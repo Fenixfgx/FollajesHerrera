@@ -1,7 +1,7 @@
 // Configuración para Google Sheets
 const GOOGLE_SHEETS_CONFIG = {
     // Tu URL de Google Apps Script ya configurada
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbwH9-FigkdPD-WtoAs3SaDZxsWMwKVWH0YLnoOP9OVbktuRqr-UdzkHwdUDcmkLU4DSaA/exec',
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbyRiygrDFfGL-9rVFPhxaNBEUqOglEbSfK3X0lpiePIiLIbl65Pcq7FhBUwG3OOTAhkZA/exec',
     sheetName: 'Evaluaciones'
 };
 
@@ -18,7 +18,7 @@ let currentScore = {
 };
 
 // Variables del timer
-let timeRemaining = 15 * 60; // 15 minutos en segundos
+let timeRemaining = 20 * 60; // 20 minutos en segundos
 let timerInterval;
 let isTimeUp = false;
 let timerStarted = false; // Nueva variable para controlar si ya inició el timer
@@ -125,7 +125,7 @@ function setupEventListeners() {
                 // Mostrar notificación de que el timer inició
                 Swal.fire({
                     title: '⏰ ¡Timer Iniciado!',
-                    text: 'Tienes 15 minutos para completar la evaluación.',
+                    text: 'Tienes 20 minutos para completar la evaluación.',
                     icon: 'info',
                     timer: 3000,
                     timerProgressBar: true,
@@ -283,14 +283,14 @@ function collectFormData() {
     data.percentage = Math.round((currentScore.total / 360) * 100);
     
     // Información del tiempo
-    const totalTime = 15 * 60;
+    const totalTime = 20 * 60;
     const timeUsed = totalTime - timeRemaining;
     data.timeUsedMinutes = Math.floor(timeUsed / 60);
     data.timeUsedSeconds = timeUsed % 60;
     data.timeRemainingMinutes = Math.floor(timeRemaining / 60);
     data.timeRemainingSeconds = timeRemaining % 60;
     data.timeUpSubmission = isTimeUp ? 'Sí' : 'No';
-    data.totalTimeAllowed = '15:00';
+    data.totalTimeAllowed = '20:00';
     
     // Recomendación
     data.recommendation = getRecommendationLevel();
@@ -400,10 +400,10 @@ function collectPureResponsesData() {
     responses.software_conocido = Array.from(softwareCheckboxes).map(cb => cb.value);
     
     // Información de tiempo
-    const totalTime = 15 * 60;
+    const totalTime = 20 * 60;
     const timeUsed = totalTime - timeRemaining;
     responses.informacion_tiempo = {
-        tiempo_total_permitido: '15:00',
+        tiempo_total_permitido: '20:00',
         tiempo_usado_minutos: Math.floor(timeUsed / 60),
         tiempo_usado_segundos: timeUsed % 60,
         tiempo_restante_minutos: Math.floor(timeRemaining / 60),
@@ -793,7 +793,7 @@ function startTimer() {
         updateTimerDisplay();
         
         // Calcular porcentaje de tiempo restante
-        const totalTime = 15 * 60;
+        const totalTime = 20 * 60;
         const percentage = (timeRemaining / totalTime) * 100;
         
         // Actualizar barra de progreso
@@ -1496,7 +1496,7 @@ function clearFormAndProgress() {
     if (timerInterval) {
         clearInterval(timerInterval);
     }
-    timeRemaining = 15 * 60;
+    timeRemaining = 20 * 60;
     isTimeUp = false;
     timerStarted = false;
     
