@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Evaluaciones Auxiliar Contable</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px;
+        }
+
+        /* Header compacto */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* Grid de estadísticas compacto */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-card i {
+            font-size: 1.4rem;
+            color: #667eea;
+            margin-bottom: 6px;
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Controles compactos */
+        .controls {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+            border: 1px solid rgba(108, 117, 125, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(108, 117, 125, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .btn.active {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        /* Contenedor principal */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .content-header h3 {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .content-body {
+            padding: 16px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        /* Tabla compacta */
+        .evaluations-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .evaluations-table th,
+        .evaluations-table td {
+            padding: 6px 8px;
+            text-align: left;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .evaluations-table th {
+            background: rgba(102, 126, 234, 0.05);
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+        }
+
+        .evaluations-table tr:hover {
+            background: rgba(102, 126, 234, 0.03);
+        }
+
+        /* Tarjetas de candidatos compactas */
+        .candidate-card {
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .candidate-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .candidate-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .candidate-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+
+        .candidate-date {
+            color: #6c757d;
+            font-size: 0.75rem;
+        }
+
+        .candidate-contact {
+            color: #6c757d;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+        }
+
+        .candidate-scores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .score-mini {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 6px 8px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .score-mini .label {
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-bottom: 2px;
+        }
+
+        .score-mini .value {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.8rem;
+        }
+
+        /* Badges compactos */
+        .score-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-align: center;
+            min-width: 50px;
+        }
+
+        .score-excellent {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.2);
+        }
+
+        .score-good {
+            background: rgba(23, 162, 184, 0.1);
+            color: #17a2b8;
+            border: 1px solid rgba(23, 162, 184, 0.2);
+        }
+
+        .score-fair {
+            background: rgba(255, 193, 7, 0.1);
+            color: #e6ac00;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        .score-poor {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .recommendation-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .status-excellent { background: rgba(40, 167, 69, 0.1); color: #28a745; }
+        .status-good { background: rgba(23, 162, 184, 0.1); color: #17a2b8; }
+        .status-conditional { background: rgba(255, 193, 7, 0.1); color: #e6ac00; }
+        .status-poor { background: rgba(220, 53, 69, 0.1); color: #dc3545; }
+
+        /* Estados de carga */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+        }
+
+        .loading i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive design mejorado */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 8px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            
+            .candidate-header {
+                flex-direction: column;
+                gap: 4px;
+            }
+            
+            .candidate-scores {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+            
+            .content-body {
+                padding: 12px;
+                max-height: 50vh;
+            }
+            
+            .evaluations-table {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .candidate-scores {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header compacto -->
+        <header class="header">
+            <h1><i class="fas fa-chart-line"></i> Dashboard Evaluaciones</h1>
+            <p>Panel de control auxiliar contable</p>
+        </header>
+
+        <!-- Estadísticas compactas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-number" id="totalEvaluations">--</div>
+                <div class="stat-label">Total</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <div class="stat-number" id="averageScore">--%</div>
+                <div class="stat-label">Promedio</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-trophy"></i>
+                <div class="stat-number" id="topScore">--%</div>
+                <div class="stat-label">Mejor</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-thumbs-up"></i>
+                <div class="stat-number" id="recommendedCandidates">--</div>
+                <div class="stat-label">Recomendados</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-calculator"></i>
+                <div class="stat-number" id="avgAccounting">--%</div>
+                <div class="stat-label">Contabilidad</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-file-excel"></i>
+                <div class="stat-number" id="avgExcel">--%</div>
+                <div class="stat-label">Excel</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-tasks"></i>
+                <div class="stat-number" id="avgSecretarial">--%</div>
+                <div class="stat-label">Secretarial</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-percentage"></i>
+                <div class="stat-number" id="recommendationRate">--%</div>
+                <div class="stat-label">Tasa Rec.</div>
+            </div>
+        </div>
+
+        <!-- Controles compactos -->
+        <div class="controls">
+            <button class="btn btn-primary active" onclick="showTableView()" id="tableBtn">
+                <i class="fas fa-table"></i> Tabla
+            </button>
+            <button class="btn btn-secondary" onclick="showDetailedView()" id="detailedBtn">
+                <i class="fas fa-list"></i> Detalle
+            </button>
+            <button class="btn btn-secondary" onclick="loadData()">
+                <i class="fas fa-sync"></i> Actualizar
+            </button>
+            <button class="btn btn-secondary" onclick="exportData()">
+                <i class="fas fa-download"></i> Exportar
+            </button>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div class="content-header">
+                <h3 id="contentTitle"><i class="fas fa-table"></i> Vista Tabla - Evaluaciones</h3>
+            </div>
+            <div class="content-body" id="mainContent">
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Cargando evaluaciones...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de la API
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxcfKXBwtSxlpxcF3g6dG_KJ4hjNC4vsJcWNpYEJoGnb8gX6Y70MttJLOTopkKJx_-Y/exec';
+        
+        let currentView = 'table';
+        let allEvaluations = [];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+        });
+
+        // Cargar todos los datos
+        async function loadData() {
+            showLoading();
+            try {
+                await Promise.all([
+                    loadStats(),
+                    loadEvaluations()
+                ]);
+                showCurrentView();
+            } catch (error) {
+                console.error('Error cargando datos:', error);
+                showError('Error al cargar los datos');
+            }
+        }
+
+        // Cargar estadísticas
+        async function loadStats() {
+            try {
+                const response = await fetch(`${API_URL}?action=getStats`);
+                const data = await response.json();
+                
+                if (data.success && data.stats) {
+                    updateStatsDisplay(data.stats);
+                }
+            } catch (error) {
+                console.error('Error cargando estadísticas:', error);
+            }
+        }
+
+        // Cargar evaluaciones
+        async function loadEvaluations() {
+            try {
+                const response = await fetch(`${API_URL}?action=getAllData`);
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    allEvaluations = data.data;
+                    calculateStats();
+                }
+            } catch (error) {
+                console.error('Error cargando evaluaciones:', error);
+                allEvaluations = [];
+            }
+        }
+
+        // Actualizar display de estadísticas
+        function updateStatsDisplay(stats) {
+            document.getElementById('totalEvaluations').textContent = stats.total || allEvaluations.length || 0;
+            document.getElementById('averageScore').textContent = stats.averageScore ? `${stats.averageScore.toFixed(1)}%` : '0%';
+            document.getElementById('topScore').textContent = stats.topScore ? `${stats.topScore}%` : '0%';
+            document.getElementById('recommendedCandidates').textContent = stats.recommendedCandidates || 0;
+            document.getElementById('recommendationRate').textContent = stats.recommendationRate ? `${stats.recommendationRate.toFixed(1)}%` : '0%';
+            document.getElementById('avgAccounting').textContent = stats.avgAccounting ? `${stats.avgAccounting.toFixed(1)}%` : '0%';
+            document.getElementById('avgExcel').textContent = stats.avgExcel ? `${stats.avgExcel.toFixed(1)}%` : '0%';
+            document.getElementById('avgSecretarial').textContent = stats.avgSecretarial ? `${stats.avgSecretarial.toFixed(1)}%` : '0%';
+        }
+
+        // Calcular estadísticas localmente si no vienen del servidor
+        function calculateStats() {
+            if (allEvaluations.length === 0) return;
+
+            const stats = {
+                total: allEvaluations.length,
+                averageScore: 0,
+                topScore: 0,
+                recommendedCandidates: 0,
+                recommendationRate: 0,
+                avgAccounting: 0,
+                avgExcel: 0,
+                avgSecretarial: 0
+            };
+
+            let totalScore = 0;
+            let totalAccounting = 0;
+            let totalExcel = 0;
+            let totalSecretarial = 0;
+            let recommended = 0;
+
+            allEvaluations.forEach(evaluation => {
+                const percentage = evaluation['Porcentaje'] || 0;
+                const accScore = evaluation['Puntuación Contabilidad'] || 0;
+                const excelScore = evaluation['Puntuación Excel'] || 0;
+                const secScore = evaluation['Puntuación Secretarial'] || 0;
+                
+                totalScore += percentage;
+                totalAccounting += (accScore / 50) * 100;
+                totalExcel += (excelScore / 50) * 100;
+                totalSecretarial += (secScore / 50) * 100;
+                
+                if (percentage >= 70) recommended++;
+                if (percentage > stats.topScore) stats.topScore = percentage;
+            });
+
+            stats.averageScore = totalScore / allEvaluations.length;
+            stats.avgAccounting = totalAccounting / allEvaluations.length;
+            stats.avgExcel = totalExcel / allEvaluations.length;
+            stats.avgSecretarial = totalSecretarial / allEvaluations.length;
+            stats.recommendedCandidates = recommended;
+            stats.recommendationRate = (recommended / allEvaluations.length) * 100;
+
+            updateStatsDisplay(stats);
+        }
+
+        // Mostrar vista tabla
+        function showTableView() {
+            currentView = 'table';
+            updateViewButtons();
+            document.getElementById('contentTitle').innerHTML = '<i class="fas fa-table"></i> Vista Tabla - Evaluaciones';
+            showCurrentView();
+        }
+
+        // Mostrar vista detallada
+        function showDetailedView() {
+            currentView = 'detailed';
+            updateViewButtons();
+            document.getElementById('contentTitle').innerHTML = '<i class="fas fa-list"></i> Vista Detallada - Candidatos';
+            showCurrentView();
+        }
+
+        // Actualizar botones de vista
+        function updateViewButtons() {
+            const tableBtn = document.getElementById('tableBtn');
+            const detailedBtn = document.getElementById('detailedBtn');
+            
+            if (currentView === 'table') {
+                tableBtn.className = 'btn btn-primary active';
+                detailedBtn.className = 'btn btn-secondary';
+            } else {
+                tableBtn.className = 'btn btn-secondary';
+                detailedBtn.className = 'btn btn-primary active';
+            }
+        }
+
+        // Mostrar vista actual
+        function showCurrentView() {
+            const container = document.getElementById('mainContent');
+            
+            if (allEvaluations.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 20px; color: #6c757d;"><i class="fas fa-inbox"></i><p>No hay evaluaciones disponibles</p></div>';
+                return;
+            }
+
+            if (currentView === 'table') {
+                container.innerHTML = createTableView();
+            } else {
+                container.innerHTML = createDetailedView();
+            }
+        }
+
+        // Crear vista tabla compacta
+        function createTableView() {
+            let html = `
+                <table class="evaluations-table">
+                    <thead>
+                        <tr>
+                            <th>Candidato</th>
+                            <th>Fecha</th>
+                            <th>Cont.</th>
+                            <th>Excel</th>
+                            <th>Secr.</th>
+                            <th>Total</th>
+                            <th>Recomendación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            allEvaluations.forEach(evaluation => {
+                const name = evaluation['Nombre Completo'] || 'N/A';
+                const email = evaluation['Email'] || '';
+                const date = formatDate(evaluation['Fecha y Hora']);
+                const accScore = evaluation['Puntuación Contabilidad'] || 0;
+                const excelScore = evaluation['Puntuación Excel'] || 0;
+                const secScore = evaluation['Puntuación Secretarial'] || 0;
+                const totalScore = evaluation['Puntuación Total'] || 0;
+                const percentage = evaluation['Porcentaje'] || 0;
+                const recommendation = evaluation['Recomendación'] || 'N/A';
+
+                html += `
+                    <tr>
+                        <td>
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 2px;">${name}</div>
+                            <div style="font-size: 0.7rem; color: #6c757d;">${email}</div>
+                        </td>
+                        <td>${date}</td>
+                        <td><span class="score-badge ${getScoreClass((accScore/50)*100)}">${accScore}/50</span></td>
+                        <td><span class="score-badge ${getScoreClass((excelScore/50)*100)}">${excelScore}/50</span></td>
+                        <td><span class="score-badge ${getScoreClass((secScore/50)*100)}">${secScore}/50</span></td>
+                        <td><span class="score-badge ${getScoreClass(percentage)}">${totalScore}/150<br>(${percentage}%)</span></td>
+                        <td><span class="recommendation-badge ${getRecommendationClass(recommendation)}">${getShortRecommendation(recommendation)}</span></td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            return html;
+        }
+
+        // Crear vista detallada compacta
+        function createDetailedView() {
+            let html = '';
+
+            allEvaluations.forEach(evaluation => {
+                const name = evaluation['Nombre Completo'] || 'N/A';
+                const email = evaluation['Email'] || 'N/A';
+                const phone = evaluation['Teléfono'] || 'N/A';
+                const experience = evaluation['Experiencia'] || 'N/A';
+                const date = formatDate(evaluation['Fecha y Hora']);
+                const accScore = evaluation['Puntuación Contabilidad'] || 0;
+                const excelScore = evaluation['Puntuación Excel'] || 0;
+                const secScore = evaluation['Puntuación Secretarial'] || 0;
+                const totalScore = evaluation['Puntuación Total'] || 0;
+                const percentage = evaluation['Porcentaje'] || 0;
+                const recommendation = evaluation['Recomendación'] || 'N/A';
+                const excelLevel = evaluation['Nivel Excel (1-10)'] || 'N/A';
+                const software = evaluation['Software Conocido'] || 'N/A';
+                const skills = evaluation['Habilidades Adicionales'] || 'N/A';
+
+                html += `
+                    <div class="candidate-card">
+                        <div class="candidate-header">
+                            <div class="candidate-name">${name}</div>
+                            <div class="candidate-date">${date}</div>
+                        </div>
+                        
+                        <div class="candidate-contact">
+                            <i class="fas fa-envelope"></i> ${email} | 
+                            <i class="fas fa-phone"></i> ${phone} | 
+                            <i class="fas fa-briefcase"></i> ${experience}
+                        </div>
+                        
+                        <div class="candidate-scores">
+                            <div class="score-mini">
+                                <div class="label">Contabilidad</div>
+                                <div class="value">${accScore}/50 (${((accScore/50)*100).toFixed(0)}%)</div>
+                            </div>
+                            <div class="score-mini">
+                                <div class="label">Excel</div>
+                                <div class="value">${excelScore}/50 (${((excelScore/50)*100).toFixed(0)}%)</div>
+                            </div>
+                            <div class="score-mini">
+                                <div class="label">Secretarial</div>
+                                <div class="value">${secScore}/50 (${((secScore/50)*100).toFixed(0)}%)</div>
+                            </div>
+                            <div class="score-mini">
+                                <div class="label">Total</div>
+                                <div class="value">${totalScore}/150 (${percentage}%)</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 8px 0;">
+                            <strong>Recomendación:</strong> 
+                            <span class="recommendation-badge ${getRecommendationClass(recommendation)}">
+                                ${recommendation}
+                            </span>
+                        </div>
+                        
+                        <div style="font-size: 0.75rem; color: #6c757d; margin-top: 8px;">
+                            <p><strong>Excel autodeclarado:</strong> ${excelLevel}/10 | <strong>Software:</strong> ${software}</p>
+                            <p><strong>Habilidades:</strong> ${skills}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            return html;
+        }
+
+        // Funciones auxiliares
+        function getScoreClass(percentage) {
+            if (percentage >= 90) return 'score-excellent';
+            if (percentage >= 80) return 'score-good';
+            if (percentage >= 70) return 'score-fair';
+            return 'score-poor';
+        }
+
+        function getRecommendationClass(recommendation) {
+            if (!recommendation) return 'status-poor';
+            
+            if (recommendation.includes('ALTAMENTE RECOMENDADO') || recommendation.includes('Excelente')) {
+                return 'status-excellent';
+            } else if (recommendation.includes('RECOMENDADO') || recommendation.includes('Muy Bueno')) {
+                return 'status-good';
+            } else if (recommendation.includes('CON CAPACITACIÓN') || recommendation.includes('Bueno')) {
+                return 'status-conditional';
+            } else {
+                return 'status-poor';
+            }
+        }
+
+        function getShortRecommendation(recommendation) {
+            if (!recommendation) return 'N/A';
+            
+            if (recommendation.includes('ALTAMENTE RECOMENDADO')) return 'EXCELENTE';
+            if (recommendation.includes('RECOMENDADO CON')) return 'CON CAPAC.';
+            if (recommendation.includes('RECOMENDADO')) return 'RECOMENDADO';
+            if (recommendation.includes('NO RECOMENDADO')) return 'NO RECOM.';
+            
+            return recommendation.length > 15 ? recommendation.substring(0, 12) + '...' : recommendation;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('es-ES', {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch (error) {
+                return dateString;
+            }
+        }
+
+        function showLoading() {
+            document.getElementById('mainContent').innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Cargando datos...</p>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('mainContent').innerHTML = `
+                <div style="text-align: center; padding: 20px; color: #dc3545;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        function exportData() {
+            if (allEvaluations.length === 0) {
+                alert('No hay datos para exportar');
+                return;
+            }
+            
+            // Crear CSV
+            const headers = ['Nombre', 'Email', 'Fecha', 'Contabilidad', 'Excel', 'Secretarial', 'Total', 'Porcentaje', 'Recomendación'];
+            const csvContent = [
+                headers.join(','),
+                ...allEvaluations.map(evaluation => [
+                    `"${evaluation['Nombre Completo'] || ''}"`,
+                    `"${evaluation['Email'] || ''}"`,
+                    `"${evaluation['Fecha y Hora'] || ''}"`,
+                    evaluation['Puntuación Contabilidad'] || 0,
+                    evaluation['Puntuación Excel'] || 0,
+                    evaluation['Puntuación Secretarial'] || 0,
+                    evaluation['Puntuación Total'] || 0,
+                    evaluation['Porcentaje'] || 0,
+                    `"${evaluation['Recomendación'] || ''}"`
+                ].join(','))
+            ].join('\n');
+            
+            // Descargar archivo
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `evaluaciones_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

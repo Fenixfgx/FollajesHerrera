@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrevista Auxiliar Contable - Evaluación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Animate.css for SweetAlert2 animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <i class="fas fa-calculator"></i>
+                <h1>Prueba y entrevista Follajes Herrera</h1>
+                <p>Prueba de competencias contables y secretariales</p>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="form-container">
+                <form id="evaluationForm" autocomplete="off">
+                    <!-- Información Personal -->
+                    <div class="section">
+                        <h2><i class="fas fa-user"></i> Información Personal</h2>
+                        <div class="form-group">
+                            <label for="fullName">Nombre Completo *</label>
+                            <input type="text" id="fullName" name="fullName" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico *</label>
+                            <input type="email" id="email" name="email" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono *</label>
+                            <input type="tel" id="phone" name="phone" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Años de Experiencia en Contabilidad</label>
+                            <select id="experience" name="experience" autocomplete="off">
+                                <option value="">Seleccionar</option>
+                                <option value="0-1">0-1 años</option>
+                                <option value="1-3">1-3 años</option>
+                                <option value="3-5">3-5 años</option>
+                                <option value="5+">Más de 5 años</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Conocimientos Contables -->
+                    <div class="section">
+                        <h2><i class="fas fa-book"></i> Conocimientos Contables</h2>
+                        
+                        <div class="question-group">
+                            <h3>1. ¿Cuál es la ecuación fundamental de la contabilidad?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q1" value="0"> Activos = Pasivos - Patrimonio</label>
+                                <label><input type="radio" name="q1" value="10"> Activos = Pasivos + Patrimonio</label>
+                                <label><input type="radio" name="q1" value="0"> Activos + Pasivos = Patrimonio</label>
+                                <label><input type="radio" name="q1" value="0"> Ingresos - Gastos = Utilidad</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>2. ¿Qué significa el término "debe" en contabilidad?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q2" value="0"> Lado derecho de una cuenta</label>
+                                <label><input type="radio" name="q2" value="0"> Una deuda pendiente</label>
+                                <label><input type="radio" name="q2" value="10"> Lado izquierdo de una cuenta</label>
+                                <label><input type="radio" name="q2" value="0"> Un error contable</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>3. ¿Cuál es el régimen tributario más común para pequeñas empresas en Colombia?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q3" value="0"> Régimen Ordinario</label>
+                                <label><input type="radio" name="q3" value="0"> Régimen Especial</label>
+                                <label><input type="radio" name="q3" value="0"> Régimen de Renta Presuntiva</label>
+                                <label><input type="radio" name="q3" value="10"> Régimen Simplificado de Tributación (SIMPLE)</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>4. ¿Qué es el IVA en Colombia?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q4" value="10"> Impuesto al Valor Agregado</label>
+                                <label><input type="radio" name="q4" value="0"> Impuesto a la Renta</label>
+                                <label><input type="radio" name="q4" value="0"> Impuesto al Valor Añadido</label>
+                                <label><input type="radio" name="q4" value="0"> Impuesto de Ventas</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>5. ¿Cuál es la tasa general del IVA en Colombia actualmente?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q5" value="0"> 16%</label>
+                                <label><input type="radio" name="q5" value="0"> 21%</label>
+                                <label><input type="radio" name="q5" value="10"> 19%</label>
+                                <label><input type="radio" name="q5" value="0"> 18%</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Habilidades en Hojas de Cálculo -->
+                    <div class="section">
+                        <h2><i class="fas fa-table"></i> Habilidades en Hojas de Cálculo</h2>
+                        
+                        <div class="question-group">
+                            <h3>6. ¿Cuál es la fórmula correcta para sumar un rango de celdas A1 a A10?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q6" value="0"> =SUM(A1-A10)</label>
+                                <label><input type="radio" name="q6" value="10"> =SUMA(A1:A10)</label>
+                                <label><input type="radio" name="q6" value="0"> =SUMA(A1+A10)</label>
+                                <label><input type="radio" name="q6" value="0"> =SUMAR(A1:A10)</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>7. ¿Qué función utilizarías para buscar un valor en una tabla?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q7" value="0"> BUSCAR</label>
+                                <label><input type="radio" name="q7" value="0"> ENCONTRAR</label>
+                                <label><input type="radio" name="q7" value="0"> CONSULTAR</label>
+                                <label><input type="radio" name="q7" value="10"> BUSCARV o VLOOKUP</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>8. ¿Cómo se bloquea una celda para que no cambie al copiar una fórmula?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q8" value="0"> Usando el símbolo # (ej: #A1)</label>
+                                <label><input type="radio" name="q8" value="0"> Usando paréntesis (ej: (A1))</label>
+                                <label><input type="radio" name="q8" value="10"> Usando el símbolo $ (ej: $A$1)</label>
+                                <label><input type="radio" name="q8" value="0"> Usando corchetes (ej: [A1])</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>9. ¿Qué función utilizarías para contar celdas que cumplan una condición?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q9" value="0"> CONTAR</label>
+                                <label><input type="radio" name="q9" value="10"> CONTAR.SI</label>
+                                <label><input type="radio" name="q9" value="0"> CONTARA</label>
+                                <label><input type="radio" name="q9" value="0"> CONTADOR</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>10. ¿Cuál es la combinación de teclas para crear una tabla dinámica en Excel?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q10" value="0"> Ctrl + T</label>
+                                <label><input type="radio" name="q10" value="10"> Alt + N + V</label>
+                                <label><input type="radio" name="q10" value="0"> Ctrl + P</label>
+                                <label><input type="radio" name="q10" value="0"> Alt + T + P</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Habilidades Secretariales -->
+                    <div class="section">
+                        <h2><i class="fas fa-clipboard-list"></i> Habilidades Secretariales</h2>
+                        
+                        <div class="question-group">
+                            <h3>11. ¿Cuál es la prioridad más alta en la gestión de correspondencia?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q11" value="0"> Correspondencia comercial general</label>
+                                <label><input type="radio" name="q11" value="0"> Publicidad y promociones</label>
+                                <label><input type="radio" name="q11" value="10"> Documentos urgentes y confidenciales</label>
+                                <label><input type="radio" name="q11" value="0"> Correspondencia personal</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>12. ¿Qué información debe incluir un archivo de documentos bien organizado?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q12" value="0"> Solo la fecha y el asunto</label>
+                                <label><input type="radio" name="q12" value="0"> Únicamente el número de referencia</label>
+                                <label><input type="radio" name="q12" value="0"> Solo el nombre del remitente</label>
+                                <label><input type="radio" name="q12" value="10"> Fecha, número de referencia, asunto y ubicación</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>13. ¿Cuál es la mejor práctica para el manejo de llamadas telefónicas?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q13" value="10"> Responder antes del tercer timbre, identificarse y ser cortés</label>
+                                <label><input type="radio" name="q13" value="0"> Responder rápidamente sin identificarse</label>
+                                <label><input type="radio" name="q13" value="0"> Dejar que suene varias veces antes de responder</label>
+                                <label><input type="radio" name="q13" value="0"> Responder solo cuando sea conveniente</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>14. ¿Cómo se debe manejar información confidencial?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q14" value="0"> Compartiéndola solo con el equipo</label>
+                                <label><input type="radio" name="q14" value="0"> Guardándola en archivos comunes</label>
+                                <label><input type="radio" name="q14" value="10"> Con total discreción y acceso limitado</label>
+                                <label><input type="radio" name="q14" value="0"> Comentándola en reuniones generales</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>15. ¿Cuál es la estructura correcta de una carta comercial?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q15" value="0"> Fecha, saludo, cuerpo, despedida</label>
+                                <label><input type="radio" name="q15" value="10"> Encabezado, fecha, destinatario, saludo, cuerpo, despedida, firma</label>
+                                <label><input type="radio" name="q15" value="0"> Solo cuerpo y firma</label>
+                                <label><input type="radio" name="q15" value="0"> Encabezado, cuerpo, firma</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Autoevaluación -->
+                    <div class="section">
+                        <h2><i class="fas fa-star"></i> Autoevaluación</h2>
+                        
+                        <div class="form-group">
+                            <label for="excelLevel">Nivel de manejo de Excel (1-10)</label>
+                            <input type="range" id="excelLevel" name="excelLevel" min="1" max="10" value="5" autocomplete="off">
+                            <div class="range-value">5</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="softwareKnowledge">Software contable que conoce</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="software" value="SIIGO"> SIIGO</label>
+                                <label><input type="checkbox" name="software" value="World Office"> World Office</label>
+                                <label><input type="checkbox" name="software" value="HELISA"> HELISA</label>
+                                <label><input type="checkbox" name="software" value="SAP"> SAP</label>
+                                <label><input type="checkbox" name="software" value="QuickBooks"> QuickBooks</label>
+                                <label><input type="checkbox" name="software" value="Otro"> Otro</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additionalSkills">Habilidades adicionales</label>
+                            <textarea id="additionalSkills" name="additionalSkills" rows="3" placeholder="Describa otras habilidades relevantes..." autocomplete="off"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar Evaluación
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="score-container">
+                <div class="score-card">
+                    <h3><i class="fas fa-chart-line"></i> Puntuación</h3>
+                    <div class="score-display">
+                        <div class="score-number">0</div>
+                        <div class="score-max">/ 150</div>
+                    </div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <span>Conocimientos Contables:</span>
+                            <span id="accountingScore">0/50</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Habilidades Excel:</span>
+                            <span id="excelScore">0/50</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Habilidades Secretariales:</span>
+                            <span id="secretarialScore">0/50</span>
+                        </div>
+                    </div>
+                    <div class="score-level">
+                        <div class="level-indicator">
+                            <div class="level-bar"></div>
+                        </div>
+                        <div class="level-text">Evaluación en progreso</div>
+                    </div>
+                </div>
+
+                <div class="recommendation-card">
+                    <h3><i class="fas fa-lightbulb"></i> Recomendación</h3>
+                    <div class="recommendation-text">
+                        Complete la evaluación para obtener una recomendación personalizada.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
