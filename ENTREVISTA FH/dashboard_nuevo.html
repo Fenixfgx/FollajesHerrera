@@ -673,10 +673,10 @@
                             <div style="font-size: 0.7rem; color: #6c757d;">${email}</div>
                         </td>
                         <td>${date}</td>
-                        <td><span class="score-badge ${getScoreClass((accScore/50)*100)}">${accScore}/50</span></td>
-                        <td><span class="score-badge ${getScoreClass((excelScore/50)*100)}">${excelScore}/50</span></td>
+                        <td><span class="score-badge ${getScoreClass((accScore/70)*100)}">${accScore}/70</span></td>
+                        <td><span class="score-badge ${getScoreClass((excelScore/80)*100)}">${excelScore}/80</span></td>
                         <td><span class="score-badge ${getScoreClass((secScore/50)*100)}">${secScore}/50</span></td>
-                        <td><span class="score-badge ${getScoreClass(percentage)}">${totalScore}/150<br>(${percentage}%)</span></td>
+                        <td><span class="score-badge ${getScoreClass(percentage)}">${totalScore}/340<br>(${percentage}%)</span></td>
                         <td><span class="recommendation-badge ${getRecommendationClass(recommendation)}">${getShortRecommendation(recommendation)}</span></td>
                     </tr>
                 `;
@@ -734,7 +734,7 @@
                             </div>
                             <div class="score-mini">
                                 <div class="label">Total</div>
-                                <div class="value">${totalScore}/150 (${percentage}%)</div>
+                                <div class="value">${totalScore}/340 (${percentage}%)</div>
                             </div>
                         </div>
                         

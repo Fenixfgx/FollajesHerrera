@@ -756,10 +756,10 @@
                         </div>
                     </td>
                     <td>${formatDate(evaluation['Fecha y Hora']) || 'N/A'}</td>
-                    <td><span class="score-badge ${getScoreClass((accScore/50)*100)}">${accScore}/50</span></td>
-                    <td><span class="score-badge ${getScoreClass((excelScore/50)*100)}">${excelScore}/50</span></td>
+                    <td><span class="score-badge ${getScoreClass((accScore/70)*100)}">${accScore}/70</span></td>
+                    <td><span class="score-badge ${getScoreClass((excelScore/80)*100)}">${excelScore}/80</span></td>
                     <td><span class="score-badge ${getScoreClass((secScore/50)*100)}">${secScore}/50</span></td>
-                    <td><span class="score-badge ${getScoreClass(percentage)}">${totalScore}/150 (${percentage}%)</span></td>
+                    <td><span class="score-badge ${getScoreClass(percentage)}">${totalScore}/340 (${percentage}%)</span></td>
                     <td><span class="recommendation-status ${getRecommendationClass(evaluation['Recomendación'])}">${evaluation['Recomendación'] || 'N/A'}</span></td>
                     <td><button class="btn btn-sm btn-info" onclick="showDetailedRecommendation('${evaluation['Nombre Completo'] || 'N/A'}', \`${(evaluation['Recomendación Detallada'] || 'No disponible').replace(/`/g, '\\`')}\`)"><i class="fas fa-eye"></i></button></td>
                 `;
@@ -807,7 +807,7 @@
                     </div>
                     <div class="score-item">
                         <div class="label">Total</div>
-                        <div class="value">${totalScore}/150 (${percentage}%)</div>
+                        <div class="value">${totalScore}/340 (${percentage}%)</div>
                     </div>
                 </div>
                 

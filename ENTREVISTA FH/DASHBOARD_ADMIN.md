@@ -100,7 +100,7 @@ GET: TU_URL_DE_SCRIPT?action=getEvaluationById&id=2
 ## Código de Colores del Dashboard
 
 ### **Puntuaciones**
-- 🟢 **Verde (Excelente)**: 90-100% (135-150 puntos)
+- 🟢 **Verde (Excelente)**: 90-100% (306-340 puntos)
 - 🔵 **Azul (Muy Bueno)**: 80-89% (120-134 puntos)
 - 🟡 **Amarillo (Bueno)**: 70-79% (105-119 puntos)
 - 🔴 **Rojo (Insuficiente)**: 0-69% (0-104 puntos)

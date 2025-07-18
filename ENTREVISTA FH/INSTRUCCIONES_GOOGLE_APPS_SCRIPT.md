@@ -1,4 +1,14 @@
-# Configuración de Google Apps Script para el Formulario de Evaluación
+# Configuración de Google Apps Script para el Formulario de Evaluación - ACTUALIZADO
+
+## ⚠️ IMPORTANTE: Script Actualizado para 36 Preguntas
+
+Este script ha sido actualizado para manejar todas las 36 preguntas del formulario y las nuevas categorías de evaluación:
+
+- **7 categorías de evaluación**: Contabilidad, Ventas/Proveedores, Excel, Secretarial, Lógica, Psicológica, Salud/Disponibilidad
+- **36 preguntas en total** con distribución específica por categoría
+- **Sistema de puntuación de 340 puntos** total
+- **Información detallada de tiempo** utilizado en la evaluación
+- **Correos de notificación mejorados** con desglose completo por categorías
 
 ## Pasos para configurar el backend en Google Apps Script:
 
@@ -7,16 +17,132 @@
 - Crea una nueva hoja de cálculo
 - Nómbrala "Evaluaciones Auxiliar Contable"
 
-### 2. Crear una nueva hoja de cálculo de Google
-- Ve a [Google Sheets](https://sheets.google.com)
-- Crea una nueva hoja de cálculo
-- Nómbrala "Evaluaciones Auxiliar Contable"
-
-**Nota:** Los encabezados se crearán automáticamente cuando se reciba la primera evaluación.
+### 2. Obtener el ID de la hoja de cálculo
+- En la URL de tu hoja de cálculo, el ID es la parte entre `/d/` y `/edit`
+- Ejemplo: `https://docs.google.com/spreadsheets/d/1SX44yC7N6ZdkJQBnSdiLVMeCsGS5ECgWdjLCzbtdDbE/edit`
+- El ID sería: `1SX44yC7N6ZdkJQBnSdiLVMeCsGS5ECgWdjLCzbtdDbE`
 
 ### 3. Crear el script de Google Apps Script
 - En la hoja de cálculo, ve a "Extensiones" > "Apps Script"
-- Borra el código existente y pega el siguiente código:
+- Borra el código existente y pega el código del archivo `google_apps_script_actualizado.js`
+
+### 4. Configurar el script
+- En las primeras líneas del script, actualiza:
+  ```javascript
+  const SHEET_ID = 'TU_SHEET_ID_AQUI'; // Reemplaza con tu ID real
+  const SHEET_NAME = 'Hoja 1';         // Cambia si tu hoja tiene otro nombre
+  ```
+
+### 5. Configurar notificaciones por email
+- En la función `sendNotificationEmail`, cambia:
+  ```javascript
+  const EMAIL_RECIPIENT = 'tu_email@ejemplo.com';
+  ```
+
+### 6. Dar permisos y publicar
+- Guarda el proyecto con un nombre descriptivo: "Evaluaciones Auxiliar Contable"
+- Ejecuta la función `setupPermissions()` para dar permisos
+- Ve a "Implementar" > "Nueva implementación"
+- Tipo: "Aplicación web"
+- Ejecutar como: "Yo"
+- Acceso: "Cualquier persona"
+- Hacer clic en "Implementar"
+- Copia la URL de la aplicación web
+
+### 7. Actualizar la URL en el formulario
+- Abre `script.js` del formulario
+- Busca la línea con `GOOGLE_SHEETS_CONFIG`
+- Actualiza la URL:
+  ```javascript
+  const GOOGLE_SHEETS_CONFIG = {
+      scriptUrl: 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI'
+  };
+  ```
+
+## 📊 Nuevas Características del Script Actualizado
+
+### Estructura de Datos Completa
+El script ahora maneja:
+- **36 preguntas individuales** con sus respuestas
+- **7 puntuaciones por categoría**:
+  - Contabilidad (70 puntos máximo)
+  - Ventas/Proveedores (40 puntos máximo)
+  - Excel (80 puntos máximo)
+  - Secretarial (50 puntos máximo)
+  - Lógica (30 puntos máximo)
+  - Psicológica (30 puntos máximo)
+  - Salud/Disponibilidad (40 puntos máximo)
+- **Información de tiempo detallada**
+- **Datos adicionales** (nivel Excel, software conocido, habilidades)
+
+### Funciones de Dashboard Mejoradas
+- `getAllEvaluations()`: Obtiene todas las evaluaciones con el nuevo formato
+- `getStatistics()`: Calcula estadísticas para las 7 categorías
+- `getRecentEvaluations()`: Obtiene evaluaciones recientes
+- `getEvaluationById()`: Obtiene evaluación específica por ID
+
+### Notificaciones de Email Mejoradas
+Los emails ahora incluyen:
+- Desglose completo por categorías
+- Porcentajes individuales por área
+- Información de tiempo utilizado
+- Recomendación final destacada
+- Formato visual mejorado
+
+## 🔧 Funciones de Utilidad
+
+### Para inicializar la hoja por primera vez:
+```javascript
+initializeSheet()
+```
+
+### Para migrar datos existentes:
+```javascript
+migrateExistingData()
+```
+
+### Para limpiar datos de prueba:
+```javascript
+clearTestData()
+```
+
+## 📋 Estructura de Columnas en Google Sheets
+
+El script creará automáticamente estas columnas:
+
+1. **Información Personal** (Columnas A-E):
+   - Fecha y Hora, Nombre, Email, Teléfono, Experiencia
+
+2. **36 Preguntas** (Columnas F-AO):
+   - P1-P7: Contabilidad
+   - P8-P11: Ventas/Proveedores  
+   - P12-P21: Excel
+   - P22-P26: Secretarial
+   - P27-P29: Lógica
+   - P30-P32: Psicológica
+   - P33-P36: Salud/Disponibilidad
+
+3. **Información Adicional** (Columnas AP-AR):
+   - Nivel Excel, Software Conocido, Habilidades Adicionales
+
+4. **Puntuaciones** (Columnas AS-AZ):
+   - Puntuaciones por categoría y totales
+
+5. **Información de Tiempo** (Columnas BA-BF):
+   - Tiempos utilizados y restantes
+
+6. **Recomendación** (Columna BG):
+   - Recomendación final del sistema
+
+## ⚠️ Notas Importantes
+
+1. **Migración de Datos**: Si ya tienes datos con el formato anterior, usa la función `migrateExistingData()` para crear una nueva hoja con el formato actualizado.
+
+2. **Permisos**: Asegúrate de que el script tenga permisos para acceder a Google Sheets y Gmail.
+
+3. **URL de Implementación**: Cada vez que hagas cambios significativos al script, debes crear una nueva implementación y actualizar la URL en el formulario.
+
+4. **Testing**: Usa la función `clearTestData()` para limpiar datos de prueba antes de usar en producción.
 
 ```javascript
 // === CONFIGURACIÓN GENERAL ===
@@ -329,7 +455,7 @@ function sendNotificationEmail(data) {
     - Contabilidad: ${data.accountingScore}/50
     - Excel: ${data.excelScore}/50
     - Secretarial: ${data.secretarialScore}/50
-    - Total: ${data.totalScore}/150 (${data.percentage}%)
+    - Total: ${data.totalScore}/340 (${data.percentage}%)
 
     Recomendación: ${data.recommendation}
 

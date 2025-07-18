@@ -30,22 +30,174 @@ body {
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.header-content i {
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-img {
+    width: 95px;
+    height: 95px;
+    border-radius: 29%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.header-text {
+    text-align: left;
+}
+
+.header-text i {
     font-size: 3rem;
     color: #667eea;
     margin-bottom: 15px;
 }
 
-.header-content h1 {
+.header-text h1 {
     font-size: 2.5rem;
     font-weight: 700;
     color: #2c3e50;
     margin-bottom: 10px;
 }
 
-.header-content p {
+.header-text p {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+}
+
+/* Timer Styles */
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.timer-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.timer-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border-radius: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    min-width: 120px;
+    justify-content: center;
+}
+
+.timer-display.warning {
+    background: linear-gradient(135deg, #ff9f43, #f0932b);
+    animation: pulse 1s infinite;
+}
+
+.timer-display.critical {
+    background: linear-gradient(135deg, #ee5a52, #c44569);
+    animation: urgentPulse 0.5s infinite;
+}
+
+.timer-progress {
+    width: 200px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.timer-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    border-radius: 4px;
+    transition: width 1s linear;
+    width: 100%;
+}
+
+.timer-bar.warning {
+    background: linear-gradient(90deg, #ff9f43, #f0932b);
+}
+
+.timer-bar.critical {
+    background: linear-gradient(90deg, #ee5a52, #c44569);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes urgentPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(238, 90, 82, 0.3); }
+    50% { transform: scale(1.08); box-shadow: 0 6px 20px rgba(238, 90, 82, 0.6); }
+}
+
+/* Responsive timer */
+@media (max-width: 768px) {
+    .timer-container {
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+    }
+    
+    .timer-display {
+        font-size: 1.1rem;
+        padding: 8px 15px;
+        min-width: 100px;
+    }
+    
+    .timer-progress {
+        width: 140px;
+        height: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .timer-container {
+        top: 5px;
+        right: 5px;
+        padding: 8px;
+    }
+    
+    .timer-display {
+        font-size: 1rem;
+        padding: 6px 12px;
+        min-width: 90px;
+    }
+    
+    .timer-progress {
+        width: 120px;
+        height: 5px;
+    }
+}
+
+/* Header text styles */
+.header-text p {
     font-size: 1.1rem;
     color: #7f8c8d;
     font-weight: 300;
@@ -542,6 +694,93 @@ body {
 
 .error-message.show {
     display: block;
+}
+
+/* Time Out Modal */
+.time-out-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.time-out-modal.show {
+    display: flex;
+}
+
+.time-out-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.time-out-icon {
+    font-size: 4rem;
+    color: #e74c3c;
+    margin-bottom: 20px;
+}
+
+.time-out-content h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.time-out-content p {
+    color: #7f8c8d;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.time-out-submit-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.time-out-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+}
+
+/* Form Disabled State */
+.form-disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    position: relative;
+}
+
+.form-disabled::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 100;
 }
 
 /* Responsive Design */

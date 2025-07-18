@@ -56,7 +56,14 @@
         /* Para pantallas grandes, forzar una sola fila */
         @media (min-width: 1200px) {
             .stats-grid {
-                grid-template-columns: repeat(8, 1fr);
+                grid-template-columns: repeat(6, 1fr);
+                gap: 15px;
+            }
+        }
+        
+        @media (min-width: 1600px) {
+            .stats-grid {
+                grid-template-columns: repeat(12, 1fr);
                 gap: 20px;
             }
         }
@@ -569,6 +576,31 @@
                 grid-template-columns: repeat(4, 1fr);
                 gap: 15px;
             }
+            
+            .evaluations-table {
+                font-size: 0.75rem;
+            }
+            
+            .evaluations-table th,
+            .evaluations-table td {
+                padding: 6px 8px;
+            }
+            
+            .candidate-scores {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .evaluations-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .candidate-scores {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -606,6 +638,11 @@
                 <div class="stat-label">Prom. Contabilidad</div>
             </div>
             <div class="stat-card">
+                <i class="fas fa-handshake"></i>
+                <div class="stat-number" id="avgSales">--</div>
+                <div class="stat-label">Prom. Ventas</div>
+            </div>
+            <div class="stat-card">
                 <i class="fas fa-file-excel"></i>
                 <div class="stat-number" id="avgExcel">--</div>
                 <div class="stat-label">Prom. Excel</div>
@@ -614,6 +651,21 @@
                 <i class="fas fa-tasks"></i>
                 <div class="stat-number" id="avgSecretarial">--</div>
                 <div class="stat-label">Prom. Secretarial</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-brain"></i>
+                <div class="stat-number" id="avgLogic">--</div>
+                <div class="stat-label">Prom. Lógica</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-heart"></i>
+                <div class="stat-number" id="avgPsychology">--</div>
+                <div class="stat-label">Prom. Psicológica</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-user-check"></i>
+                <div class="stat-number" id="avgHealth">--</div>
+                <div class="stat-label">Prom. Salud/Disp.</div>
             </div>
             <div class="stat-card">
                 <i class="fas fa-percentage"></i>
@@ -675,8 +727,12 @@
                     document.getElementById('topScore').textContent = `${stats.topScore}%`;
                     document.getElementById('recommendedCandidates').textContent = stats.recommended;
                     document.getElementById('avgAccounting').textContent = `${stats.avgAccounting.toFixed(1)}%`;
+                    document.getElementById('avgSales').textContent = `${stats.avgSales.toFixed(1)}%`;
                     document.getElementById('avgExcel').textContent = `${stats.avgExcel.toFixed(1)}%`;
                     document.getElementById('avgSecretarial').textContent = `${stats.avgSecretarial.toFixed(1)}%`;
+                    document.getElementById('avgLogic').textContent = `${stats.avgLogic.toFixed(1)}%`;
+                    document.getElementById('avgPsychology').textContent = `${stats.avgPsychology.toFixed(1)}%`;
+                    document.getElementById('avgHealth').textContent = `${stats.avgHealth.toFixed(1)}%`;
                     document.getElementById('recommendationRate').textContent = `${stats.recommendationRate.toFixed(1)}%`;
                     
                     console.log('Estadísticas calculadas:', stats);
@@ -688,8 +744,12 @@
                     document.getElementById('topScore').textContent = '0%';
                     document.getElementById('recommendedCandidates').textContent = '0';
                     document.getElementById('avgAccounting').textContent = '0%';
+                    document.getElementById('avgSales').textContent = '0%';
                     document.getElementById('avgExcel').textContent = '0%';
                     document.getElementById('avgSecretarial').textContent = '0%';
+                    document.getElementById('avgLogic').textContent = '0%';
+                    document.getElementById('avgPsychology').textContent = '0%';
+                    document.getElementById('avgHealth').textContent = '0%';
                     document.getElementById('recommendationRate').textContent = '0%';
                 }
             } catch (error) {
@@ -701,8 +761,12 @@
                 document.getElementById('topScore').textContent = errorText;
                 document.getElementById('recommendedCandidates').textContent = errorText;
                 document.getElementById('avgAccounting').textContent = errorText;
+                document.getElementById('avgSales').textContent = errorText;
                 document.getElementById('avgExcel').textContent = errorText;
                 document.getElementById('avgSecretarial').textContent = errorText;
+                document.getElementById('avgLogic').textContent = errorText;
+                document.getElementById('avgPsychology').textContent = errorText;
+                document.getElementById('avgHealth').textContent = errorText;
                 document.getElementById('recommendationRate').textContent = errorText;
             }
         }
@@ -712,8 +776,12 @@
             const total = evaluations.length;
             let totalScore = 0;
             let totalAccounting = 0;
+            let totalSales = 0;
             let totalExcel = 0;
             let totalSecretarial = 0;
+            let totalLogic = 0;
+            let totalPsychology = 0;
+            let totalHealth = 0;
             let recommendedCount = 0;
             let topScore = 0;
 
@@ -722,8 +790,12 @@
             evaluations.forEach((evaluation, index) => {
                 const percentage = parseFloat(evaluation['Porcentaje']) || 0;
                 const accScore = parseFloat(evaluation['Puntuación Contabilidad']) || 0;
+                const salesScore = parseFloat(evaluation['Puntuación Ventas']) || 0;
                 const excelScore = parseFloat(evaluation['Puntuación Excel']) || 0;
                 const secScore = parseFloat(evaluation['Puntuación Secretarial']) || 0;
+                const logicScore = parseFloat(evaluation['Puntuación Lógica']) || 0;
+                const psychScore = parseFloat(evaluation['Puntuación Psicológica']) || 0;
+                const healthScore = parseFloat(evaluation['Puntuación Salud']) || 0;
                 const recommendation = evaluation['Recomendación'] || '';
 
                 console.log(`Evaluación ${index + 1}:`, {
@@ -733,9 +805,13 @@
                 });
 
                 totalScore += percentage;
-                totalAccounting += (accScore / 50) * 100; // Convertir a porcentaje
-                totalExcel += (excelScore / 50) * 100; // Convertir a porcentaje
-                totalSecretarial += (secScore / 50) * 100; // Convertir a porcentaje
+                totalAccounting += (accScore / 70) * 100; // Convertir a porcentaje (contabilidad: 70 puntos)
+                totalSales += (salesScore / 40) * 100; // Convertir a porcentaje (ventas: 40 puntos)
+                totalExcel += (excelScore / 80) * 100; // Convertir a porcentaje (excel: 80 puntos)
+                totalSecretarial += (secScore / 50) * 100; // Convertir a porcentaje (secretarial: 50 puntos)
+                totalLogic += (logicScore / 30) * 100; // Convertir a porcentaje (lógica: 30 puntos)
+                totalPsychology += (psychScore / 30) * 100; // Convertir a porcentaje (psicología: 30 puntos)
+                totalHealth += (healthScore / 40) * 100; // Convertir a porcentaje (salud: 40 puntos)
 
                 if (percentage > topScore) {
                     topScore = percentage;
@@ -755,8 +831,12 @@
                 topScore: topScore,
                 recommended: recommendedCount,
                 avgAccounting: total > 0 ? totalAccounting / total : 0,
+                avgSales: total > 0 ? totalSales / total : 0,
                 avgExcel: total > 0 ? totalExcel / total : 0,
                 avgSecretarial: total > 0 ? totalSecretarial / total : 0,
+                avgLogic: total > 0 ? totalLogic / total : 0,
+                avgPsychology: total > 0 ? totalPsychology / total : 0,
+                avgHealth: total > 0 ? totalHealth / total : 0,
                 recommendationRate: total > 0 ? (recommendedCount / total) * 100 : 0
             };
 
@@ -880,8 +960,12 @@
             document.getElementById('topScore').textContent = `${stats.topScore}%`;
             document.getElementById('recommendedCandidates').textContent = stats.recommended;
             document.getElementById('avgAccounting').textContent = `${stats.avgAccounting.toFixed(1)}%`;
+            document.getElementById('avgSales').textContent = `${stats.avgSales.toFixed(1)}%`;
             document.getElementById('avgExcel').textContent = `${stats.avgExcel.toFixed(1)}%`;
             document.getElementById('avgSecretarial').textContent = `${stats.avgSecretarial.toFixed(1)}%`;
+            document.getElementById('avgLogic').textContent = `${stats.avgLogic.toFixed(1)}%`;
+            document.getElementById('avgPsychology').textContent = `${stats.avgPsychology.toFixed(1)}%`;
+            document.getElementById('avgHealth').textContent = `${stats.avgHealth.toFixed(1)}%`;
             document.getElementById('recommendationRate').textContent = `${stats.recommendationRate.toFixed(1)}%`;
             
             console.log('Estadísticas actualizadas:', stats);
@@ -941,8 +1025,12 @@
                     <th>Candidato</th>
                     <th>Fecha</th>
                     <th>Contabilidad</th>
+                    <th>Ventas</th>
                     <th>Excel</th>
                     <th>Secretarial</th>
+                    <th>Lógica</th>
+                    <th>Psicológica</th>
+                    <th>Salud/Disp.</th>
                     <th>Total</th>
                     <th>Recomendación</th>
                     <th>Detalle</th>
@@ -957,8 +1045,12 @@
                 const totalScore = evaluation['Puntuación Total'] || 0;
                 const percentage = evaluation['Porcentaje'] || 0;
                 const accScore = evaluation['Puntuación Contabilidad'] || 0;
+                const salesScore = evaluation['Puntuación Ventas'] || 0;
                 const excelScore = evaluation['Puntuación Excel'] || 0;
                 const secScore = evaluation['Puntuación Secretarial'] || 0;
+                const logicScore = evaluation['Puntuación Lógica'] || 0;
+                const psychScore = evaluation['Puntuación Psicológica'] || 0;
+                const healthScore = evaluation['Puntuación Salud'] || 0;
                 
                 row.innerHTML = `
                     <td>
@@ -968,10 +1060,14 @@
                         </div>
                     </td>
                     <td>${formatDate(evaluation['Fecha y Hora']) || 'N/A'}</td>
-                    <td><span class="score-badge ${getScoreClass((accScore/50)*100)}">${accScore}/50</span></td>
-                    <td><span class="score-badge ${getScoreClass((excelScore/50)*100)}">${excelScore}/50</span></td>
+                    <td><span class="score-badge ${getScoreClass((accScore/70)*100)}">${accScore}/70</span></td>
+                    <td><span class="score-badge ${getScoreClass((salesScore/40)*100)}">${salesScore}/40</span></td>
+                    <td><span class="score-badge ${getScoreClass((excelScore/80)*100)}">${excelScore}/80</span></td>
                     <td><span class="score-badge ${getScoreClass((secScore/50)*100)}">${secScore}/50</span></td>
-                    <td><span class="score-badge ${getScoreClass(percentage)}">${totalScore}/150 (${percentage}%)</span></td>
+                    <td><span class="score-badge ${getScoreClass((logicScore/30)*100)}">${logicScore}/30</span></td>
+                    <td><span class="score-badge ${getScoreClass((psychScore/30)*100)}">${psychScore}/30</span></td>
+                    <td><span class="score-badge ${getScoreClass((healthScore/40)*100)}">${healthScore}/40</span></td>
+                    <td><span class="score-badge ${getScoreClass(percentage)}">${totalScore}/340 (${percentage}%)</span></td>
                     <td><span class="recommendation-status ${getRecommendationClass(evaluation['Recomendación'])}">${evaluation['Recomendación'] || 'N/A'}</span></td>
                     <td><button class="btn btn-sm btn-info" onclick="showDetailedRecommendation('${evaluation['Nombre Completo'] || 'N/A'}')"><i class="fas fa-eye"></i></button></td>
                 `;
@@ -989,8 +1085,12 @@
             const totalScore = evaluation['Puntuación Total'] || 0;
             const percentage = evaluation['Porcentaje'] || 0;
             const accScore = evaluation['Puntuación Contabilidad'] || 0;
+            const salesScore = evaluation['Puntuación Ventas'] || 0;
             const excelScore = evaluation['Puntuación Excel'] || 0;
             const secScore = evaluation['Puntuación Secretarial'] || 0;
+            const logicScore = evaluation['Puntuación Lógica'] || 0;
+            const psychScore = evaluation['Puntuación Psicológica'] || 0;
+            const healthScore = evaluation['Puntuación Salud'] || 0;
             
             card.innerHTML = `
                 <div class="candidate-header">
@@ -1007,19 +1107,35 @@
                 <div class="candidate-scores">
                     <div class="score-item">
                         <div class="label">Contabilidad</div>
-                        <div class="value">${accScore}/50 (${((accScore/50)*100).toFixed(1)}%)</div>
+                        <div class="value">${accScore}/70 (${((accScore/70)*100).toFixed(1)}%)</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="label">Ventas</div>
+                        <div class="value">${salesScore}/40 (${((salesScore/40)*100).toFixed(1)}%)</div>
                     </div>
                     <div class="score-item">
                         <div class="label">Excel</div>
-                        <div class="value">${excelScore}/50 (${((excelScore/50)*100).toFixed(1)}%)</div>
+                        <div class="value">${excelScore}/80 (${((excelScore/80)*100).toFixed(1)}%)</div>
                     </div>
                     <div class="score-item">
                         <div class="label">Secretarial</div>
                         <div class="value">${secScore}/50 (${((secScore/50)*100).toFixed(1)}%)</div>
                     </div>
                     <div class="score-item">
+                        <div class="label">Lógica</div>
+                        <div class="value">${logicScore}/30 (${((logicScore/30)*100).toFixed(1)}%)</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="label">Psicológica</div>
+                        <div class="value">${psychScore}/30 (${((psychScore/30)*100).toFixed(1)}%)</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="label">Salud/Disp.</div>
+                        <div class="value">${healthScore}/40 (${((healthScore/40)*100).toFixed(1)}%)</div>
+                    </div>
+                    <div class="score-item">
                         <div class="label">Total</div>
-                        <div class="value">${totalScore}/150 (${percentage}%)</div>
+                        <div class="value">${totalScore}/340 (${percentage}%)</div>
                     </div>
                 </div>
                 
@@ -1052,8 +1168,12 @@
             const totalScore = evaluation['Puntuación Total'] || 0;
             const percentage = evaluation['Porcentaje'] || 0;
             const accScore = evaluation['Puntuación Contabilidad'] || 0;
+            const salesScore = evaluation['Puntuación Ventas'] || 0;
             const excelScore = evaluation['Puntuación Excel'] || 0;
             const secScore = evaluation['Puntuación Secretarial'] || 0;
+            const logicScore = evaluation['Puntuación Lógica'] || 0;
+            const psychScore = evaluation['Puntuación Psicológica'] || 0;
+            const healthScore = evaluation['Puntuación Salud'] || 0;
             const recommendation = evaluation['Recomendación'] || 'Sin determinar';
 
             // Crear recomendación detallada
@@ -1067,19 +1187,35 @@
 📈 RESULTADOS DETALLADOS:
 
 🧮 CONOCIMIENTOS CONTABLES
-• Puntuación obtenida: ${accScore}/50 (${((accScore/50)*100).toFixed(1)}%)
-• Evaluación: ${getPerformanceLevel((accScore/50)*100)}
+• Puntuación obtenida: ${accScore}/70 (${((accScore/70)*100).toFixed(1)}%)
+• Evaluación: ${getPerformanceLevel((accScore/70)*100)}
+
+🤝 VENTAS Y PROVEEDORES
+• Puntuación obtenida: ${salesScore}/40 (${((salesScore/40)*100).toFixed(1)}%)
+• Evaluación: ${getPerformanceLevel((salesScore/40)*100)}
 
 📊 HABILIDADES EN EXCEL
-• Puntuación obtenida: ${excelScore}/50 (${((excelScore/50)*100).toFixed(1)}%)
+• Puntuación obtenida: ${excelScore}/80 (${((excelScore/80)*100).toFixed(1)}%)
 • Nivel autodeclarado: ${evaluation['Nivel Excel (1-10)'] || 'N/A'}/10
-• Evaluación: ${getPerformanceLevel((excelScore/50)*100)}
+• Evaluación: ${getPerformanceLevel((excelScore/80)*100)}
 
 📋 COMPETENCIAS SECRETARIALES
 • Puntuación obtenida: ${secScore}/50 (${((secScore/50)*100).toFixed(1)}%)
 • Evaluación: ${getPerformanceLevel((secScore/50)*100)}
 
-🎯 PUNTUACIÓN TOTAL: ${totalScore}/150 (${percentage}%)
+🧠 LÓGICA Y RAZONAMIENTO
+• Puntuación obtenida: ${logicScore}/30 (${((logicScore/30)*100).toFixed(1)}%)
+• Evaluación: ${getPerformanceLevel((logicScore/30)*100)}
+
+❤️ EVALUACIÓN PSICOLÓGICA
+• Puntuación obtenida: ${psychScore}/30 (${((psychScore/30)*100).toFixed(1)}%)
+• Evaluación: ${getPerformanceLevel((psychScore/30)*100)}
+
+✅ SALUD Y DISPONIBILIDAD
+• Puntuación obtenida: ${healthScore}/40 (${((healthScore/40)*100).toFixed(1)}%)
+• Evaluación: ${getPerformanceLevel((healthScore/40)*100)}
+
+🎯 PUNTUACIÓN TOTAL: ${totalScore}/340 (${percentage}%)
 
 💡 SOFTWARE CONOCIDO: ${evaluation['Software Conocido'] || 'No especificado'}
 ⭐ HABILIDADES ADICIONALES: ${evaluation['Habilidades Adicionales'] || 'No especificadas'}
@@ -1087,7 +1223,7 @@
 🔍 RECOMENDACIÓN FINAL: ${recommendation}
 
 📋 ANÁLISIS DETALLADO:
-${generateDetailedAnalysis(accScore, excelScore, secScore, percentage)}`;
+${generateDetailedAnalysis(accScore, salesScore, excelScore, secScore, logicScore, psychScore, healthScore, percentage)}`;
 
             const modal = document.createElement('div');
             modal.className = 'modal-overlay';
@@ -1144,38 +1280,84 @@ ${generateDetailedAnalysis(accScore, excelScore, secScore, percentage)}`;
             return 'NECESITA CAPACITACIÓN - Requiere formación adicional';
         }
 
-        function generateDetailedAnalysis(accScore, excelScore, secScore, percentage) {
+        function generateDetailedAnalysis(accScore, salesScore, excelScore, secScore, logicScore, psychScore, healthScore, percentage) {
             let analysis = '';
             
-            // Análisis por área
-            if (accScore >= 45) {
+            // Análisis por área - Contabilidad (70 puntos)
+            if (accScore >= 56) { // 80% de 70
                 analysis += 'El candidato demuestra excelente dominio de conceptos contables fundamentales. ';
-            } else if (accScore >= 35) {
+            } else if (accScore >= 42) { // 60% de 70
                 analysis += 'Conocimientos contables sólidos, con algunas áreas de oportunidad. ';
-            } else if (accScore >= 25) {
+            } else if (accScore >= 28) { // 40% de 70
                 analysis += 'Conocimientos contables básicos, requiere capacitación específica. ';
             } else {
                 analysis += 'Conocimientos contables insuficientes, necesita formación integral. ';
             }
 
-            if (excelScore >= 45) {
+            // Análisis Ventas y Proveedores (40 puntos)
+            if (salesScore >= 32) { // 80% de 40
+                analysis += 'Excelente comprensión del manejo de ventas y proveedores. ';
+            } else if (salesScore >= 24) { // 60% de 40
+                analysis += 'Buen entendimiento de procesos comerciales. ';
+            } else if (salesScore >= 16) { // 40% de 40
+                analysis += 'Conocimientos básicos en ventas, requiere desarrollo. ';
+            } else {
+                analysis += 'Necesita capacitación en gestión comercial. ';
+            }
+
+            // Análisis Excel (80 puntos)
+            if (excelScore >= 64) { // 80% de 80
                 analysis += 'Excelente manejo de Excel, capaz de realizar tareas avanzadas. ';
-            } else if (excelScore >= 35) {
+            } else if (excelScore >= 48) { // 60% de 80
                 analysis += 'Buen nivel en Excel, puede manejar tareas intermedias. ';
-            } else if (excelScore >= 25) {
+            } else if (excelScore >= 32) { // 40% de 80
                 analysis += 'Nivel básico en Excel, requiere práctica adicional. ';
             } else {
                 analysis += 'Habilidades limitadas en Excel, necesita capacitación. ';
             }
 
-            if (secScore >= 45) {
+            // Análisis Secretarial (50 puntos)
+            if (secScore >= 40) { // 80% de 50
                 analysis += 'Competencias secretariales sobresalientes, alta eficiencia administrativa. ';
-            } else if (secScore >= 35) {
+            } else if (secScore >= 30) { // 60% de 50
                 analysis += 'Buenas competencias secretariales, manejo adecuado de tareas administrativas. ';
-            } else if (secScore >= 25) {
+            } else if (secScore >= 20) { // 40% de 50
                 analysis += 'Competencias secretariales básicas, necesita desarrollar habilidades. ';
             } else {
                 analysis += 'Competencias secretariales insuficientes, requiere formación. ';
+            }
+
+            // Análisis Lógica (30 puntos)
+            if (logicScore >= 24) { // 80% de 30
+                analysis += 'Excelente capacidad de razonamiento lógico y resolución de problemas. ';
+            } else if (logicScore >= 18) { // 60% de 30
+                analysis += 'Buena capacidad analítica y de razonamiento. ';
+            } else if (logicScore >= 12) { // 40% de 30
+                analysis += 'Capacidad de razonamiento básica, puede mejorar con práctica. ';
+            } else {
+                analysis += 'Requiere desarrollo en habilidades de razonamiento lógico. ';
+            }
+
+            // Análisis Psicológico (30 puntos)
+            if (psychScore >= 24) { // 80% de 30
+                analysis += 'Perfil psicológico muy favorable para el puesto. ';
+            } else if (psychScore >= 18) { // 60% de 30
+                analysis += 'Buen ajuste psicológico al perfil requerido. ';
+            } else if (psychScore >= 12) { // 40% de 30
+                analysis += 'Perfil psicológico aceptable con áreas de mejora. ';
+            } else {
+                analysis += 'Requiere evaluación psicológica adicional. ';
+            }
+
+            // Análisis Salud y Disponibilidad (40 puntos)
+            if (healthScore >= 32) { // 80% de 40
+                analysis += 'Excelente estado de salud y disponibilidad total para el puesto. ';
+            } else if (healthScore >= 24) { // 60% de 40
+                analysis += 'Buen estado de salud y disponibilidad adecuada. ';
+            } else if (healthScore >= 16) { // 40% de 40
+                analysis += 'Estado de salud y disponibilidad aceptables con algunas limitaciones. ';
+            } else {
+                analysis += 'Requiere evaluación médica adicional o tiene limitaciones importantes. ';
             }
 
             // Recomendación final basada en el puntaje total

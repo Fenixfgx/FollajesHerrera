@@ -43,17 +43,21 @@ ENTREVISTA FH/
 ## Sistema de Puntuación
 
 ### Distribución de Puntos
-- **Conocimientos Contables**: 50 puntos máximo (5 preguntas × 10 puntos)
-- **Habilidades Excel**: 50 puntos máximo (5 preguntas × 10 puntos)
+- **Conocimientos Contables**: 70 puntos máximo (7 preguntas × 10 puntos)
+- **Ventas y Proveedores**: 40 puntos máximo (4 preguntas × 10 puntos)
+- **Habilidades Excel**: 80 puntos máximo (8 preguntas × 10 puntos)
 - **Competencias Secretariales**: 50 puntos máximo (5 preguntas × 10 puntos)
-- **Total**: 150 puntos máximo
+- **Lógica y Razonamiento**: 30 puntos máximo (3 preguntas × 10 puntos)
+- **Evaluación Psicológica**: 30 puntos máximo (3 preguntas × 10 puntos)
+- **Salud y Disponibilidad**: 40 puntos máximo (4 preguntas × 10 puntos)
+- **Total**: 340 puntos máximo
 
 ### Niveles de Rendimiento
-- **Excelente (135-150 puntos)**: 90-100% - Altamente recomendado
-- **Muy Bueno (120-134 puntos)**: 80-89% - Recomendado
-- **Bueno (105-119 puntos)**: 70-79% - Recomendado con capacitación
-- **Regular (75-104 puntos)**: 50-69% - No recomendado
-- **Insuficiente (0-74 puntos)**: 0-49% - No recomendado
+- **Excelente (306-340 puntos)**: 90-100% - Altamente recomendado
+- **Muy Bueno (272-305 puntos)**: 80-89% - Recomendado
+- **Bueno (238-271 puntos)**: 70-79% - Recomendado con capacitación
+- **Regular (170-237 puntos)**: 50-69% - No recomendado
+- **Insuficiente (0-169 puntos)**: 0-49% - No recomendado
 
 ## Preguntas de Evaluación
 

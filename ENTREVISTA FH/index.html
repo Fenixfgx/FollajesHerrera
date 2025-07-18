@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrevista Auxiliar Contable - Evaluación</title>
+    <title>Entrevista Auxiliar Administrativo - Evaluación</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -16,11 +16,26 @@
     <div class="container">
         <header class="header">
             <div class="header-content">
-                <i class="fas fa-calculator"></i>
-                <h1>Prueba y entrevista Follajes Herrera</h1>
-                <p>Prueba de competencias contables y secretariales</p>
+                <div class="header-logo">
+                    <img src="https://i.postimg.cc/8P8gp5kW/319068467-708280470557603-1456894316421742412-n-removebg-preview-1.png" alt="Follajes Herrera Logo" class="logo-img">
+                    <div class="header-text">
+                        <h1>Prueba y Entrevista Follajes Herrera</h1>
+                        <p>Prueba de competencias administrativas</p>
+                    </div>
+                </div>
             </div>
         </header>
+
+        <!-- Timer fijo en la esquina superior derecha -->
+        <div class="timer-container" id="timerContainer">
+            <div class="timer-display">
+                <i class="fas fa-clock"></i>
+                <span id="timer">15:00</span>
+            </div>
+            <div class="timer-progress">
+                <div class="timer-bar" id="timerBar"></div>
+            </div>
+        </div>
 
         <div class="main-content">
             <div class="form-container">
@@ -105,6 +120,71 @@
                                 <label><input type="radio" name="q5" value="0"> 18%</label>
                             </div>
                         </div>
+
+                        <div class="question-group">
+                            <h3>6. ¿Sobre qué monto se aplica la exención del 1.5% en Colombia?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q6" value="0"> $2'500.000</label>
+                                <label><input type="radio" name="q6" value="10"> $3'486.000</label>
+                                <label><input type="radio" name="q6" value="0"> $4'000.000</label>
+                                <label><input type="radio" name="q6" value="0"> $5'000.000</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>7. ¿Sobre qué monto se aplica la exención del 2.5% en Colombia?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q7" value="0"> $400.000</label>
+                                <label><input type="radio" name="q7" value="10"> $498.000</label>
+                                <label><input type="radio" name="q7" value="0"> $600.000</label>
+                                <label><input type="radio" name="q7" value="0"> $750.000</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ventas y Manejo de Proveedores -->
+                    <div class="section">
+                        <h2><i class="fas fa-handshake"></i> Ventas y Manejo de Proveedores</h2>
+                        
+                        <div class="question-group">
+                            <h3>8. ¿Cuál es el primer paso en el proceso de ventas?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q8" value="0"> Cerrar la venta</label>
+                                <label><input type="radio" name="q8" value="10"> Identificar las necesidades del cliente</label>
+                                <label><input type="radio" name="q8" value="0"> Presentar el producto</label>
+                                <label><input type="radio" name="q8" value="0"> Negociar el precio</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>9. ¿Qué información es esencial al registrar un nuevo proveedor?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q9" value="0"> Solo nombre y teléfono</label>
+                                <label><input type="radio" name="q9" value="10"> NIT, razón social, dirección, contacto y términos de pago</label>
+                                <label><input type="radio" name="q9" value="0"> Únicamente el NIT</label>
+                                <label><input type="radio" name="q9" value="0"> Solo información de contacto</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>10. ¿Cuál es la mejor práctica para el seguimiento de facturas de proveedores?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q10" value="0"> Pagar cuando se recuerde</label>
+                                <label><input type="radio" name="q10" value="10"> Llevar un control de fechas de vencimiento y términos de pago</label>
+                                <label><input type="radio" name="q10" value="0"> Esperar a que el proveedor llame</label>
+                                <label><input type="radio" name="q10" value="0"> Pagar todas al final del mes</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>11. ¿Qué es importante considerar al evaluar un proveedor?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q11" value="0"> Solo el precio más bajo</label>
+                                <label><input type="radio" name="q11" value="10"> Calidad, precio, tiempo de entrega y confiabilidad</label>
+                                <label><input type="radio" name="q11" value="0"> Únicamente la ubicación geográfica</label>
+                                <label><input type="radio" name="q11" value="0"> Solo la reputación en el mercado</label>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Habilidades en Hojas de Cálculo -->
@@ -112,52 +192,102 @@
                         <h2><i class="fas fa-table"></i> Habilidades en Hojas de Cálculo</h2>
                         
                         <div class="question-group">
-                            <h3>6. ¿Cuál es la fórmula correcta para sumar un rango de celdas A1 a A10?</h3>
+                            <h3>12. ¿Cuál es la fórmula correcta para sumar un rango de celdas A1 a A10?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q6" value="0"> =SUM(A1-A10)</label>
-                                <label><input type="radio" name="q6" value="10"> =SUMA(A1:A10)</label>
-                                <label><input type="radio" name="q6" value="0"> =SUMA(A1+A10)</label>
-                                <label><input type="radio" name="q6" value="0"> =SUMAR(A1:A10)</label>
+                                <label><input type="radio" name="q12" value="0"> =SUM(A1-A10)</label>
+                                <label><input type="radio" name="q12" value="10"> =SUMA(A1:A10)</label>
+                                <label><input type="radio" name="q12" value="0"> =SUMA(A1+A10)</label>
+                                <label><input type="radio" name="q12" value="0"> =SUMAR(A1:A10)</label>
                             </div>
                         </div>
 
                         <div class="question-group">
-                            <h3>7. ¿Qué función utilizarías para buscar un valor en una tabla?</h3>
+                            <h3>13. ¿Qué función utilizarías para buscar un valor en una tabla?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q7" value="0"> BUSCAR</label>
-                                <label><input type="radio" name="q7" value="0"> ENCONTRAR</label>
-                                <label><input type="radio" name="q7" value="0"> CONSULTAR</label>
-                                <label><input type="radio" name="q7" value="10"> BUSCARV o VLOOKUP</label>
+                                <label><input type="radio" name="q13" value="0"> BUSCAR</label>
+                                <label><input type="radio" name="q13" value="0"> ENCONTRAR</label>
+                                <label><input type="radio" name="q13" value="0"> CONSULTAR</label>
+                                <label><input type="radio" name="q13" value="10"> BUSCARV o VLOOKUP</label>
                             </div>
                         </div>
 
                         <div class="question-group">
-                            <h3>8. ¿Cómo se bloquea una celda para que no cambie al copiar una fórmula?</h3>
+                            <h3>14. ¿Cómo se bloquea una celda para que no cambie al copiar una fórmula?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q8" value="0"> Usando el símbolo # (ej: #A1)</label>
-                                <label><input type="radio" name="q8" value="0"> Usando paréntesis (ej: (A1))</label>
-                                <label><input type="radio" name="q8" value="10"> Usando el símbolo $ (ej: $A$1)</label>
-                                <label><input type="radio" name="q8" value="0"> Usando corchetes (ej: [A1])</label>
+                                <label><input type="radio" name="q14" value="0"> Usando el símbolo # (ej: #A1)</label>
+                                <label><input type="radio" name="q14" value="0"> Usando paréntesis (ej: (A1))</label>
+                                <label><input type="radio" name="q14" value="10"> Usando el símbolo $ (ej: $A$1)</label>
+                                <label><input type="radio" name="q14" value="0"> Usando corchetes (ej: [A1])</label>
                             </div>
                         </div>
 
                         <div class="question-group">
-                            <h3>9. ¿Qué función utilizarías para contar celdas que cumplan una condición?</h3>
+                            <h3>15. ¿Qué función utilizarías para contar celdas que cumplan una condición?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q9" value="0"> CONTAR</label>
-                                <label><input type="radio" name="q9" value="10"> CONTAR.SI</label>
-                                <label><input type="radio" name="q9" value="0"> CONTARA</label>
-                                <label><input type="radio" name="q9" value="0"> CONTADOR</label>
+                                <label><input type="radio" name="q15" value="0"> CONTAR</label>
+                                <label><input type="radio" name="q15" value="10"> CONTAR.SI</label>
+                                <label><input type="radio" name="q15" value="0"> CONTARA</label>
+                                <label><input type="radio" name="q15" value="0"> CONTADOR</label>
                             </div>
                         </div>
 
                         <div class="question-group">
-                            <h3>10. ¿Cuál es la combinación de teclas para crear una tabla dinámica en Excel?</h3>
+                            <h3>16. ¿Cuál es la combinación de teclas para crear una tabla dinámica en Excel?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q10" value="0"> Ctrl + T</label>
-                                <label><input type="radio" name="q10" value="10"> Alt + N + V</label>
-                                <label><input type="radio" name="q10" value="0"> Ctrl + P</label>
-                                <label><input type="radio" name="q10" value="0"> Alt + T + P</label>
+                                <label><input type="radio" name="q16" value="0"> Ctrl + T</label>
+                                <label><input type="radio" name="q16" value="10"> Alt + N + V</label>
+                                <label><input type="radio" name="q16" value="0"> Ctrl + P</label>
+                                <label><input type="radio" name="q16" value="0"> Alt + T + P</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>17. ¿Qué función utilizarías para calcular el promedio de un rango de celdas?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q17" value="10"> =PROMEDIO()</label>
+                                <label><input type="radio" name="q17" value="0"> =MEDIA()</label>
+                                <label><input type="radio" name="q17" value="0"> =AVERAGE()</label>
+                                <label><input type="radio" name="q17" value="0"> =PROM()</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>18. ¿Cómo se aplica un filtro automático en Excel?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q18" value="0"> Ctrl + F</label>
+                                <label><input type="radio" name="q18" value="10"> Datos > Filtro o Ctrl + Shift + L</label>
+                                <label><input type="radio" name="q18" value="0"> Alt + F</label>
+                                <label><input type="radio" name="q18" value="0"> Insertar > Filtro</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>19. ¿Qué función usarías para unir texto de diferentes celdas?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q19" value="10"> CONCATENAR o &</label>
+                                <label><input type="radio" name="q19" value="0"> UNIR</label>
+                                <label><input type="radio" name="q19" value="0"> JUNTAR</label>
+                                <label><input type="radio" name="q19" value="0"> COMBINAR</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>20. ¿Cuál es la mejor función para combinar datos de dos tablas con un campo común?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q20" value="0"> CONCATENAR</label>
+                                <label><input type="radio" name="q20" value="10"> BUSCARV o XLOOKUP</label>
+                                <label><input type="radio" name="q20" value="0"> SUMAR.SI</label>
+                                <label><input type="radio" name="q20" value="0"> COINCIDIR</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>21. ¿Cómo se pueden conectar datos de diferentes hojas de un mismo archivo?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q21" value="0"> Solo copiando y pegando</label>
+                                <label><input type="radio" name="q21" value="10"> Usando referencias como =Hoja2!A1</label>
+                                <label><input type="radio" name="q21" value="0"> No es posible conectarlas</label>
+                                <label><input type="radio" name="q21" value="0"> Solo usando macros</label>
                             </div>
                         </div>
                     </div>
@@ -167,52 +297,167 @@
                         <h2><i class="fas fa-clipboard-list"></i> Habilidades Secretariales</h2>
                         
                         <div class="question-group">
-                            <h3>11. ¿Cuál es la prioridad más alta en la gestión de correspondencia?</h3>
+                            <h3>22. ¿Cuál es la prioridad más alta en la gestión de correspondencia?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q11" value="0"> Correspondencia comercial general</label>
-                                <label><input type="radio" name="q11" value="0"> Publicidad y promociones</label>
-                                <label><input type="radio" name="q11" value="10"> Documentos urgentes y confidenciales</label>
-                                <label><input type="radio" name="q11" value="0"> Correspondencia personal</label>
+                                <label><input type="radio" name="q22" value="0"> Correspondencia comercial general</label>
+                                <label><input type="radio" name="q22" value="0"> Publicidad y promociones</label>
+                                <label><input type="radio" name="q22" value="10"> Documentos urgentes y confidenciales</label>
+                                <label><input type="radio" name="q22" value="0"> Correspondencia personal</label>
                             </div>
                         </div>
 
                         <div class="question-group">
-                            <h3>12. ¿Qué información debe incluir un archivo de documentos bien organizado?</h3>
+                            <h3>23. ¿Qué información debe incluir un archivo de documentos bien organizado?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q12" value="0"> Solo la fecha y el asunto</label>
-                                <label><input type="radio" name="q12" value="0"> Únicamente el número de referencia</label>
-                                <label><input type="radio" name="q12" value="0"> Solo el nombre del remitente</label>
-                                <label><input type="radio" name="q12" value="10"> Fecha, número de referencia, asunto y ubicación</label>
+                                <label><input type="radio" name="q23" value="0"> Solo la fecha y el asunto</label>
+                                <label><input type="radio" name="q23" value="0"> Únicamente el número de referencia</label>
+                                <label><input type="radio" name="q23" value="0"> Solo el nombre del remitente</label>
+                                <label><input type="radio" name="q23" value="10"> Fecha, número de referencia, asunto y ubicación</label>
                             </div>
                         </div>
 
                         <div class="question-group">
-                            <h3>13. ¿Cuál es la mejor práctica para el manejo de llamadas telefónicas?</h3>
+                            <h3>24. ¿Cuál es la mejor práctica para el manejo de llamadas telefónicas?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q13" value="10"> Responder antes del tercer timbre, identificarse y ser cortés</label>
-                                <label><input type="radio" name="q13" value="0"> Responder rápidamente sin identificarse</label>
-                                <label><input type="radio" name="q13" value="0"> Dejar que suene varias veces antes de responder</label>
-                                <label><input type="radio" name="q13" value="0"> Responder solo cuando sea conveniente</label>
+                                <label><input type="radio" name="q24" value="10"> Responder antes del tercer timbre, identificarse y ser cortés</label>
+                                <label><input type="radio" name="q24" value="0"> Responder rápidamente sin identificarse</label>
+                                <label><input type="radio" name="q24" value="0"> Dejar que suene varias veces antes de responder</label>
+                                <label><input type="radio" name="q24" value="0"> Responder solo cuando sea conveniente</label>
                             </div>
                         </div>
 
                         <div class="question-group">
-                            <h3>14. ¿Cómo se debe manejar información confidencial?</h3>
+                            <h3>25. ¿Cómo se debe manejar información confidencial?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q14" value="0"> Compartiéndola solo con el equipo</label>
-                                <label><input type="radio" name="q14" value="0"> Guardándola en archivos comunes</label>
-                                <label><input type="radio" name="q14" value="10"> Con total discreción y acceso limitado</label>
-                                <label><input type="radio" name="q14" value="0"> Comentándola en reuniones generales</label>
+                                <label><input type="radio" name="q25" value="0"> Compartiéndola solo con el equipo</label>
+                                <label><input type="radio" name="q25" value="0"> Guardándola en archivos comunes</label>
+                                <label><input type="radio" name="q25" value="10"> Con total discreción y acceso limitado</label>
+                                <label><input type="radio" name="q25" value="0"> Comentándola en reuniones generales</label>
                             </div>
                         </div>
 
                         <div class="question-group">
-                            <h3>15. ¿Cuál es la estructura correcta de una carta comercial?</h3>
+                            <h3>26. ¿Cuál es la estructura correcta de una carta comercial?</h3>
                             <div class="radio-group">
-                                <label><input type="radio" name="q15" value="0"> Fecha, saludo, cuerpo, despedida</label>
-                                <label><input type="radio" name="q15" value="10"> Encabezado, fecha, destinatario, saludo, cuerpo, despedida, firma</label>
-                                <label><input type="radio" name="q15" value="0"> Solo cuerpo y firma</label>
-                                <label><input type="radio" name="q15" value="0"> Encabezado, cuerpo, firma</label>
+                                <label><input type="radio" name="q26" value="0"> Fecha, saludo, cuerpo, despedida</label>
+                                <label><input type="radio" name="q26" value="10"> Encabezado, fecha, destinatario, saludo, cuerpo, despedida, firma</label>
+                                <label><input type="radio" name="q26" value="0"> Solo cuerpo y firma</label>
+                                <label><input type="radio" name="q26" value="0"> Encabezado, cuerpo, firma</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lógica y Razonamiento -->
+                    <div class="section">
+                        <h2><i class="fas fa-brain"></i> Lógica y Razonamiento</h2>
+                        
+                        <div class="question-group">
+                            <h3>27. Si 5 personas pueden realizar un trabajo en 10 días, ¿cuántas personas se necesitan para realizar el mismo trabajo en 2 días?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q27" value="0"> 10 personas</label>
+                                <label><input type="radio" name="q27" value="0"> 15 personas</label>
+                                <label><input type="radio" name="q27" value="10"> 25 personas</label>
+                                <label><input type="radio" name="q27" value="0"> 20 personas</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>28. ¿Cuál es el siguiente número en la secuencia: 2, 6, 12, 20, 30, ?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q28" value="0"> 40</label>
+                                <label><input type="radio" name="q28" value="10"> 42</label>
+                                <label><input type="radio" name="q28" value="0"> 45</label>
+                                <label><input type="radio" name="q28" value="0"> 38</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>29. Si un producto cuesta $100 y se le aplica un descuento del 20%, luego un impuesto del 19%, ¿cuál es el precio final?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q29" value="0"> $99</label>
+                                <label><input type="radio" name="q29" value="10"> $95.20</label>
+                                <label><input type="radio" name="q29" value="0"> $91.20</label>
+                                <label><input type="radio" name="q29" value="0"> $100</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evaluación Psicológica -->
+                    <div class="section">
+                        <h2><i class="fas fa-user-friends"></i> Evaluación Psicológica</h2>
+                        
+                        <div class="question-group">
+                            <h3>30. ¿Cómo maneja situaciones de estrés en el trabajo?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q30" value="5"> Me siento abrumado/a y necesito ayuda inmediata</label>
+                                <label><input type="radio" name="q30" value="10"> Mantengo la calma, priorizo tareas y busco soluciones</label>
+                                <label><input type="radio" name="q30" value="7"> Puedo manejar algo de estrés pero prefiero evitarlo</label>
+                                <label><input type="radio" name="q30" value="3"> Evito situaciones estresantes</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>31. ¿Cómo prefiere trabajar?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q31" value="8"> Solo/a, me concentro mejor</label>
+                                <label><input type="radio" name="q31" value="10"> Puedo trabajar tanto solo/a como en equipo según se requiera</label>
+                                <label><input type="radio" name="q31" value="7"> En equipo, me motiva la colaboración</label>
+                                <label><input type="radio" name="q31" value="5"> Prefiero que me digan exactamente qué hacer</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>32. ¿Cómo reacciona ante los cambios en el trabajo?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q32" value="3"> Me cuesta adaptarme a los cambios</label>
+                                <label><input type="radio" name="q32" value="10"> Me adapto fácilmente y veo los cambios como oportunidades</label>
+                                <label><input type="radio" name="q32" value="7"> Me adapto gradualmente a los cambios</label>
+                                <label><input type="radio" name="q32" value="5"> Prefiero rutinas establecidas</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estado de Salud y Disponibilidad -->
+                    <div class="section">
+                        <h2><i class="fas fa-heart"></i> Estado de Salud y Disponibilidad</h2>
+                        
+                        <div class="question-group">
+                            <h3>33. ¿Tiene alguna condición de salud que pueda afectar su desempeño laboral?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q33" value="10"> No, gozo de buena salud</label>
+                                <label><input type="radio" name="q33" value="8"> Tengo condiciones menores que no afectan mi trabajo</label>
+                                <label><input type="radio" name="q33" value="5"> Tengo condiciones que pueden requerir adaptaciones ocasionales</label>
+                                <label><input type="radio" name="q33" value="3"> Tengo condiciones que pueden afectar mi rendimiento</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>34. ¿Con qué frecuencia ha faltado al trabajo en su último empleo?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q34" value="10"> Muy raramente, solo por emergencias</label>
+                                <label><input type="radio" name="q34" value="8"> Ocasionalmente por motivos de salud</label>
+                                <label><input type="radio" name="q34" value="5"> Algunas veces por motivos personales</label>
+                                <label><input type="radio" name="q34" value="3"> Con relativa frecuencia</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>35. ¿Tiene responsabilidades familiares que puedan afectar su horario laboral?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q35" value="10"> No, tengo total disponibilidad horaria</label>
+                                <label><input type="radio" name="q35" value="8"> Tengo responsabilidades menores que puedo manejar</label>
+                                <label><input type="radio" name="q35" value="5"> Tengo responsabilidades que requieren flexibilidad ocasional</label>
+                                <label><input type="radio" name="q35" value="3"> Tengo responsabilidades que pueden limitar mi disponibilidad</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>36. ¿Qué tan estable es su situación personal actual?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q36" value="10"> Muy estable, sin cambios previstos</label>
+                                <label><input type="radio" name="q36" value="8"> Estable con cambios menores ocasionales</label>
+                                <label><input type="radio" name="q36" value="5"> Moderadamente estable</label>
+                                <label><input type="radio" name="q36" value="3"> Atravesando cambios importantes</label>
                             </div>
                         </div>
                     </div>
@@ -259,20 +504,36 @@
                     <h3><i class="fas fa-chart-line"></i> Puntuación</h3>
                     <div class="score-display">
                         <div class="score-number">0</div>
-                        <div class="score-max">/ 150</div>
+                        <div class="score-max">/ 360</div>
                     </div>
                     <div class="score-breakdown">
                         <div class="score-item">
                             <span>Conocimientos Contables:</span>
-                            <span id="accountingScore">0/50</span>
+                            <span id="accountingScore">0/70</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Ventas y Proveedores:</span>
+                            <span id="salesScore">0/40</span>
                         </div>
                         <div class="score-item">
                             <span>Habilidades Excel:</span>
-                            <span id="excelScore">0/50</span>
+                            <span id="excelScore">0/100</span>
                         </div>
                         <div class="score-item">
                             <span>Habilidades Secretariales:</span>
                             <span id="secretarialScore">0/50</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Lógica y Razonamiento:</span>
+                            <span id="logicScore">0/30</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Evaluación Psicológica:</span>
+                            <span id="psychologyScore">0/30</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Salud y Disponibilidad:</span>
+                            <span id="healthScore">0/40</span>
                         </div>
                     </div>
                     <div class="score-level">
@@ -290,6 +551,19 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal de Tiempo Agotado -->
+    <div id="timeOutModal" class="time-out-modal">
+        <div class="time-out-content">
+            <i class="fas fa-hourglass-end time-out-icon"></i>
+            <h2>¡Tiempo Agotado!</h2>
+            <p>El tiempo para completar la evaluación ha terminado. Las respuestas que hayas completado hasta ahora serán enviadas automáticamente.</p>
+            <button id="timeOutSubmitBtn" class="time-out-submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                Enviar Evaluación
+            </button>
         </div>
     </div>
 

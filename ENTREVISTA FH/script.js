@@ -1,7 +1,7 @@
 // Configuración para Google Sheets
 const GOOGLE_SHEETS_CONFIG = {
     // Tu URL de Google Apps Script ya configurada
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbxcfKXBwtSxlpxcF3g6dG_KJ4hjNC4vsJcWNpYEJoGnb8gX6Y70MttJLOTopkKJx_-Y/exec',
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbwH9-FigkdPD-WtoAs3SaDZxsWMwKVWH0YLnoOP9OVbktuRqr-UdzkHwdUDcmkLU4DSaA/exec',
     sheetName: 'Evaluaciones'
 };
 
@@ -9,16 +9,27 @@ const GOOGLE_SHEETS_CONFIG = {
 let currentScore = {
     total: 0,
     accounting: 0,
+    sales: 0,
     excel: 0,
-    secretarial: 0
+    secretarial: 0,
+    logic: 0,
+    psychology: 0,
+    health: 0
 };
 
+// Variables del timer
+let timeRemaining = 15 * 60; // 15 minutos en segundos
+let timerInterval;
+let isTimeUp = false;
+let timerStarted = false; // Nueva variable para controlar si ya inició el timer
 // Inicialización
 document.addEventListener('DOMContentLoaded', function() {
     initializeForm();
     randomizeAnswers();
     setupEventListeners();
     updateScoreDisplay();
+    // NO iniciamos el timer automáticamente - se inicia al responder primera pregunta
+    // startTimer(); // REMOVIDO
     
     // Mostrar estado de configuración
     showConfigurationStatus();
@@ -95,7 +106,6 @@ function randomizeAnswers() {
         }
     });
 }
-
 function setupEventListeners() {
     const form = document.getElementById('evaluationForm');
     const radioInputs = document.querySelectorAll('input[type="radio"]');
@@ -103,8 +113,31 @@ function setupEventListeners() {
     // Listener para cambios en respuestas
     radioInputs.forEach(input => {
         input.addEventListener('change', function() {
+            // Iniciar timer al responder la primera pregunta
+            if (!timerStarted) {
+                startTimer();
+                timerStarted = true;
+                
+                // Mostrar el timer container
+                const timerContainer = document.getElementById('timerContainer');
+                timerContainer.classList.add('active');
+                
+                // Mostrar notificación de que el timer inició
+                Swal.fire({
+                    title: '⏰ ¡Timer Iniciado!',
+                    text: 'Tienes 15 minutos para completar la evaluación.',
+                    icon: 'info',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end'
+                });
+            }
+            
             calculateScore();
             updateScoreDisplay();
+            saveProgress(); // Guardar progreso
         });
     });
     
@@ -119,35 +152,72 @@ function calculateScore() {
     currentScore = {
         total: 0,
         accounting: 0,
+        sales: 0,
         excel: 0,
-        secretarial: 0
+        secretarial: 0,
+        logic: 0,
+        psychology: 0,
+        health: 0
     };
     
-    // Preguntas de contabilidad (q1-q5)
-    for (let i = 1; i <= 5; i++) {
+    // Preguntas de contabilidad (q1-q7)
+    for (let i = 1; i <= 7; i++) {
         const answer = document.querySelector(`input[name="q${i}"]:checked`);
         if (answer) {
             currentScore.accounting += parseInt(answer.value);
         }
     }
     
-    // Preguntas de Excel (q6-q10)
-    for (let i = 6; i <= 10; i++) {
+    // Preguntas de ventas y proveedores (q8-q11)
+    for (let i = 8; i <= 11; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer) {
+            currentScore.sales += parseInt(answer.value);
+        }
+    }
+    
+    // Preguntas de Excel (q12-q21)
+    for (let i = 12; i <= 21; i++) {
         const answer = document.querySelector(`input[name="q${i}"]:checked`);
         if (answer) {
             currentScore.excel += parseInt(answer.value);
         }
     }
     
-    // Preguntas secretariales (q11-q15)
-    for (let i = 11; i <= 15; i++) {
+    // Preguntas secretariales (q22-q26)
+    for (let i = 22; i <= 26; i++) {
         const answer = document.querySelector(`input[name="q${i}"]:checked`);
         if (answer) {
             currentScore.secretarial += parseInt(answer.value);
         }
     }
     
-    currentScore.total = currentScore.accounting + currentScore.excel + currentScore.secretarial;
+    // Preguntas de lógica (q27-q29)
+    for (let i = 27; i <= 29; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer) {
+            currentScore.logic += parseInt(answer.value);
+        }
+    }
+    
+    // Preguntas psicológicas (q30-q32)
+    for (let i = 30; i <= 32; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer) {
+            currentScore.psychology += parseInt(answer.value);
+        }
+    }
+    
+    // Preguntas de salud y disponibilidad (q33-q36)
+    for (let i = 33; i <= 36; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer) {
+            currentScore.health += parseInt(answer.value);
+        }
+    }
+    
+    currentScore.total = currentScore.accounting + currentScore.sales + currentScore.excel + 
+                        currentScore.secretarial + currentScore.logic + currentScore.psychology + currentScore.health;
 }
 
 function updateScoreDisplay() {
@@ -158,13 +228,17 @@ function updateScoreDisplay() {
     // evitamos actualizar el DOM completamente
     
     // Solo mantenemos el cálculo del porcentaje para uso interno
-    const percentage = (currentScore.total / 150) * 100;
+    const percentage = (currentScore.total / 360) * 100;
     
     // Log interno para debugging (solo visible en consola de desarrollador)
     console.log('Puntuación actual (oculta al usuario):', {
         accounting: currentScore.accounting,
+        sales: currentScore.sales,
         excel: currentScore.excel,
         secretarial: currentScore.secretarial,
+        logic: currentScore.logic,
+        psychology: currentScore.psychology,
+        health: currentScore.health,
         total: currentScore.total,
         percentage: percentage.toFixed(1) + '%'
     });
@@ -184,7 +258,7 @@ function collectFormData() {
     data.experience = formData.get('experience');
     
     // Respuestas de evaluación
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= 36; i++) {
         const answer = document.querySelector(`input[name="q${i}"]:checked`);
         data[`question_${i}`] = answer ? answer.value : '0';
     }
@@ -199,10 +273,24 @@ function collectFormData() {
     
     // Puntuaciones
     data.accountingScore = currentScore.accounting;
+    data.salesScore = currentScore.sales;
     data.excelScore = currentScore.excel;
     data.secretarialScore = currentScore.secretarial;
+    data.logicScore = currentScore.logic;
+    data.psychologyScore = currentScore.psychology;
+    data.healthScore = currentScore.health;
     data.totalScore = currentScore.total;
-    data.percentage = Math.round((currentScore.total / 150) * 100);
+    data.percentage = Math.round((currentScore.total / 360) * 100);
+    
+    // Información del tiempo
+    const totalTime = 15 * 60;
+    const timeUsed = totalTime - timeRemaining;
+    data.timeUsedMinutes = Math.floor(timeUsed / 60);
+    data.timeUsedSeconds = timeUsed % 60;
+    data.timeRemainingMinutes = Math.floor(timeRemaining / 60);
+    data.timeRemainingSeconds = timeRemaining % 60;
+    data.timeUpSubmission = isTimeUp ? 'Sí' : 'No';
+    data.totalTimeAllowed = '15:00';
     
     // Recomendación
     data.recommendation = getRecommendationLevel();
@@ -210,8 +298,154 @@ function collectFormData() {
     return data;
 }
 
+// Función para recopilar solo las respuestas del formulario sin evaluaciones
+function collectPureResponsesData() {
+    const formData = new FormData(document.getElementById('evaluationForm'));
+    const responses = {};
+    
+    // Información básica
+    responses.fecha_hora = new Date().toLocaleString('es-CO');
+    responses.nombre_completo = formData.get('fullName') || '';
+    responses.email = formData.get('email') || '';
+    responses.telefono = formData.get('phone') || '';
+    responses.experiencia = formData.get('experience') || '';
+    
+    // Definir las preguntas tal como aparecen en el formulario
+    const questions = [
+        // Contabilidad (Preguntas 1-7)
+        "¿Cuál es la ecuación fundamental de la contabilidad?",
+        "¿Qué significa el término \"debe\" en contabilidad?", 
+        "¿Cuál es el régimen tributario más común para pequeñas empresas en Colombia?",
+        "¿Qué es el IVA en Colombia?",
+        "¿Cuál es la tasa general del IVA en Colombia actualmente?",
+        "¿Sobre qué monto se aplica la exención del 1.5% en Colombia?",
+        "¿Sobre qué monto se aplica la exención del 2.5% en Colombia?",
+        
+        // Ventas y Proveedores (Preguntas 8-11)
+        "¿Cuál es el primer paso en el proceso de ventas?",
+        "¿Qué información es esencial al registrar un nuevo proveedor?",
+        "¿Cuál es la mejor práctica para el seguimiento de facturas de proveedores?",
+        "¿Qué es importante considerar al evaluar un proveedor?",
+        
+        // Excel (Preguntas 12-21)
+        "¿Cuál es la fórmula correcta para sumar un rango de celdas A1 a A10?",
+        "¿Qué función utilizarías para buscar un valor en una tabla?",
+        "¿Cómo se bloquea una celda para que no cambie al copiar una fórmula?",
+        "¿Qué función utilizarías para contar celdas que cumplan una condición?",
+        "¿Cuál es la combinación de teclas para crear una tabla dinámica en Excel?",
+        "¿Qué función utilizarías para calcular el promedio de un rango de celdas?",
+        "¿Cómo se aplica un filtro automático en Excel?",
+        "¿Qué función usarías para unir texto de diferentes celdas?",
+        "¿Cuál es la mejor función para combinar datos de dos tablas con un campo común?",
+        "¿Cómo se pueden conectar datos de diferentes hojas de un mismo archivo?",
+        
+        // Secretarial (Preguntas 22-26)
+        "¿Cuál es la prioridad más alta en la gestión de correspondencia?",
+        "¿Qué información debe incluir un archivo de documentos bien organizado?",
+        "¿Cuál es la mejor práctica para el manejo de llamadas telefónicas?",
+        "¿Cómo se debe manejar información confidencial?",
+        "¿Cuál es la estructura correcta de una carta comercial?",
+        
+        // Lógica (Preguntas 27-29)
+        "Si 5 personas pueden realizar un trabajo en 10 días, ¿cuántas personas se necesitan para realizar el mismo trabajo en 2 días?",
+        "¿Cuál es el siguiente número en la secuencia: 2, 6, 12, 20, 30, ?",
+        "Si un producto cuesta $100 y se le aplica un descuento del 20%, luego un impuesto del 19%, ¿cuál es el precio final?",
+        
+        // Psicológica (Preguntas 30-32)
+        "¿Cómo maneja situaciones de estrés en el trabajo?",
+        "¿Cómo prefiere trabajar?",
+        "¿Cómo reacciona ante los cambios en el trabajo?",
+        
+        // Salud y Disponibilidad (Preguntas 33-36)
+        "¿Tiene alguna condición de salud que pueda afectar su desempeño laboral?",
+        "¿Con qué frecuencia ha faltado al trabajo en su último empleo?",
+        "¿Tiene responsabilidades familiares que puedan afectar su horario laboral?",
+        "¿Qué tan estable es su situación personal actual?"
+    ];
+    
+    // Recopilar respuestas pregunta por pregunta
+    responses.respuestas = {};
+    for (let i = 1; i <= 36; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        const questionText = questions[i-1] || `Pregunta ${i}`;
+        
+        // Obtener todas las opciones disponibles para esta pregunta
+        const allOptions = document.querySelectorAll(`input[name="q${i}"]`);
+        const opciones = Array.from(allOptions).map(option => {
+            return {
+                valor: option.value,
+                texto: option.nextElementSibling?.textContent?.trim() || option.value
+            };
+        });
+        
+        responses.respuestas[`pregunta_${i}`] = {
+            pregunta: questionText,
+            opciones_disponibles: opciones,
+            respuesta_seleccionada: {
+                valor: answer ? answer.value : null,
+                texto: answer ? answer.nextElementSibling?.textContent?.trim() || answer.value : 'No respondida'
+            },
+            respondida: !!answer
+        };
+    }
+    
+    // Autoevaluación adicional
+    responses.autoevaluacion = {
+        nivel_excel_autodeclarado: formData.get('excelLevel') || '',
+        habilidades_adicionales: formData.get('additionalSkills') || ''
+    };
+    
+    // Software conocido
+    const softwareCheckboxes = document.querySelectorAll('input[name="software"]:checked');
+    responses.software_conocido = Array.from(softwareCheckboxes).map(cb => cb.value);
+    
+    // Información de tiempo
+    const totalTime = 15 * 60;
+    const timeUsed = totalTime - timeRemaining;
+    responses.informacion_tiempo = {
+        tiempo_total_permitido: '15:00',
+        tiempo_usado_minutos: Math.floor(timeUsed / 60),
+        tiempo_usado_segundos: timeUsed % 60,
+        tiempo_restante_minutos: Math.floor(timeRemaining / 60),
+        tiempo_restante_segundos: timeRemaining % 60,
+        entrega_por_tiempo_agotado: isTimeUp
+    };
+    
+    return responses;
+}
+
+// Función para descargar las respuestas como JSON
+function downloadResponsesJSON() {
+    try {
+        const responses = collectPureResponsesData();
+        const fileName = `respuestas_${responses.nombre_completo.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.json`;
+        
+        // Crear blob con el JSON
+        const jsonString = JSON.stringify(responses, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        
+        // Crear enlace de descarga
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        
+        // Hacer clic automáticamente para descargar
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Limpiar URL
+        URL.revokeObjectURL(url);
+        
+        console.log('JSON de respuestas descargado:', fileName);
+    } catch (error) {
+        console.error('Error al descargar JSON de respuestas:', error);
+    }
+}
+
 function getRecommendationLevel() {
-    const percentage = (currentScore.total / 150) * 100;
+    const percentage = (currentScore.total / 360) * 100;
     if (percentage >= 90) return 'Excelente - Altamente recomendado';
     if (percentage >= 80) return 'Muy Bueno - Recomendado';
     if (percentage >= 70) return 'Bueno - Recomendado con capacitación';
@@ -221,10 +455,14 @@ function getRecommendationLevel() {
 
 // Función para generar recomendaciones detalladas
 function getDetailedRecommendation(scores, level) {
-    const accPercentage = (scores.accounting / 50) * 100;
-    const excelPercentage = (scores.excel / 50) * 100;
+    const accPercentage = (scores.accounting / 70) * 100;
+    const salesPercentage = (scores.sales / 40) * 100;
+    const excelPercentage = (scores.excel / 100) * 100;
     const secretarialPercentage = (scores.secretarial / 50) * 100;
-    const totalPercentage = (scores.total / 150) * 100;
+    const logicPercentage = (scores.logic / 30) * 100;
+    const psychologyPercentage = (scores.psychology / 30) * 100;
+    const healthPercentage = (scores.health / 40) * 100;
+    const totalPercentage = (scores.total / 360) * 100;
     
     let recommendation = '';
     let strengths = [];
@@ -235,15 +473,30 @@ function getDetailedRecommendation(scores, level) {
     if (accPercentage >= 80) strengths.push('Contabilidad');
     else if (accPercentage < 60) weaknesses.push('Contabilidad');
     
+    if (salesPercentage >= 80) strengths.push('Ventas y Proveedores');
+    else if (salesPercentage < 60) weaknesses.push('Ventas y Proveedores');
+    
     if (excelPercentage >= 80) strengths.push('Excel');
     else if (excelPercentage < 60) weaknesses.push('Excel');
     
     if (secretarialPercentage >= 80) strengths.push('Habilidades Secretariales');
     else if (secretarialPercentage < 60) weaknesses.push('Habilidades Secretariales');
     
+    if (logicPercentage >= 80) strengths.push('Lógica y Razonamiento');
+    else if (logicPercentage < 60) weaknesses.push('Lógica y Razonamiento');
+    
+    if (psychologyPercentage >= 80) strengths.push('Evaluación Psicológica');
+    else if (psychologyPercentage < 60) weaknesses.push('Evaluación Psicológica');
+    
+    if (healthPercentage >= 80) strengths.push('Salud y Disponibilidad');
+    else if (healthPercentage < 60) weaknesses.push('Salud y Disponibilidad');
+    
     // Generar recomendaciones específicas
     if (weaknesses.includes('Contabilidad')) {
         suggestions.push('Capacitación en principios contables básicos y manejo de cuentas');
+    }
+    if (weaknesses.includes('Ventas y Proveedores')) {
+        suggestions.push('Entrenamiento en técnicas de ventas y gestión de proveedores');
     }
     if (weaknesses.includes('Excel')) {
         suggestions.push('Entrenamiento en funciones avanzadas de Excel y análisis de datos');
@@ -251,25 +504,50 @@ function getDetailedRecommendation(scores, level) {
     if (weaknesses.includes('Habilidades Secretariales')) {
         suggestions.push('Desarrollo de habilidades de comunicación y organización documental');
     }
+    if (weaknesses.includes('Lógica y Razonamiento')) {
+        suggestions.push('Desarrollo de habilidades de pensamiento analítico y resolución de problemas');
+    }
+    if (weaknesses.includes('Evaluación Psicológica')) {
+        suggestions.push('Desarrollo de habilidades de manejo del estrés y trabajo en equipo');
+    }
+    if (weaknesses.includes('Salud y Disponibilidad')) {
+        suggestions.push('Evaluación de disponibilidad y condiciones de trabajo');
+    }
     
     switch (level) {
         case 'excelente':
             recommendation = `
                 <div class="recommendation-detail">
                     <h4><i class="fas fa-star"></i> Excelente Desempeño</h4>
-                    <p><strong>Puntuación General:</strong> ${scores.total}/150 (${totalPercentage.toFixed(1)}%)</p>
+                    <p><strong>Puntuación General:</strong> ${scores.total}/360 (${totalPercentage.toFixed(1)}%)</p>
                     <div class="score-breakdown">
                         <div class="score-item">
                             <span class="area">Contabilidad:</span>
-                            <span class="points">${scores.accounting}/50 (${accPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.accounting}/70 (${accPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Ventas y Proveedores:</span>
+                            <span class="points">${scores.sales}/40 (${salesPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Excel:</span>
-                            <span class="points">${scores.excel}/50 (${excelPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.excel}/100 (${excelPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Secretarial:</span>
                             <span class="points">${scores.secretarial}/50 (${secretarialPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Lógica:</span>
+                            <span class="points">${scores.logic}/30 (${logicPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Psicología:</span>
+                            <span class="points">${scores.psychology}/30 (${psychologyPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Salud:</span>
+                            <span class="points">${scores.health}/40 (${healthPercentage.toFixed(1)}%)</span>
                         </div>
                     </div>
                     <div class="recommendation-verdict">
@@ -292,19 +570,35 @@ function getDetailedRecommendation(scores, level) {
             recommendation = `
                 <div class="recommendation-detail">
                     <h4><i class="fas fa-thumbs-up"></i> Muy Buen Desempeño</h4>
-                    <p><strong>Puntuación General:</strong> ${scores.total}/150 (${totalPercentage.toFixed(1)}%)</p>
+                    <p><strong>Puntuación General:</strong> ${scores.total}/360 (${totalPercentage.toFixed(1)}%)</p>
                     <div class="score-breakdown">
                         <div class="score-item">
                             <span class="area">Contabilidad:</span>
-                            <span class="points">${scores.accounting}/50 (${accPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.accounting}/70 (${accPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Ventas y Proveedores:</span>
+                            <span class="points">${scores.sales}/40 (${salesPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Excel:</span>
-                            <span class="points">${scores.excel}/50 (${excelPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.excel}/100 (${excelPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Secretarial:</span>
                             <span class="points">${scores.secretarial}/50 (${secretarialPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Lógica:</span>
+                            <span class="points">${scores.logic}/30 (${logicPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Psicología:</span>
+                            <span class="points">${scores.psychology}/30 (${psychologyPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Salud:</span>
+                            <span class="points">${scores.health}/40 (${healthPercentage.toFixed(1)}%)</span>
                         </div>
                     </div>
                     <div class="recommendation-verdict">
@@ -326,19 +620,35 @@ function getDetailedRecommendation(scores, level) {
             recommendation = `
                 <div class="recommendation-detail">
                     <h4><i class="fas fa-info-circle"></i> Desempeño Satisfactorio</h4>
-                    <p><strong>Puntuación General:</strong> ${scores.total}/150 (${totalPercentage.toFixed(1)}%)</p>
+                    <p><strong>Puntuación General:</strong> ${scores.total}/360 (${totalPercentage.toFixed(1)}%)</p>
                     <div class="score-breakdown">
                         <div class="score-item">
                             <span class="area">Contabilidad:</span>
-                            <span class="points">${scores.accounting}/50 (${accPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.accounting}/70 (${accPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Ventas y Proveedores:</span>
+                            <span class="points">${scores.sales}/40 (${salesPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Excel:</span>
-                            <span class="points">${scores.excel}/50 (${excelPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.excel}/100 (${excelPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Secretarial:</span>
                             <span class="points">${scores.secretarial}/50 (${secretarialPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Lógica:</span>
+                            <span class="points">${scores.logic}/30 (${logicPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Psicología:</span>
+                            <span class="points">${scores.psychology}/30 (${psychologyPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Salud:</span>
+                            <span class="points">${scores.health}/40 (${healthPercentage.toFixed(1)}%)</span>
                         </div>
                     </div>
                     <div class="recommendation-verdict">
@@ -361,19 +671,35 @@ function getDetailedRecommendation(scores, level) {
             recommendation = `
                 <div class="recommendation-detail">
                     <h4><i class="fas fa-exclamation-triangle"></i> Conocimientos Limitados</h4>
-                    <p><strong>Puntuación General:</strong> ${scores.total}/150 (${totalPercentage.toFixed(1)}%)</p>
+                    <p><strong>Puntuación General:</strong> ${scores.total}/360 (${totalPercentage.toFixed(1)}%)</p>
                     <div class="score-breakdown">
                         <div class="score-item">
                             <span class="area">Contabilidad:</span>
-                            <span class="points">${scores.accounting}/50 (${accPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.accounting}/70 (${accPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Ventas y Proveedores:</span>
+                            <span class="points">${scores.sales}/40 (${salesPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Excel:</span>
-                            <span class="points">${scores.excel}/50 (${excelPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.excel}/100 (${excelPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Secretarial:</span>
                             <span class="points">${scores.secretarial}/50 (${secretarialPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Lógica:</span>
+                            <span class="points">${scores.logic}/30 (${logicPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Psicología:</span>
+                            <span class="points">${scores.psychology}/30 (${psychologyPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Salud:</span>
+                            <span class="points">${scores.health}/40 (${healthPercentage.toFixed(1)}%)</span>
                         </div>
                     </div>
                     <div class="recommendation-verdict">
@@ -395,19 +721,35 @@ function getDetailedRecommendation(scores, level) {
             recommendation = `
                 <div class="recommendation-detail">
                     <h4><i class="fas fa-times-circle"></i> Conocimientos Insuficientes</h4>
-                    <p><strong>Puntuación General:</strong> ${scores.total}/150 (${totalPercentage.toFixed(1)}%)</p>
+                    <p><strong>Puntuación General:</strong> ${scores.total}/360 (${totalPercentage.toFixed(1)}%)</p>
                     <div class="score-breakdown">
                         <div class="score-item">
                             <span class="area">Contabilidad:</span>
-                            <span class="points">${scores.accounting}/50 (${accPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.accounting}/70 (${accPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Ventas y Proveedores:</span>
+                            <span class="points">${scores.sales}/40 (${salesPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Excel:</span>
-                            <span class="points">${scores.excel}/50 (${excelPercentage.toFixed(1)}%)</span>
+                            <span class="points">${scores.excel}/100 (${excelPercentage.toFixed(1)}%)</span>
                         </div>
                         <div class="score-item">
                             <span class="area">Secretarial:</span>
                             <span class="points">${scores.secretarial}/50 (${secretarialPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Lógica:</span>
+                            <span class="points">${scores.logic}/30 (${logicPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Psicología:</span>
+                            <span class="points">${scores.psychology}/30 (${psychologyPercentage.toFixed(1)}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="area">Salud:</span>
+                            <span class="points">${scores.health}/40 (${healthPercentage.toFixed(1)}%)</span>
                         </div>
                     </div>
                     <div class="recommendation-verdict">
@@ -428,29 +770,203 @@ function getDetailedRecommendation(scores, level) {
     return recommendation;
 }
 
+
+// ===============================
+// FUNCIONES DEL TIMER
+// ===============================
+
+function startTimer() {
+    const timerDisplay = document.getElementById('timer');
+    const timerBar = document.getElementById('timerBar');
+    const timeOutModal = document.getElementById('timeOutModal');
+    const timeOutSubmitBtn = document.getElementById('timeOutSubmitBtn');
+    
+    // Configurar evento del botón de envío en el modal
+    timeOutSubmitBtn.addEventListener('click', function() {
+        submitForm();
+    });
+    
+    timerInterval = setInterval(function() {
+        if (isTimeUp) return;
+        
+        timeRemaining--;
+        updateTimerDisplay();
+        
+        // Calcular porcentaje de tiempo restante
+        const totalTime = 15 * 60;
+        const percentage = (timeRemaining / totalTime) * 100;
+        
+        // Actualizar barra de progreso
+        timerBar.style.width = percentage + '%';
+        
+        // Cambiar colores según el tiempo restante
+        updateTimerColors(percentage);
+        
+        // Cuando el tiempo se agota
+        if (timeRemaining <= 0) {
+            timeUp();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const timerDisplay = document.getElementById('timer');
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function updateTimerColors(percentage) {
+    const timerDisplay = document.querySelector('.timer-display');
+    const timerBar = document.getElementById('timerBar');
+    
+    // Remover clases anteriores
+    timerDisplay.classList.remove('warning', 'critical');
+    timerBar.classList.remove('warning', 'critical');
+    
+    if (percentage <= 20) { // Últimos 3 minutos
+        timerDisplay.classList.add('critical');
+        timerBar.classList.add('critical');
+    } else if (percentage <= 40) { // Últimos 6 minutos
+        timerDisplay.classList.add('warning');
+        timerBar.classList.add('warning');
+    }
+}
+
+function timeUp() {
+    isTimeUp = true;
+    clearInterval(timerInterval);
+    
+    // Bloquear el formulario
+    const formContainer = document.querySelector('.form-container');
+    formContainer.classList.add('form-disabled');
+    
+    // Mostrar modal de tiempo agotado
+    const timeOutModal = document.getElementById('timeOutModal');
+    timeOutModal.classList.add('show');
+    
+    // Opcional: Reproducir sonido de alerta
+    playTimeUpSound();
+    
+    // Mostrar notificación SweetAlert2
+    Swal.fire({
+        title: '⏰ ¡Tiempo Agotado!',
+        text: 'El tiempo para completar la evaluación ha terminado.',
+        icon: 'warning',
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        },
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-end'
+    });
+}
+
+function playTimeUpSound() {
+    // Crear un sonido simple usando Web Audio API
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.2);
+        oscillator.frequency.setValueAtTime(400, audioContext.currentTime + 0.4);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.6);
+    } catch (error) {
+        console.log('Audio no disponible:', error);
+    }
+}
+
+function pauseTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+}
+
+function resumeTimer() {
+    if (!isTimeUp) {
+        startTimer();
+    }
+}
+
+// Función para agregar tiempo extra (solo para testing/debugging)
+function addExtraTime(minutes) {
+    if (!isTimeUp) {
+        timeRemaining += minutes * 60;
+        updateTimerDisplay();
+    }
+}
+
+// Prevenir que el usuario cierre la página accidentalmente cuando hay poco tiempo
+window.addEventListener('beforeunload', function(e) {
+    if (!isTimeUp && timeRemaining > 0 && timeRemaining < 300) { // Últimos 5 minutos
+        e.preventDefault();
+        e.returnValue = '¿Estás seguro de que quieres salir? Perderás tu progreso en la evaluación.';
+    }
+});
+
+// Detectar cuando el usuario cambia de pestaña (opcional)
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden && !isTimeUp && timeRemaining < 300) {
+        // El usuario cambió de pestaña en los últimos 5 minutos
+        console.log('Usuario cambió de pestaña con poco tiempo restante');
+    }
+});
+
 async function submitForm() {
-    const submitButton = document.querySelector('.btn-primary');
+    const submitButton = document.querySelector('.btn-primary') || document.getElementById('timeOutSubmitBtn');
     const originalText = submitButton.innerHTML;
     
-    // Validar que se hayan respondido todas las preguntas requeridas
-    if (!validateForm()) {
-        showError('Por favor, complete todos los campos requeridos.');
-        return;
+    // Detener el timer si está corriendo
+    if (timerInterval) {
+        clearInterval(timerInterval);
     }
     
-    // Mostrar estado de carga
-    submitButton.innerHTML = '<span class="loading"></span> Enviando...';
-    submitButton.disabled = true;
-    
     try {
+        // Validar que se hayan respondido al menos algunas preguntas si el tiempo se agotó
+        if (isTimeUp) {
+            // Para tiempo agotado, enviar lo que esté respondido
+            console.log('Enviando evaluación por tiempo agotado');
+        } else {
+            // Validación normal para envío manual
+            if (!validateForm()) {
+                showError('Por favor, complete todos los campos requeridos.');
+                return;
+            }
+        }
+        
         const formData = collectFormData();
         
         // Intentar enviar a Google Sheets con diferentes métodos
         const success = await sendToGoogleSheets(formData);
         
         if (success) {
+            // Descargar JSON con respuestas puras antes de mostrar mensaje de éxito
+            downloadResponsesJSON();
+            
             showSuccess('Evaluación enviada exitosamente. Gracias por completar la prueba.');
             clearFormAndProgress(); // Limpiar formulario y progreso guardado
+            
+            // Cerrar modal de tiempo agotado si está abierto
+            const timeOutModal = document.getElementById('timeOutModal');
+            if (timeOutModal) {
+                timeOutModal.classList.remove('show');
+            }
             
             // Scroll al top
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -592,7 +1108,7 @@ async function sendToGoogleSheets(formData) {
                 showSuccess(`Datos enviados exitosamente usando método ${i + 1}. Verifique la hoja de cálculo.`);
                 
                 // Agregar botón para verificar la hoja
-                addVerificationButton();
+                // addVerificationButton(); // Comentado para ocultar el botón
                 
                 return true;
             }
@@ -841,7 +1357,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Guardar progreso en localStorage
+// Función para guardar progreso
 function saveProgress() {
     const formData = new FormData(document.getElementById('evaluationForm'));
     const progress = {};
@@ -858,18 +1374,32 @@ function loadProgress() {
     const saved = localStorage.getItem('evaluationProgress');
     if (saved) {
         const progress = JSON.parse(saved);
+        let hasAnswers = false;
         
         Object.keys(progress).forEach(key => {
             const element = document.querySelector(`[name="${key}"]`);
             if (element) {
                 if (element.type === 'radio') {
                     const radio = document.querySelector(`[name="${key}"][value="${progress[key]}"]`);
-                    if (radio) radio.checked = true;
+                    if (radio) {
+                        radio.checked = true;
+                        hasAnswers = true;
+                    }
                 } else {
                     element.value = progress[key];
                 }
             }
         });
+        
+        // Si hay respuestas guardadas, iniciar el timer
+        if (hasAnswers && !timerStarted) {
+            startTimer();
+            timerStarted = true;
+            
+            // Mostrar el timer container
+            const timerContainer = document.getElementById('timerContainer');
+            timerContainer.classList.add('active');
+        }
         
         calculateScore();
         updateScoreDisplay();
@@ -950,8 +1480,32 @@ function clearFormAndProgress() {
     });
     
     // Resetear puntuación
-    scores = { accounting: 0, excel: 0, secretarial: 0 };
+    currentScore = {
+        total: 0,
+        accounting: 0,
+        sales: 0,
+        excel: 0,
+        secretarial: 0,
+        logic: 0,
+        psychology: 0,
+        health: 0
+    };
     updateScoreDisplay();
+    
+    // Resetear timer
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    timeRemaining = 15 * 60;
+    isTimeUp = false;
+    timerStarted = false;
+    
+    // Ocultar timer container
+    const timerContainer = document.getElementById('timerContainer');
+    timerContainer.classList.remove('active');
+    
+    // Resetear display del timer
+    updateTimerDisplay();
     
     // Mostrar todas las secciones de nuevo
     const sections = document.querySelectorAll('.question-section');
