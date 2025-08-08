@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Conexión Google Apps Script</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status.connecting {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test de Conexión Google Apps Script</h1>
+        <p>Esta página te ayuda a diagnosticar problemas de conexión con tu Google Apps Script.</p>
+        
+        <div>
+            <button class="btn" onclick="testConnection()">🔗 Probar Conexión</button>
+            <button class="btn" onclick="testWithSampleData()">📊 Enviar Datos de Prueba</button>
+            <button class="btn" onclick="clearResults()">🗑️ Limpiar</button>
+            <span id="connectionStatus"></span>
+        </div>
+
+        <div>
+            <label for="scriptUrl">URL del Google Apps Script:</label><br>
+            <input type="text" id="scriptUrl" style="width: 100%; padding: 10px; margin: 10px 0;" 
+                   value="https://script.google.com/macros/s/AKfycbzH-NLv9keQKF8N_hkQS1ktpxyF8BijV4ltd6ieK-CbmD9vor0B9QQGjCLtGHvI8Pgs/exec">
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function updateStatus(text, type) {
+            const status = document.getElementById('connectionStatus');
+            status.textContent = text;
+            status.className = `status ${type}`;
+        }
+
+        function addResult(title, content, type = '') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = `<strong>${title}</strong>\n${content}`;
+            results.appendChild(div);
+            results.scrollTop = results.scrollHeight;
+        }
+
+        async function testConnection() {
+            updateStatus('Conectando...', 'connecting');
+            const scriptUrl = document.getElementById('scriptUrl').value;
+            
+            addResult('🔄 INICIANDO TEST DE CONEXIÓN', `URL: ${scriptUrl}`);
+
+            try {
+                // Test GET request
+                addResult('📡 Enviando solicitud GET...', 'Probando conexión básica');
+                
+                const response = await fetch(scriptUrl + '?action=get', {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+
+                addResult('📊 RESPUESTA HTTP', `
+Status: ${response.status} ${response.statusText}
+Headers: ${JSON.stringify([...response.headers.entries()], null, 2)}
+                `);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                addResult('✅ DATOS RECIBIDOS', JSON.stringify(data, null, 2), 'success');
+                
+                if (data.success) {
+                    updateStatus('✅ Conexión exitosa', 'success');
+                    addResult('📋 ESTRUCTURA DE DATOS', `
+Número de registros: ${data.data ? data.data.length : 0}
+Primer registro: ${data.data && data.data[0] ? JSON.stringify(data.data[0], null, 2) : 'No hay datos'}
+                    `, 'success');
+                } else {
+                    updateStatus('⚠️ Error en respuesta', 'error');
+                    addResult('❌ ERROR EN RESPUESTA', data.error || 'Error desconocido', 'error');
+                }
+
+            } catch (error) {
+                updateStatus('❌ Error de conexión', 'error');
+                addResult('💥 ERROR DE CONEXIÓN', `
+Error: ${error.message}
+Stack: ${error.stack}
+                `, 'error');
+            }
+        }
+
+        async function testWithSampleData() {
+            updateStatus('Enviando datos...', 'connecting');
+            const scriptUrl = document.getElementById('scriptUrl').value;
+            
+            const sampleData = {
+                timestamp: new Date().toISOString(),
+                fullName: 'Juan Prueba Agrícola',
+                phone: '555-0123',
+                experience: '2 años',
+                question_1: '10',
+                question_2: '8',
+                question_15: '0', // Alto gasto en entretenimiento
+                question_16: '0', // Faltas los lunes
+                totalScore: 250,
+                percentage: 78,
+                psychologicalAnalysis: {
+                    psychopathy: '25.5%',
+                    sociopathy: '15.0%',
+                    substanceUse: '45.0%',
+                    alcoholism: '35.0%',
+                    empathy: '65.0%',
+                    integrity: '70.0%'
+                }
+            };
+
+            addResult('📤 ENVIANDO DATOS DE PRUEBA', JSON.stringify(sampleData, null, 2));
+
+            try {
+                const response = await fetch(scriptUrl, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(sampleData)
+                });
+
+                const result = await response.json();
+                
+                addResult('📬 RESPUESTA DEL ENVÍO', JSON.stringify(result, null, 2), 
+                    result.success ? 'success' : 'error');
+
+                if (result.success) {
+                    updateStatus('✅ Datos enviados correctamente', 'success');
+                    // Esperar un momento y luego recargar datos
+                    setTimeout(testConnection, 2000);
+                } else {
+                    updateStatus('❌ Error al enviar datos', 'error');
+                }
+
+            } catch (error) {
+                updateStatus('❌ Error al enviar', 'error');
+                addResult('💥 ERROR AL ENVIAR DATOS', error.toString(), 'error');
+            }
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+            updateStatus('', '');
+        }
+
+        // Auto-test al cargar la página
+        window.addEventListener('load', function() {
+            setTimeout(testConnection, 1000);
+        });
+    </script>
+</body>
+</html>

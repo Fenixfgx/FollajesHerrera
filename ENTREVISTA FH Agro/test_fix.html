@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test de Funciones</title>
+</head>
+<body>
+    <h1>Prueba de Funciones de Procesamiento</h1>
+    
+    <script>
+        // Función de extracción mejorada
+        function extractPercentageValue(value) {
+            console.log('🔢 Procesando valor:', value, 'tipo:', typeof value);
+            
+            if (!value || value === null || value === undefined) {
+                console.log('❌ Valor vacío o nulo');
+                return 0;
+            }
+            
+            if (typeof value === 'number') {
+                console.log('✅ Número:', value);
+                return value;
+            }
+            
+            if (typeof value === 'string') {
+                if (value.includes('%')) {
+                    const num = parseFloat(value.replace('%', '')) || 0;
+                    console.log('✅ String con % convertido:', num);
+                    return num;
+                } else {
+                    const num = parseFloat(value) || 0;
+                    console.log('✅ String sin % convertido:', num);
+                    return num;
+                }
+            }
+            
+            console.log('❌ Tipo no reconocido, usando 0');
+            return 0;
+        }
+
+        // Función para formatear
+        function formatPercentage(value) {
+            const num = parseFloat(value) || 0;
+            return num.toFixed(1) + '%';
+        }
+
+        // Datos de prueba basados en tu debug
+        const testData = {
+            psychopathy: 25,         // número
+            sociopathy: "0.0%",      // string con %
+            narcissism: "0.0%",      // string con %
+            antisocial: "0.0%",      // string con %
+            substanceUse: "39.0%",   // string con %
+            alcoholism: "27.0%",     // string con %
+            empathy: "20.0%",        // string con %
+            integrity: "0.0%",       // string con %
+            stability: "13.5%"       // string con %
+        };
+
+        console.log('=== RESULTADOS DE LA PRUEBA ===');
+        
+        Object.keys(testData).forEach(key => {
+            const originalValue = testData[key];
+            const extractedValue = extractPercentageValue(originalValue);
+            const formattedValue = formatPercentage(extractedValue);
+            
+            console.log(`${key}:`);
+            console.log(`  Original: ${originalValue} (${typeof originalValue})`);
+            console.log(`  Extraído: ${extractedValue} (${typeof extractedValue})`);
+            console.log(`  Formateado: ${formattedValue}`);
+            console.log('---');
+        });
+
+        // Test de condiciones de riesgo
+        console.log('=== TEST DE CONDICIONES DE RIESGO ===');
+        const psychopathy = extractPercentageValue(testData.psychopathy);
+        const sociopathy = extractPercentageValue(testData.sociopathy);
+        const antisocial = extractPercentageValue(testData.antisocial);
+        const substanceUse = extractPercentageValue(testData.substanceUse);
+
+        console.log(`Psicopatía ${psychopathy} > 30? ${psychopathy > 30}`);
+        console.log(`Sociopatía ${sociopathy} > 30? ${sociopathy > 30}`);
+        console.log(`Antisocial ${antisocial} > 40? ${antisocial > 40}`);
+        console.log(`Sustancias ${substanceUse} > 40? ${substanceUse > 40}`);
+        
+        const isHighRisk = psychopathy > 30 || sociopathy > 30 || antisocial > 40 || substanceUse > 40;
+        console.log(`¿Es alto riesgo? ${isHighRisk}`);
+    </script>
+</body>
+</html>

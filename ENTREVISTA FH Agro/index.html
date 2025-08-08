@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrevista Auxiliar Administrativo - Evaluación Actitudinal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Animate.css for SweetAlert2 animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-logo">
+                    <img src="https://i.postimg.cc/8P8gp5kW/319068467-708280470557603-1456894316421742412-n-removebg-preview-1.png" alt="Follajes Herrera Logo" class="logo-img">
+                    <div class="header-text">
+                        <h1>Evaluación Follajes Herrera</h1>
+                        <p>Evaluación de Competencias Para Operario Agrícola</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Timer fijo en la esquina superior derecha -->
+        <div class="timer-container" id="timerContainer">
+            <div class="timer-display">
+                <i class="fas fa-clock"></i>
+                <span id="timer">20:00</span>
+            </div>
+            <div class="timer-progress">
+                <div class="timer-bar" id="timerBar"></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="form-container">
+                <form id="evaluationForm" autocomplete="off">
+                    <!-- Información Personal -->
+                    <div class="section">
+                        <h2><i class="fas fa-user"></i> Información Personal</h2>
+                        <div class="form-group">
+                            <label for="fullName">Nombre Completo *</label>
+                            <input type="text" id="fullName" name="fullName" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono *</label>
+                            <input type="tel" id="phone" name="phone" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Experiencia en Trabajo Agrícola</label>
+                            <select id="experience" name="experience" autocomplete="off">
+                                <option value="">Seleccionar</option>
+                                <option value="Sin experiencia">Sin experiencia</option>
+                                <option value="0-1">0-1 años</option>
+                                <option value="1-3">1-3 años</option>
+                                <option value="3-5">3-5 años</option>
+                                <option value="5+">Más de 5 años</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Conocimientos sobre Follajes y Agricultura -->
+                    <div class="section">
+                        <h2><i class="fas fa-leaf"></i> Conocimientos sobre Follajes y Agricultura</h2>
+                        
+                        <div class="question-group">
+                            <h3>1. ¿Qué es lo más importante al cuidar plantas ornamentales?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q1" value="10" data-trait="knowledge"> El riego adecuado, luz apropiada y control de plagas</label>
+                                <label><input type="radio" name="q1" value="5" data-trait="basic"> Solo regarlas todos los días</label>
+                                <label><input type="radio" name="q1" value="0" data-trait="ignorance"> Ponerlas al sol todo el tiempo</label>
+                                <label><input type="radio" name="q1" value="3" data-trait="partial"> Usar mucho fertilizante</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>2. ¿Cuál es el mejor momento del día para regar las plantas?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q2" value="10" data-trait="knowledge"> En la mañana temprano o al atardecer</label>
+                                <label><input type="radio" name="q2" value="0" data-trait="ignorance"> Al mediodía cuando hace más calor</label>
+                                <label><input type="radio" name="q2" value="5" data-trait="partial"> A cualquier hora del día</label>
+                                <label><input type="radio" name="q2" value="8" data-trait="good"> Solo en las mañanas</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>3. Si una planta presenta hojas amarillas, ¿qué podría estar pasando?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q3" value="10" data-trait="analytical"> Exceso o falta de agua, falta de nutrientes o enfermedad</label>
+                                <label><input type="radio" name="q3" value="0" data-trait="guess"> La planta está muriendo y no se puede salvar</label>
+                                <label><input type="radio" name="q3" value="5" data-trait="basic"> Necesita más agua</label>
+                                <label><input type="radio" name="q3" value="3" data-trait="simple"> Falta de sol</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>4. ¿Qué herramientas consideras esenciales para el trabajo en jardinería?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q4" value="10" data-trait="professional"> Tijeras de podar, palas, rastrillos, manguera y guantes</label>
+                                <label><input type="radio" name="q4" value="5" data-trait="basic"> Solo una pala y una manguera</label>
+                                <label><input type="radio" name="q4" value="0" data-trait="unprepared"> Las manos son suficientes</label>
+                                <label><input type="radio" name="q4" value="8" data-trait="good"> Tijeras y regadera</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>5. ¿Cómo identificarías una plaga en las plantas?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q5" value="10" data-trait="observant"> Observando cambios en hojas, presencia de insectos, manchas o deformaciones</label>
+                                <label><input type="radio" name="q5" value="0" data-trait="negligent"> No me fijo mucho en esos detalles</label>
+                                <label><input type="radio" name="q5" value="5" data-trait="basic"> Solo cuando las hojas se ven muy mal</label>
+                                <label><input type="radio" name="q5" value="8" data-trait="alert"> Revisando regularmente las plantas</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>6. ¿Qué harías si encuentras una planta con plagas?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q6" value="10" data-trait="responsible"> Informar inmediatamente al supervisor y seguir las indicaciones</label>
+                                <label><input type="radio" name="q6" value="4" data-trait="impulsive"> Aplicar cualquier insecticida que encuentre</label>
+                                <label><input type="radio" name="q6" value="0" data-trait="negligent"> Ignorarla, no es mi problema</label>
+                                <label><input type="radio" name="q6" value="7" data-trait="cautious"> Separarla de las otras plantas</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evaluación de Personalidad y Comportamiento -->
+                    <div class="section">
+                        
+                        <div class="question-group">
+                            <h3>7. Cuando trabajas solo en el campo y nadie te supervisa, tú:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q7" value="10" data-trait="integrity"> Trabajo con la misma dedicación como si me estuvieran viendo</label>
+                                <label><input type="radio" name="q7" value="7" data-trait="moderate"> Trabajo bien pero tomo descansos más largos</label>
+                                <label><input type="radio" name="q7" value="0" data-trait="antisocial"> Aprovecho para hacer menos trabajo del asignado</label>
+                                <label><input type="radio" name="q7" value="4" data-trait="opportunistic"> Depende del día y de mi estado de ánimo</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>8. Si un compañero comete un error que podría dañar las plantas, tú:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q8" value="10" data-trait="empathy"> Le explico el error de manera amable y lo ayudo a corregirlo</label>
+                                <label><input type="radio" name="q8" value="0" data-trait="psychopathic"> Lo dejo que cometa el error para que aprenda por las malas</label>
+                                <label><input type="radio" name="q8" value="7" data-trait="responsible"> Se lo comento al supervisor</label>
+                                <label><input type="radio" name="q8" value="3" data-trait="indifferent"> No es mi problema, cada quien con su trabajo</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>9. ¿Cómo reaccionas cuando alguien te da órdenes en el trabajo?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q9" value="10" data-trait="cooperative"> Las sigo sin problema, entiendo la jerarquía</label>
+                                <label><input type="radio" name="q9" value="6" data-trait="questioning"> Las sigo pero a veces cuestiono si están bien</label>
+                                <label><input type="radio" name="q9" value="0" data-trait="rebellious"> Me molesta que me den órdenes, prefiero trabajar a mi manera</label>
+                                <label><input type="radio" name="q9" value="8" data-trait="respectful"> Las acato con respeto y pregunto si tengo dudas</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>10. Si encuentras dinero o algo de valor en el lugar de trabajo:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q10" value="10" data-trait="honesty"> Lo entrego inmediatamente al supervisor</label>
+                                <label><input type="radio" name="q10" value="0" data-trait="sociopathic"> Me lo quedo, nadie se va a enterar</label>
+                                <label><input type="radio" name="q10" value="6" data-trait="conflicted"> Espero un tiempo a ver si alguien lo reclama</label>
+                                <label><input type="radio" name="q10" value="8" data-trait="ethical"> Pregunto a mis compañeros si han perdido algo</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>11. Cuando ves que maltratan un animal o una planta sin razón:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q11" value="10" data-trait="empathy"> Me duele verlo y trato de impedirlo</label>
+                                <label><input type="radio" name="q11" value="0" data-trait="psychopathic"> No me afecta, son solo plantas o animales</label>
+                                <label><input type="radio" name="q11" value="7" data-trait="concerned"> Me preocupa pero no sé qué hacer</label>
+                                <label><input type="radio" name="q11" value="3" data-trait="callous"> Es parte de la naturaleza, no me inmuto</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>12. ¿Has tenido problemas con la ley, peleas frecuentes o conflictos graves?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q12" value="10" data-trait="stable"> No, siempre trato de resolver conflictos pacíficamente</label>
+                                <label><input type="radio" name="q12" value="7" data-trait="minor"> Solo problemas menores o malentendidos</label>
+                                <label><input type="radio" name="q12" value="0" data-trait="antisocial"> Sí, he tenido varios problemas serios</label>
+                                <label><input type="radio" name="q12" value="8" data-trait="learning"> Tuve problemas en el pasado pero he cambiado</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>13. Cuando mientes, generalmente es porque:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q13" value="10" data-trait="honesty"> Rara vez miento, prefiero ser honesto</label>
+                                <label><input type="radio" name="q13" value="7" data-trait="protective"> Para proteger los sentimientos de otros</label>
+                                <label><input type="radio" name="q13" value="0" data-trait="manipulative"> Para obtener beneficios personales o evitar problemas</label>
+                                <label><input type="radio" name="q13" value="8" data-trait="social"> Solo "mentiras blancas" socialmente aceptables</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>14. ¿Cuál de estos colores te resulta más atractivo o relajante?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q14" value="10" data-trait="peaceful-color"> Azul</label>
+                                <label><input type="radio" name="q14" value="7" data-trait="warm-color"> Amarillo</label>
+                                <label><input type="radio" name="q14" value="3" data-trait="intense-color"> Rojo</label>
+                                <label><input type="radio" name="q14" value="0" data-trait="dark-color"> Negro</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hábitos y Estilo de Vida -->
+                    <div class="section">
+                        
+                        <div class="question-group">
+                            <h3>15. ¿Cuánto dinero gastas semanalmente en entretenimiento y vida social?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q15" value="10" data-trait="sobriety"> Menos de $50.000 (actividades simples en casa)</label>
+                                <label><input type="radio" name="q15" value="8" data-trait="moderate"> $50.000-200.000 (cenas ocasionales, cine)</label>
+                                <label><input type="radio" name="q15" value="3" data-trait="regular"> $200.000-500.000 (salidas frecuentes los fines de semana)</label>
+                                <label><input type="radio" name="q15" value="0" data-trait="dependency"> Más de $500.000 (vida nocturna intensa, bares frecuentes)</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>16. Si tuvieras que faltar al trabajo, ¿cuál sería la razón más probable?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q16" value="10" data-trait="clean"> Enfermedad médica verificable o emergencia familiar</label>
+                                <label><input type="radio" name="q16" value="8" data-trait="responsible"> Cita médica programada con anticipación</label>
+                                <label><input type="radio" name="q16" value="3" data-trait="experimental"> Malestar general después de eventos sociales</label>
+                                <label><input type="radio" name="q16" value="0" data-trait="addiction"> Problemas de salud frecuentes los lunes</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>17. ¿Con qué tipo de personas prefieres socializar los fines de semana?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q17" value="10" data-trait="healthy"> Familia, amigos que practican deportes o actividades saludables</label>
+                                <label><input type="radio" name="q17" value="8" data-trait="balanced"> Compañeros de trabajo o amigos de la escuela</label>
+                                <label><input type="radio" name="q17" value="3" data-trait="social"> Gente que conozco en bares o fiestas</label>
+                                <label><input type="radio" name="q17" value="0" data-trait="substance"> Personas que disfrutan la vida nocturna intensa</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>18. ¿Has tenido peleas físicas en el último año?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q18" value="10" data-trait="peaceful"> No, evito los conflictos físicos</label>
+                                <label><input type="radio" name="q18" value="5" data-trait="occasional"> Solo una o dos veces en situaciones extremas</label>
+                                <label><input type="radio" name="q18" value="0" data-trait="violent"> Sí, varias veces</label>
+                                <label><input type="radio" name="q18" value="8" data-trait="defensive"> Solo en defensa propia</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>19. Si fueras un animal en la naturaleza, ¿cual serias?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q19" value="10" data-trait="peaceful"> Una vaca</label>
+                                <label><input type="radio" name="q19" value="8" data-trait="industrious"> Una ardilla</label>
+                                <label><input type="radio" name="q19" value="3" data-trait="opportunistic"> Un cuervo</label>
+                                <label><input type="radio" name="q19" value="0" data-trait="predatory"> Un león</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>20. ¿Cuál es tu horario ideal para dormir en días libres?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q20" value="10" data-trait="stable"> Temprano (10-11 PM), me levanto descansado</label>
+                                <label><input type="radio" name="q20" value="8" data-trait="moderate"> Regular (11 PM-12 AM), mantengo rutina</label>
+                                <label><input type="radio" name="q20" value="3" data-trait="irregular"> Muy tarde (2-4 AM), los fines de semana trasnocho</label>
+                                <label><input type="radio" name="q20" value="0" data-trait="troubled"> Irregular, a veces no duermo en casa</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Razonamiento y Lógica -->
+                    <div class="section">
+                        <div class="question-group">
+                            <h3>21. Si necesitas resolver un problema complejo, tu primer instinto es:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q21" value="10" data-trait="analytical"> Dividirlo en partes más pequeñas y analizarlas sistemáticamente</label>
+                                <label><input type="radio" name="q21" value="8" data-trait="intuitive"> Confiar en mi intuición y experiencia previa</label>
+                                <label><input type="radio" name="q21" value="5" data-trait="collaborative"> Buscar ayuda o trabajar con otros para solucionarlo</label>
+                                <label><input type="radio" name="q21" value="3" data-trait="impulsive"> Probar diferentes soluciones hasta que algo funcione</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>22. En una secuencia de números: 3, 6, 12, 24, ¿cuál sería el siguiente número?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q22" value="10" data-trait="logic"> 48 </label>
+                                <label><input type="radio" name="q22" value="0" data-trait="guess"> 36 </label>
+                                <label><input type="radio" name="q22" value="0" data-trait="guess"> 30 </label>
+                                <label><input type="radio" name="q22" value="0" data-trait="guess"> 27 </label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>23. Cuando necesitas tomar una decisión importante:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q23" value="10" data-trait="methodical"> Hago una lista de pros y contras detallada</label>
+                                <label><input type="radio" name="q23" value="8" data-trait="research"> Investigo todas las opciones disponibles</label>
+                                <label><input type="radio" name="q23" value="5" data-trait="consultation"> Consulto con personas de confianza</label>
+                                <label><input type="radio" name="q23" value="0" data-trait="indecisive"> Me cuesta mucho decidir y a menudo cambio de opinión</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>24. ¿Qué animal representa mejor tu personalidad en situaciones de estrés?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q24" value="10" data-trait="calm"> Tortuga</label>
+                                <label><input type="radio" name="q24" value="8" data-trait="protective"> Oso</label>
+                                <label><input type="radio" name="q24" value="3" data-trait="reactive"> Gato</label>
+                                <label><input type="radio" name="q24" value="0" data-trait="aggressive"> Serpiente</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>25. Si tuvieras que identificarte con un animal en cuanto a trabajo, ¿cuál elegirías?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q25" value="10" data-trait="cooperative"> Abeja </label>
+                                <label><input type="radio" name="q25" value="8" data-trait="loyal"> Perro Pastor Alemán</label>
+                                <label><input type="radio" name="q25" value="3" data-trait="solitary"> Gato </label>
+                                <label><input type="radio" name="q25" value="0" data-trait="predatory"> Lobo </label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>26. Cuando trabajas con detalles específicos:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q26" value="10" data-trait="detail-oriented"> Los reviso cuidadosamente múltiples veces</label>
+                                <label><input type="radio" name="q26" value="8" data-trait="systematic"> Uso sistemas o checklists para no olvidar nada</label>
+                                <label><input type="radio" name="q26" value="5" data-trait="big-picture"> Prefiero enfocarme en el panorama general</label>
+                                <label><input type="radio" name="q26" value="0" data-trait="obsessive"> Me enfoco tanto en los detalles que pierdo de vista el objetivo principal</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Disponibilidad y Compromiso -->
+                    <div class="section">
+                        <div class="question-group">
+                            <h3>27. En cuanto a horarios de trabajo:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q27" value="10" data-trait="flexible"> Puedo adaptarme a diferentes horarios según las necesidades</label>
+                                <label><input type="radio" name="q27" value="8" data-trait="standard"> Prefiero horarios estándar pero puedo ser flexible ocasionalmente</label>
+                                <label><input type="radio" name="q27" value="5" data-trait="limited"> Tengo algunas limitaciones de horario por compromisos personales</label>
+                                <label><input type="radio" name="q27" value="3" data-trait="rigid"> Necesito horarios fijos y predecibles</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>28. Si tu jefe te pide quedarte tiempo extra para terminar un proyecto urgente:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q28" value="10" data-trait="committed"> Acepto sin problema, entiendo que es parte del trabajo</label>
+                                <label><input type="radio" name="q28" value="8" data-trait="accommodating"> Acepto pero trato de negociar compensación</label>
+                                <label><input type="radio" name="q28" value="5" data-trait="conditional"> Depende de mis planes personales</label>
+                                <label><input type="radio" name="q28" value="0" data-trait="resistant"> Raramente acepto, mi tiempo personal es sagrado</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>29. ¿Con qué frecuencia planeas ausentarte del trabajo (vacaciones, citas médicas, etc.)?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q29" value="10" data-trait="reliable"> Muy pocas veces al año, solo lo esencial</label>
+                                <label><input type="radio" name="q29" value="8" data-trait="balanced"> Las vacaciones programadas y citas necesarias</label>
+                                <label><input type="radio" name="q29" value="5" data-trait="regular"> Regularmente por diversos compromisos personales</label>
+                                <label><input type="radio" name="q29" value="3" data-trait="frequent"> Con cierta frecuencia por temas de salud o familia</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>30. En términos de estabilidad laboral:</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q30" value="10" data-trait="stable"> Busco estabilidad a largo plazo en un puesto</label>
+                                <label><input type="radio" name="q30" value="8" data-trait="growth"> Me quedo mientras haya oportunidades de crecimiento</label>
+                                <label><input type="radio" name="q30" value="5" data-trait="opportunistic"> Evalúo constantemente otras oportunidades</label>
+                                <label><input type="radio" name="q30" value="0" data-trait="unstable"> Frecuentemente cambio de trabajo por diversas razones</label>
+                            </div>
+                        </div>
+
+                        <div class="question-group">
+                            <h3>31. ¿Qué tan cómodo te sientes trabajando al aire libre bajo diferentes condiciones climáticas?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q31" value="10" data-trait="resilient"> Muy cómodo, me adapto a cualquier clima</label>
+                                <label><input type="radio" name="q31" value="8" data-trait="adaptable"> Cómodo la mayoría del tiempo</label>
+                                <label><input type="radio" name="q31" value="5" data-trait="conditional"> Depende del clima, algunos días me cuesta</label>
+                                <label><input type="radio" name="q31" value="0" data-trait="sensitive"> Prefiero trabajar en interiores o con clima controlado</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evaluación Psicológica Avanzada -->
+                    <div class="section">
+                        <div class="question-group">
+                            <h3>32. ¿En que animal te convertirias si tuvieras que sobrevivir en la naturaleza por un año?</h3>
+                            <div class="radio-group">
+                                <label><input type="radio" name="q32" value="10" data-trait="helpful"> Caballo</label>
+                                <label><input type="radio" name="q32" value="8" data-trait="observant"> Búho</label>
+                                <label><input type="radio" name="q32" value="3" data-trait="indifferent"> Gato montés</label>
+                                <label><input type="radio" name="q32" value="0" data-trait="exploitative"> Buitre </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Autoevaluación y Reflexión Personal -->
+                    <div class="section">
+                        <h2><i class="fas fa-star"></i> Autoevaluación y Reflexión Personal</h2>
+                        
+                        <div class="form-group">
+                            <label for="stressLevel">Nivel de tolerancia al estrés (1-10)</label>
+                            <input type="range" id="stressLevel" name="stressLevel" min="1" max="10" value="5" autocomplete="off">
+                            <div class="range-value">5</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="workEnvironment">Ambiente de trabajo preferido</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="environment" value="Tranquilo"> Ambiente tranquilo y ordenado</label>
+                                <label><input type="checkbox" name="environment" value="Dinámico"> Ambiente dinámico y cambiante</label>
+                                <label><input type="checkbox" name="environment" value="Colaborativo"> Trabajo en equipo colaborativo</label>
+                                <label><input type="checkbox" name="environment" value="Independiente"> Trabajo independiente</label>
+                                <label><input type="checkbox" name="environment" value="Estructurado"> Procesos bien estructurados</label>
+                                <label><input type="checkbox" name="environment" value="Flexible"> Flexibilidad en métodos de trabajo</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="personalChallenges">¿Has enfrentado algún desafío personal significativo que haya influido en tu desarrollo profesional?</label>
+                            <textarea id="personalChallenges" name="personalChallenges" rows="3" placeholder="Comparte brevemente alguna experiencia que te haya ayudado a crecer..." autocomplete="off"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="motivations">¿Qué te motiva más en un trabajo?</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="motivation" value="Reconocimiento"> Reconocimiento por el buen trabajo</label>
+                                <label><input type="checkbox" name="motivation" value="Crecimiento"> Oportunidades de crecimiento</label>
+                                <label><input type="checkbox" name="motivation" value="Estabilidad"> Estabilidad económica</label>
+                                <label><input type="checkbox" name="motivation" value="Propósito"> Sentido de propósito y contribución</label>
+                                <label><input type="checkbox" name="motivation" value="Autonomía"> Autonomía y independencia</label>
+                                <label><input type="checkbox" name="motivation" value="Relaciones"> Buenas relaciones interpersonales</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="communicationStyle">Estilo de comunicación preferido</label>
+                            <select id="communicationStyle" name="communicationStyle" autocomplete="off">
+                                <option value="">Seleccionar</option>
+                                <option value="Direct">Directo y claro</option>
+                                <option value="Diplomatic">Diplomático y cuidadoso</option>
+                                <option value="Analytical">Analítico con detalles</option>
+                                <option value="Empathetic">Empático y considerado</option>
+                                <option value="Assertive">Asertivo pero respetuoso</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar Evaluación
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="score-container">
+                <div class="score-card">
+                    <h3><i class="fas fa-chart-line"></i> Puntuación</h3>
+                    <div class="score-display">
+                        <div class="score-number">0</div>
+                        <div class="score-max">/ 320</div>
+                    </div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <span>Conocimiento Agrícola:</span>
+                            <span id="knowledgeScore">0/60</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Evaluación de Personalidad:</span>
+                            <span id="personalityScore">0/80</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Hábitos y Estilo de Vida:</span>
+                            <span id="lifestyleScore">0/60</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Razonamiento y Lógica:</span>
+                            <span id="logicScore">0/60</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Disponibilidad y Compromiso:</span>
+                            <span id="availabilityScore">0/50</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Competencias Interpersonales:</span>
+                            <span id="interpersonalScore">0/10</span>
+                        </div>
+                    </div>
+                    <div class="score-level">
+                        <div class="level-indicator">
+                            <div class="level-bar"></div>
+                        </div>
+                        <div class="level-text">Evaluación en progreso</div>
+                    </div>
+                </div>
+
+                <div class="recommendation-card">
+                    <h3><i class="fas fa-lightbulb"></i> Recomendación</h3>
+                    <div class="recommendation-text">
+                        Complete la evaluación para obtener una recomendación personalizada.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Tiempo Agotado -->
+    <div id="timeOutModal" class="time-out-modal">
+        <div class="time-out-content">
+            <i class="fas fa-hourglass-end time-out-icon"></i>
+            <h2>¡Tiempo Agotado!</h2>
+            <p>El tiempo para completar la evaluación ha terminado. Las respuestas que hayas completado hasta ahora serán enviadas automáticamente.</p>
+            <button id="timeOutSubmitBtn" class="time-out-submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                Enviar Evaluación
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

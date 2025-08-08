@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador - Evaluaciones Psicológicas Agrícolas FH</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2d5a27 0%, #1a4d1a 50%, #0f3a0f 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-container {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header moderno */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .alert-banner {
+            background: rgba(220, 53, 69, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .alert-banner i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Grid de estadísticas */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tarjetas principales */
+        .main-content {
+            display: grid;
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card h3 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card h3 i {
+            color: #2d5a27;
+            font-size: 1.3rem;
+        }
+
+        /* Alertas de riesgo psicológico */
+        .risk-alerts {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .risk-card {
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 6px solid;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .risk-card:hover {
+            transform: translateX(5px);
+        }
+
+        .risk-critical {
+            background: rgba(220, 53, 69, 0.1);
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .risk-high {
+            background: rgba(255, 193, 7, 0.1);
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        .risk-moderate {
+            background: rgba(255, 152, 0, 0.1);
+            border-color: #ff9800;
+            color: #663c00;
+        }
+
+        .risk-low {
+            background: rgba(40, 167, 69, 0.1);
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        /* Tabla de candidatos */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #2d5a27;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: rgba(45, 90, 39, 0.05);
+        }
+
+        /* Badges de estado */
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-critical {
+            background: #dc3545;
+            color: white;
+        }
+
+        .status-high {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .status-moderate {
+            background: #ff9800;
+            color: white;
+        }
+
+        .status-ideal {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-acceptable {
+            background: #17a2b8;
+            color: white;
+        }
+
+        /* Indicadores psicológicos */
+        .psych-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .psych-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .psych-card.danger {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .psych-card.warning {
+            border-color: #ffc107;
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .psych-card.success {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .psych-percentage {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .psych-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Controles */
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: #2d5a27;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1a4d1a;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 300px;
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        /* Modales */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalAppear 0.3s ease;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #2d5a27, #1a4d1a);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2d5a27;
+        }
+
+        .info-section h4 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .psycho-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .psycho-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .psycho-item.critical {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.05);
+        }
+
+        .psycho-item.warning {
+            border-color: #ffc107;
+            background: rgba(255, 193, 7, 0.05);
+        }
+
+        .psycho-item.success {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.05);
+        }
+
+        .psycho-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .psycho-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .recommendation-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            border: 2px solid #dee2e6;
+        }
+
+        .recommendation-box.accept {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05));
+            border-color: #28a745;
+        }
+
+        .recommendation-box.reject {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.1), rgba(220, 53, 69, 0.05));
+            border-color: #dc3545;
+        }
+
+        .recommendation-box.caution {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+            border-color: #ffc107;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+
+            .dashboard-container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+
+            .psycho-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <h1><i class="fas fa-seedling"></i> Dashboard Evaluaciones Psicológicas y Agrícolas</h1>
+            <p>Sistema de Análisis Psicológico para Trabajadores de Campo Follajes Herrera</p>
+        </div>
+
+        <!-- Estadísticas principales -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-users stat-icon"></i>
+                <div class="stat-number" id="totalCandidates">0</div>
+                <div class="stat-label">Total Evaluados</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-brain stat-icon"></i>
+                <div class="stat-number" id="riskCandidates">0</div>
+                <div class="stat-label">Riesgo Psicológico</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-wine-bottle stat-icon"></i>
+                <div class="stat-number" id="substanceCandidates">0</div>
+                <div class="stat-label">Riesgo Sustancias</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-shield-alt stat-icon"></i>
+                <div class="stat-number" id="idealCandidates">0</div>
+                <div class="stat-label">Candidatos Ideales</div>
+            </div>
+        </div>
+
+        <!-- Alertas de riesgo -->
+        <div class="card">
+            <h3><i class="fas fa-exclamation-triangle"></i> Alertas de Riesgo Psicológico</h3>
+            <div class="risk-alerts" id="riskAlerts">
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Cargando alertas de riesgo...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles -->
+        <div class="controls">
+            <button class="btn btn-primary" onclick="refreshData()">
+                <i class="fas fa-sync-alt"></i> Actualizar Datos
+            </button>
+            <button class="btn btn-primary" onclick="exportData()">
+                <i class="fas fa-download"></i> Exportar Evaluaciones
+            </button>
+            <button class="btn btn-danger" onclick="clearHighRisk()">
+                <i class="fas fa-user-times"></i> Filtrar Alto Riesgo
+            </button>
+            <input type="text" class="search-box" placeholder="Buscar candidato..." id="searchBox" onkeyup="filterCandidates()">
+        </div>
+
+        <!-- Tabla de candidatos -->
+        <div class="card">
+            <h3><i class="fas fa-table"></i> Evaluaciones Detalladas</h3>
+            <div class="table-container">
+                <table id="candidatesTable">
+                    <thead>
+                        <tr>
+                            <th>Candidato</th>
+                            <th>Teléfono</th>
+                            <th>Experiencia</th>
+                            <th>Puntuación Total</th>
+                            <th>Estado Psicológico</th>
+                            <th>Riesgo Sustancias</th>
+                            <th>Recomendación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="candidatesTableBody">
+                        <tr>
+                            <td colspan="8" class="loading">
+                                <i class="fas fa-spinner"></i>
+                                Cargando evaluaciones...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para detalles del candidato -->
+    <div id="candidateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user"></i> Detalles del Candidato</h2>
+                <button class="modal-close" onclick="closeModal('candidateModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="candidateModalBody">
+                <!-- Contenido dinámico -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para perfil psicológico -->
+    <div id="psychProfileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-brain"></i> Perfil Psicológico Detallado</h2>
+                <button class="modal-close" onclick="closeModal('psychProfileModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="psychProfileModalBody">
+                <!-- Contenido dinámico -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de Google Sheets - ACTUALIZAR CON TU NUEVO SCRIPT AGRÍCOLA
+        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyIu1UjvUP5BNGIPqCezUFXktPelOjINjlpBk_bG6KqbjY-geBnuh6vZt_jxNw_e-o/exec';
+        
+        let allCandidates = [];
+        let filteredCandidates = [];
+
+        // Cargar datos al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 DASHBOARD PSICOLÓGICO AGRÍCOLA INICIADO');
+            console.log('🕵️ Sistema de análisis encubierto activado');
+            refreshData();
+        });
+
+        // Función para refrescar datos
+        async function refreshData() {
+            try {
+                showLoading();
+                console.log('🔄 Cargando datos desde:', SHEET_URL + '?action=get');
+                
+                const response = await fetch(SHEET_URL + '?action=get');
+                console.log('📡 Respuesta HTTP status:', response.status);
+                
+                const data = await response.json();
+                console.log('📊 Datos recibidos:', data);
+                
+                if (data.success) {
+                    allCandidates = data.data || [];
+                    console.log('👥 Candidatos cargados:', allCandidates.length);
+                    
+                    // Debug: Mostrar estructura del primer candidato
+                    if (allCandidates.length > 0) {
+                        console.log('🔍 Primer candidato completo:', allCandidates[0]);
+                        console.log('🔍 Claves del primer candidato:', Object.keys(allCandidates[0]));
+                        
+                        // Buscar claves que contengan porcentajes psicológicos
+                        const psychKeys = Object.keys(allCandidates[0]).filter(key => 
+                            key.includes('Psicopatía') || 
+                            key.includes('Sociopatía') || 
+                            key.includes('Narcisismo') || 
+                            key.includes('Antisocial') || 
+                            key.includes('Sustancias') || 
+                            key.includes('Alcoholismo') || 
+                            key.includes('Empatía') || 
+                            key.includes('Integridad') || 
+                            key.includes('Estabilidad')
+                        );
+                        console.log('🧠 Claves psicológicas encontradas:', psychKeys);
+                        
+                        // Mostrar valores de estas claves
+                        psychKeys.forEach(key => {
+                            console.log(`🔍 ${key}: "${allCandidates[0][key]}" (tipo: ${typeof allCandidates[0][key]})`);
+                        });
+                    }
+                    
+                    filteredCandidates = [...allCandidates];
+                    updateStatistics();
+                    updateRiskAlerts();
+                    updateTable();
+                } else {
+                    console.error('❌ Error en respuesta:', data.error);
+                    showError('Error en el servidor: ' + (data.error || 'Error desconocido'));
+                }
+            } catch (error) {
+                console.error('💥 Error de conexión:', error);
+                showError('Error al conectar con la base de datos: ' + error.message);
+            }
+        }
+
+        // Obtener puntaje de conocimiento del candidato
+        function getKnowledgeScore(candidate) {
+            console.log('🌱 Extrayendo puntaje de conocimiento para:', candidate.fullName || candidate['Nombre Completo']);
+            console.log('🔍 Datos del candidato:', candidate);
+            
+            // Intentar diferentes nombres de campo para el conocimiento
+            const possibleFields = [
+                'Puntuación Conocimiento',
+                'knowledgeScore',
+                'knowledge',
+                'Conocimiento',
+                'Puntuacion Conocimiento'
+            ];
+            
+            for (const field of possibleFields) {
+                if (candidate[field] !== undefined && candidate[field] !== null && candidate[field] !== '') {
+                    const value = getNumericValue(candidate[field]);
+                    console.log(`✅ Encontrado conocimiento en "${field}": ${value}`);
+                    return value;
+                }
+            }
+            
+            console.log('❌ No se encontró puntaje de conocimiento, usando 0');
+            return 0;
+        }
+
+        // Actualizar estadísticas
+        function updateStatistics() {
+            const totalCandidates = allCandidates.length;
+            let riskCandidates = 0;
+            let substanceCandidates = 0;
+            let idealCandidates = 0;
+
+            console.log('📈 Calculando estadísticas para', totalCandidates, 'candidatos');
+
+            allCandidates.forEach((candidate, index) => {
+                console.log(`👤 Candidato ${index + 1}:`, candidate.fullName || candidate['Nombre Completo'] || 'Sin nombre');
+                
+                // Intentar diferentes formas de acceder al análisis psicológico
+                const analysis = candidate.psychologicalAnalysis || 
+                               candidate.analysis || 
+                               extractPsychologicalData(candidate);
+                
+                console.log('🧠 Análisis psicológico:', analysis);
+                
+                // Contar riesgos psicológicos
+                const psychopathy = getNumericValue(analysis.psychopathy);
+                const sociopathy = getNumericValue(analysis.sociopathy);
+                const antisocial = getNumericValue(analysis.antisocial);
+                
+                if (psychopathy > 30 || sociopathy > 30 || antisocial > 40) {
+                    riskCandidates++;
+                }
+
+                // Contar riesgos de sustancias
+                const substanceUse = getNumericValue(analysis.substanceUse);
+                const alcoholism = getNumericValue(analysis.alcoholism);
+                
+                if (substanceUse > 40 || alcoholism > 30) {
+                    substanceCandidates++;
+                }
+
+                // Contar candidatos ideales
+                let candidatePercentage = 0;
+                if (candidate.percentage) {
+                    candidatePercentage = parseFloat(candidate.percentage);
+                } else if (candidate['Porcentaje (%)']) {
+                    const percentageValue = candidate['Porcentaje (%)'];
+                    if (typeof percentageValue === 'string') {
+                        candidatePercentage = parseFloat(percentageValue.replace('%', ''));
+                    } else {
+                        candidatePercentage = parseFloat(percentageValue);
+                    }
+                }
+                candidatePercentage = candidatePercentage || 0;
+                
+                const empathy = getNumericValue(analysis.empathy);
+                const integrity = getNumericValue(analysis.integrity);
+                
+                // Obtener puntaje agrícola
+                const knowledgeScore = getKnowledgeScore(candidate);
+                const agriculturePercentage = (knowledgeScore / 60) * 100;
+                
+                console.log(`🌾 Evaluación candidato ideal para ${candidate.fullName || candidate['Nombre Completo']}:`);
+                console.log(`  - Porcentaje global: ${candidatePercentage}% (req: ≥78%)`);
+                console.log(`  - Conocimiento agrícola: ${knowledgeScore}/60 (${agriculturePercentage.toFixed(1)}%) (req: ≥59%)`);
+                
+                // Candidato ideal: buen porcentaje global y buen conocimiento agrícola
+                if (candidatePercentage >= 78 && agriculturePercentage >= 59) {
+                    idealCandidates++;
+                    console.log(`✅ ${candidate.fullName || candidate['Nombre Completo']} califica como candidato IDEAL`);
+                } else {
+                    console.log(`❌ ${candidate.fullName || candidate['Nombre Completo']} NO califica como candidato ideal`);
+                }
+            });
+
+            console.log('📊 Estadísticas calculadas:', {
+                total: totalCandidates,
+                riesgo: riskCandidates,
+                sustancias: substanceCandidates,
+                ideales: idealCandidates
+            });
+
+            document.getElementById('totalCandidates').textContent = totalCandidates;
+            document.getElementById('riskCandidates').textContent = riskCandidates;
+            document.getElementById('substanceCandidates').textContent = substanceCandidates;
+            document.getElementById('idealCandidates').textContent = idealCandidates;
+        }
+
+        // Función para extraer datos psicológicos de diferentes formatos
+        function extractPsychologicalData(candidate) {
+            console.log('🔍 Extrayendo datos psicológicos de:', candidate);
+            
+            // Función auxiliar para buscar valor por múltiples nombres de columna
+            const findValue = (searchTerms) => {
+                for (const term of searchTerms) {
+                    // Buscar clave exacta
+                    if (candidate[term] !== undefined && candidate[term] !== null && candidate[term] !== '') {
+                        console.log(`✅ Encontrado "${term}": "${candidate[term]}"`);
+                        return candidate[term];
+                    }
+                    
+                    // Buscar clave que contenga el término
+                    const foundKey = Object.keys(candidate).find(key => 
+                        key.toLowerCase().includes(term.toLowerCase()) ||
+                        key.includes(term)
+                    );
+                    
+                    if (foundKey && candidate[foundKey] !== undefined && candidate[foundKey] !== null && candidate[foundKey] !== '') {
+                        console.log(`✅ Encontrado por búsqueda "${foundKey}": "${candidate[foundKey]}"`);
+                        return candidate[foundKey];
+                    }
+                }
+                console.log(`❌ No encontrado para términos: ${searchTerms.join(', ')}`);
+                return null;
+            };
+            
+            const psychData = {
+                psychopathy: extractPercentageValue(findValue([
+                    '🚨 Psicopatía (%)', 'Psicopatía (%)', 'Psicopatía', 'psychopathy'
+                ])),
+                sociopathy: extractPercentageValue(findValue([
+                    '🚨 Sociopatía (%)', 'Sociopatía (%)', 'Sociopatía', 'sociopathy'
+                ])),
+                narcissism: extractPercentageValue(findValue([
+                    '🚨 Narcisismo (%)', 'Narcisismo (%)', 'Narcisismo', 'narcissism'
+                ])),
+                antisocial: extractPercentageValue(findValue([
+                    '🚨 Trastorno Antisocial (%)', 'Trastorno Antisocial (%)', 'Antisocial', 'antisocial'
+                ])),
+                substanceUse: extractPercentageValue(findValue([
+                    '🍷 Uso Problemático Sustancias (%)', 'Uso Problemático Sustancias (%)', 'Sustancias', 'substanceUse'
+                ])),
+                alcoholism: extractPercentageValue(findValue([
+                    '🍷 Alcoholismo (%)', 'Alcoholismo (%)', 'Alcoholismo', 'alcoholism'
+                ])),
+                aggression: extractPercentageValue(findValue([
+                    '😠 Agresividad (%)', 'Agresividad (%)', 'Agresividad', 'aggression'
+                ])),
+                anxiety: extractPercentageValue(findValue([
+                    '😰 Ansiedad (%)', 'Ansiedad (%)', 'Ansiedad', 'anxiety'
+                ])),
+                empathy: extractPercentageValue(findValue([
+                    '💚 Empatía (%)', 'Empatía (%)', 'Empatía', 'empathy'
+                ])),
+                integrity: extractPercentageValue(findValue([
+                    '🛡️ Integridad (%)', 'Integridad (%)', 'Integridad', 'integrity'
+                ])),
+                stability: extractPercentageValue(findValue([
+                    '⚖️ Estabilidad Emocional (%)', 'Estabilidad Emocional (%)', 'Estabilidad', 'stability'
+                ]))
+            };
+            
+            console.log('📊 Datos psicológicos extraídos:', psychData);
+            console.log('🔢 Verificación de valores numéricos:');
+            Object.keys(psychData).forEach(key => {
+                console.log(`  ${key}: ${psychData[key]} (tipo: ${typeof psychData[key]})`);
+            });
+            
+            return psychData;
+        }
+
+        // Función auxiliar para extraer valores de porcentaje de forma segura
+        function extractPercentageValue(value) {
+            console.log('🔢 Procesando valor:', value, 'tipo:', typeof value);
+            
+            if (value === null || value === undefined || value === '') {
+                console.log('❌ Valor vacío o nulo');
+                return 0;
+            }
+            
+            // Si es un número, devolverlo directamente
+            if (typeof value === 'number') {
+                console.log('✅ Número:', value);
+                return value;
+            }
+            
+            // Si es un string
+            if (typeof value === 'string') {
+                // Si ya tiene %, extraer solo el número
+                if (value.includes('%')) {
+                    const num = parseFloat(value.replace('%', '')) || 0;
+                    console.log('✅ String con % convertido:', num);
+                    return num;
+                } else {
+                    // Si es un string sin %, parsearlo
+                    const num = parseFloat(value) || 0;
+                    console.log('✅ String sin % convertido:', num);
+                    return num;
+                }
+            }
+            
+            console.log('❌ Tipo no reconocido, usando 0');
+            return 0;
+        }
+
+        // Función para formatear porcentajes para mostrar
+        function formatPercentage(value) {
+            if (value === null || value === undefined) return '0.0%';
+            const num = parseFloat(value) || 0;
+            return num.toFixed(1) + '%';
+        }
+
+        // Función para formatear integridad con ajuste de +45%
+        function formatAdjustedIntegrity(value) {
+            if (value === null || value === undefined) return '0.0%';
+            const baseValue = parseFloat(value) || 0;
+            // Calcular 45% del valor base y sumarlo
+            const adjustment = baseValue * 0.45;
+            const adjustedValue = baseValue + adjustment;
+            // Asegurar que no exceda 100%
+            const finalValue = Math.min(adjustedValue, 100);
+            console.log(`🛡️ Integridad ajustada: ${baseValue}% + 45% (${adjustment.toFixed(1)}) = ${finalValue.toFixed(1)}%`);
+            return finalValue.toFixed(1) + '%';
+        }
+
+        // Función helper para obtener valor numérico seguro
+        function getNumericValue(value) {
+            if (value === null || value === undefined || value === '') return 0;
+            if (typeof value === 'number') return value;
+            if (typeof value === 'string') {
+                if (value.includes('%')) {
+                    return parseFloat(value.replace('%', '')) || 0;
+                }
+                return parseFloat(value) || 0;
+            }
+            return 0;
+        }
+
+        // Actualizar alertas de riesgo
+        function updateRiskAlerts() {
+            const riskAlerts = document.getElementById('riskAlerts');
+            const highRiskCandidates = allCandidates.filter(candidate => {
+                const analysis = candidate.psychologicalAnalysis || 
+                               candidate.analysis || 
+                               extractPsychologicalData(candidate);
+                
+                const psychopathy = getNumericValue(analysis.psychopathy);
+                const sociopathy = getNumericValue(analysis.sociopathy);
+                const antisocial = getNumericValue(analysis.antisocial);
+                const substanceUse = getNumericValue(analysis.substanceUse);
+                
+                return psychopathy > 30 || sociopathy > 30 || antisocial > 40 || substanceUse > 40;
+            });
+
+            if (highRiskCandidates.length === 0) {
+                riskAlerts.innerHTML = `
+                    <div class="risk-card risk-low">
+                        <i class="fas fa-check-circle" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <strong>Sin alertas críticas</strong><br>
+                            No hay candidatos con riesgos psicológicos altos detectados.
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            let alertsHTML = '';
+            highRiskCandidates.forEach(candidate => {
+                const analysis = candidate.psychologicalAnalysis || 
+                               candidate.analysis || 
+                               extractPsychologicalData(candidate);
+                
+                const fullName = candidate.fullName || candidate['Nombre Completo'] || 'Sin nombre';
+                const phone = candidate.phone || candidate['Teléfono'] || 'No disponible';
+                
+                const risks = [];
+                const psychopathy = getNumericValue(analysis.psychopathy);
+                const sociopathy = getNumericValue(analysis.sociopathy);
+                const antisocial = getNumericValue(analysis.antisocial);
+                const substanceUse = getNumericValue(analysis.substanceUse);
+                
+                if (psychopathy > 30) risks.push('Psicopatía');
+                if (sociopathy > 30) risks.push('Sociopatía');
+                if (antisocial > 40) risks.push('Antisocial');
+                if (substanceUse > 40) risks.push('Sustancias');
+
+                alertsHTML += `
+                    <div class="risk-card risk-critical">
+                        <i class="fas fa-skull-crossbones" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <strong>${fullName}</strong><br>
+                            Riesgos detectados: ${risks.join(', ')}<br>
+                            <small>Teléfono: ${phone}</small>
+                        </div>
+                    </div>
+                `;
+            });
+
+            riskAlerts.innerHTML = alertsHTML;
+        }
+
+        // Actualizar tabla
+        function updateTable() {
+            const tbody = document.getElementById('candidatesTableBody');
+            
+            console.log('📋 Actualizando tabla con', filteredCandidates.length, 'candidatos filtrados');
+            
+            if (filteredCandidates.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 40px; color: #6c757d;">
+                            No se encontraron candidatos
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let tableHTML = '';
+            filteredCandidates.forEach((candidate, index) => {
+                console.log(`📝 Procesando candidato ${index + 1}:`, candidate);
+                
+                // Extraer datos del candidato con diferentes posibles nombres de campo
+                const fullName = candidate.fullName || candidate['Nombre Completo'] || 'Sin nombre';
+                const phone = candidate.phone || candidate['Teléfono'] || 'No disponible';
+                const experience = candidate.experience || candidate['Experiencia Agrícola'] || 'No especificado';
+                const totalScore = candidate.totalScore || candidate['Puntuación Total'] || 0;
+                
+                // Manejar el porcentaje de forma más robusta
+                let percentage = 0;
+                if (candidate.percentage) {
+                    percentage = parseFloat(candidate.percentage);
+                } else if (candidate['Porcentaje (%)']) {
+                    const percentageValue = candidate['Porcentaje (%)'];
+                    if (typeof percentageValue === 'string') {
+                        percentage = parseFloat(percentageValue.replace('%', ''));
+                    } else {
+                        percentage = parseFloat(percentageValue);
+                    }
+                }
+                percentage = percentage || 0;
+                
+                // Extraer análisis psicológico
+                const analysis = candidate.psychologicalAnalysis || 
+                               candidate.analysis || 
+                               extractPsychologicalData(candidate);
+                
+                console.log(`🧠 Análisis para ${fullName}:`, analysis);
+                
+                const status = getpsychologicalStatus(analysis);
+                const substanceRisk = getSubstanceRisk(analysis);
+                
+                tableHTML += `
+                    <tr onclick="showCandidateDetails('${candidate.timestamp || candidate.Timestamp || index}')">
+                        <td><strong>${fullName}</strong></td>
+                        <td>${phone}</td>
+                        <td>${experience}</td>
+                        <td><strong>${totalScore}/320 (${percentage}%)</strong></td>
+                        <td><span class="status-badge ${status.class}">${status.text}</span></td>
+                        <td><span class="status-badge ${substanceRisk.class}">${substanceRisk.text}</span></td>
+                        <td>${getRecommendation(candidate, analysis)}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="event.stopPropagation(); showPsychProfile('${candidate.timestamp || candidate.Timestamp || index}')">
+                                <i class="fas fa-brain"></i> Perfil
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = tableHTML;
+            console.log('✅ Tabla actualizada correctamente');
+        }
+
+        // Obtener estado psicológico
+        function getpsychologicalStatus(analysis) {
+            console.log('🔍 Evaluando estado psicológico:', analysis);
+            
+            const psychopathy = getNumericValue(analysis.psychopathy);
+            const sociopathy = getNumericValue(analysis.sociopathy);
+            const antisocial = getNumericValue(analysis.antisocial);
+
+            console.log('📊 Valores psicológicos:', { psychopathy, sociopathy, antisocial });
+
+            if (psychopathy > 30 || sociopathy > 30 || antisocial > 40) {
+                return { class: 'status-critical', text: 'CRÍTICO' };
+            } else if (psychopathy > 20 || sociopathy > 20 || antisocial > 30) {
+                return { class: 'status-high', text: 'ALTO RIESGO' };
+            } else if (psychopathy > 10 || sociopathy > 10 || antisocial > 20) {
+                return { class: 'status-moderate', text: 'MODERADO' };
+            } else {
+                return { class: 'status-ideal', text: 'ESTABLE' };
+            }
+        }
+
+        // Obtener riesgo de sustancias
+        function getSubstanceRisk(analysis) {
+            console.log('🍷 Evaluando riesgo de sustancias:', analysis);
+            
+            const substanceUse = getNumericValue(analysis.substanceUse);
+            const alcoholism = getNumericValue(analysis.alcoholism);
+
+            console.log('📊 Valores de sustancias:', { substanceUse, alcoholism });
+
+            if (substanceUse > 40 || alcoholism > 30) {
+                return { class: 'status-critical', text: 'ALTO' };
+            } else if (substanceUse > 20 || alcoholism > 20) {
+                return { class: 'status-moderate', text: 'MODERADO' };
+            } else {
+                return { class: 'status-ideal', text: 'BAJO' };
+            }
+        }
+
+        // Obtener recomendación
+        function getRecommendation(candidate, analysis) {
+            console.log('💡 Calculando recomendación para:', candidate.fullName || candidate['Nombre Completo']);
+            
+            const psychopathy = getNumericValue(analysis.psychopathy);
+            const sociopathy = getNumericValue(analysis.sociopathy);
+            const antisocial = getNumericValue(analysis.antisocial);
+            const substanceUse = getNumericValue(analysis.substanceUse);
+            const empathy = getNumericValue(analysis.empathy);
+            
+            // Manejar el porcentaje de forma más robusta
+            let percentage = 0;
+            if (candidate.percentage) {
+                percentage = parseFloat(candidate.percentage);
+            } else if (candidate['Porcentaje (%)']) {
+                const percentageValue = candidate['Porcentaje (%)'];
+                if (typeof percentageValue === 'string') {
+                    percentage = parseFloat(percentageValue.replace('%', ''));
+                } else {
+                    percentage = parseFloat(percentageValue);
+                }
+            }
+            percentage = percentage || 0;
+
+            console.log('📊 Valores para recomendación:', { 
+                psychopathy, sociopathy, antisocial, substanceUse, empathy, percentage 
+            });
+
+            if (psychopathy > 30 || sociopathy > 30 || antisocial > 40 || substanceUse > 40) {
+                return '<span style="color: #dc3545; font-weight: bold;">❌ NO CONTRATAR</span>';
+            } else if (percentage >= 85 && empathy > 60) {
+                return '<span style="color: #28a745; font-weight: bold;">✅ ALTAMENTE RECOMENDADO</span>';
+            } else if (percentage >= 70) {
+                return '<span style="color: #17a2b8; font-weight: bold;">👍 ACEPTABLE</span>';
+            } else {
+                return '<span style="color: #ffc107; font-weight: bold;">⚠️ REQUIERE EVALUACIÓN</span>';
+            }
+        }
+
+        // Mostrar perfil psicológico detallado
+        function showPsychProfile(timestamp) {
+            const candidate = allCandidates.find(c => (c.timestamp === timestamp || c.Timestamp === timestamp));
+            if (!candidate) {
+                console.log('Candidato no encontrado para timestamp:', timestamp);
+                return;
+            }
+
+            const analysis = candidate.psychologicalAnalysis || 
+                           candidate.analysis || 
+                           extractPsychologicalData(candidate);
+            
+            const fullName = candidate.fullName || candidate['Nombre Completo'] || 'Sin nombre';
+            
+            // Función para obtener clase de riesgo
+            const getRiskClass = (value) => {
+                const num = getNumericValue(value);
+                if (num > 30) return 'critical';
+                if (num > 15) return 'warning';
+                return 'success';
+            };
+
+            const modalBody = document.getElementById('psychProfileModalBody');
+            modalBody.innerHTML = `
+                <div class="info-section">
+                    <h4><i class="fas fa-user-circle"></i> Información del Candidato</h4>
+                    <div class="info-row">
+                        <span class="info-label">Nombre Completo:</span>
+                        <span class="info-value">${fullName}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Fecha de Evaluación:</span>
+                        <span class="info-value">${new Date(candidate.timestamp || Date.now()).toLocaleString('es-ES')}</span>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h4><i class="fas fa-exclamation-triangle" style="color: #dc3545;"></i> Trastornos de Personalidad</h4>
+                    <div class="psycho-grid">
+                        <div class="psycho-item ${getRiskClass(analysis.psychopathy)}">
+                            <div class="psycho-value">${formatPercentage(analysis.psychopathy)}</div>
+                            <div class="psycho-label">Psicopatía</div>
+                        </div>
+                        <div class="psycho-item ${getRiskClass(analysis.sociopathy)}">
+                            <div class="psycho-value">${formatPercentage(analysis.sociopathy)}</div>
+                            <div class="psycho-label">Sociopatía</div>
+                        </div>
+                        <div class="psycho-item ${getRiskClass(analysis.narcissism)}">
+                            <div class="psycho-value">${formatPercentage(analysis.narcissism)}</div>
+                            <div class="psycho-label">Narcisismo</div>
+                        </div>
+                        <div class="psycho-item ${getRiskClass(analysis.antisocial)}">
+                            <div class="psycho-value">${formatPercentage(analysis.antisocial)}</div>
+                            <div class="psycho-label">Trastorno Antisocial</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h4><i class="fas fa-wine-bottle" style="color: #ffc107;"></i> Riesgo de Adicciones</h4>
+                    <div class="psycho-grid">
+                        <div class="psycho-item ${getRiskClass(analysis.substanceUse)}">
+                            <div class="psycho-value">${formatPercentage(analysis.substanceUse)}</div>
+                            <div class="psycho-label">Uso Problemático de Sustancias</div>
+                        </div>
+                        <div class="psycho-item ${getRiskClass(analysis.alcoholism)}">
+                            <div class="psycho-value">${formatPercentage(analysis.alcoholism)}</div>
+                            <div class="psycho-label">Alcoholismo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h4><i class="fas fa-fist-raised" style="color: #ff6b6b;"></i> Factores de Riesgo Adicionales</h4>
+                    <div class="psycho-grid">
+                        <div class="psycho-item ${getRiskClass(analysis.aggression)}">
+                            <div class="psycho-value">${formatPercentage(analysis.aggression)}</div>
+                            <div class="psycho-label">Agresividad</div>
+                        </div>
+                        <div class="psycho-item ${getRiskClass(analysis.anxiety)}">
+                            <div class="psycho-value">${formatPercentage(analysis.anxiety)}</div>
+                            <div class="psycho-label">Ansiedad</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h4><i class="fas fa-heart" style="color: #28a745;"></i> Cualidades Positivas</h4>
+                    <div class="psycho-grid">
+                        <div class="psycho-item success">
+                            <div class="psycho-value">${formatPercentage(analysis.empathy)}</div>
+                            <div class="psycho-label">Empatía</div>
+                        </div>
+                        <div class="psycho-item success">
+                            <div class="psycho-value">${formatAdjustedIntegrity(analysis.integrity)}</div>
+                            <div class="psycho-label">Integridad</div>
+                        </div>
+                        <div class="psycho-item success">
+                            <div class="psycho-value">${formatPercentage(analysis.stability)}</div>
+                            <div class="psycho-label">Estabilidad Emocional</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommendation-box ${getRecommendationClass(candidate, analysis)}">
+                    <h4><i class="fas fa-clipboard-check"></i> Evaluación Final</h4>
+                    <p><strong>Recomendación:</strong> ${getRecommendation(candidate, analysis)}</p>
+                    <small style="color: #6c757d; display: block; margin-top: 10px;">
+                        <i class="fas fa-lock"></i> Esta información es estrictamente confidencial y debe mantenerse bajo la más alta seguridad.
+                    </small>
+                </div>
+            `;
+
+            document.getElementById('psychProfileModal').style.display = 'block';
+        }
+
+        // Obtener clase para la recomendación
+        function getRecommendationClass(candidate, analysis) {
+            const psychopathy = getNumericValue(analysis.psychopathy);
+            const sociopathy = getNumericValue(analysis.sociopathy);
+            const antisocial = getNumericValue(analysis.antisocial);
+            const substanceUse = getNumericValue(analysis.substanceUse);
+            
+            let percentage = 0;
+            if (candidate.percentage) {
+                percentage = parseFloat(candidate.percentage);
+            } else if (candidate['Porcentaje (%)']) {
+                const percentageValue = candidate['Porcentaje (%)'];
+                if (typeof percentageValue === 'string') {
+                    percentage = parseFloat(percentageValue.replace('%', ''));
+                } else {
+                    percentage = parseFloat(percentageValue);
+                }
+            }
+
+            if (psychopathy > 30 || sociopathy > 30 || antisocial > 40 || substanceUse > 40) {
+                return 'reject';
+            } else if (percentage >= 85) {
+                return 'accept';
+            } else {
+                return 'caution';
+            }
+        }
+
+        // Mostrar detalles del candidato
+        function showCandidateDetails(timestamp) {
+            const candidate = allCandidates.find(c => (c.timestamp === timestamp || c.Timestamp === timestamp));
+            if (!candidate) {
+                console.log('Candidato no encontrado para timestamp:', timestamp);
+                return;
+            }
+
+            const analysis = candidate.psychologicalAnalysis || 
+                           candidate.analysis || 
+                           extractPsychologicalData(candidate);
+
+            const fullName = candidate.fullName || candidate['Nombre Completo'] || 'Sin nombre';
+            const phone = candidate.phone || candidate['Teléfono'] || 'No disponible';
+            const experience = candidate.experience || candidate['Experiencia Agrícola'] || 'No especificado';
+            
+            // Manejar el porcentaje de forma más robusta
+            let percentage = 0;
+            if (candidate.percentage) {
+                percentage = parseFloat(candidate.percentage);
+            } else if (candidate['Porcentaje (%)']) {
+                const percentageValue = candidate['Porcentaje (%)'];
+                if (typeof percentageValue === 'string') {
+                    percentage = parseFloat(percentageValue.replace('%', ''));
+                } else {
+                    percentage = parseFloat(percentageValue);
+                }
+            }
+            percentage = percentage || 0;
+
+            const totalScore = candidate.totalScore || candidate['Puntuación Total'] || 0;
+            
+            const modalBody = document.getElementById('candidateModalBody');
+            modalBody.innerHTML = `
+                <div class="info-grid">
+                    <div class="info-section">
+                        <h4><i class="fas fa-user"></i> Información Personal</h4>
+                        <div class="info-row">
+                            <span class="info-label">Nombre Completo:</span>
+                            <span class="info-value">${fullName}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Teléfono:</span>
+                            <span class="info-value">${phone}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Experiencia Agrícola:</span>
+                            <span class="info-value">${experience}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Fecha de Evaluación:</span>
+                            <span class="info-value">${new Date(candidate.timestamp || Date.now()).toLocaleString('es-ES')}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h4><i class="fas fa-chart-bar"></i> Puntuación General</h4>
+                        <div class="info-row">
+                            <span class="info-label">Puntuación Total:</span>
+                            <span class="info-value">${totalScore} / 320 puntos</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Porcentaje Global:</span>
+                            <span class="info-value">${percentage}%</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Nivel de Competencia:</span>
+                            <span class="info-value">${getCompetenceLevel(percentage)}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h4><i class="fas fa-seedling"></i> Nivel Agrícola</h4>
+                        <div class="info-row">
+                            <span class="info-label">Conocimiento Agrícola:</span>
+                            <span class="info-value">${getKnowledgeScore(candidate)} / 60 puntos</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Porcentaje Agrícola:</span>
+                            <span class="info-value">${Math.round((getKnowledgeScore(candidate) / 60) * 100)}%</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Nivel de Optimización:</span>
+                            <span class="info-value">${getAgriculturalLevel(getKnowledgeScore(candidate))}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h4><i class="fas fa-brain"></i> Evaluación Psicológica Rápida</h4>
+                        <div class="info-row">
+                            <span class="info-label">Estado Mental:</span>
+                            <span class="info-value">
+                                <span class="status-badge ${getpsychologicalStatus(analysis).class}">
+                                    ${getpsychologicalStatus(analysis).text}
+                                </span>
+                            </span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Riesgo de Sustancias:</span>
+                            <span class="info-value">
+                                <span class="status-badge ${getSubstanceRisk(analysis).class}">
+                                    ${getSubstanceRisk(analysis).text}
+                                </span>
+                            </span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Estabilidad Emocional:</span>
+                            <span class="info-value">${formatPercentage(analysis.stability)}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Nivel de Empatía:</span>
+                            <span class="info-value">${formatPercentage(analysis.empathy)}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommendation-box ${getRecommendationClass(candidate, analysis)}">
+                    <h4><i class="fas fa-clipboard-check"></i> Recomendación Final</h4>
+                    <p>${getRecommendation(candidate, analysis)}</p>
+                    <div style="margin-top: 15px;">
+                        <button class="btn btn-primary" onclick="showPsychProfile('${candidate.timestamp || candidate.Timestamp || timestamp}')">
+                            <i class="fas fa-brain"></i> Ver Perfil Psicológico Completo
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('candidateModal').style.display = 'block';
+        }
+
+        // Obtener nivel de competencia
+        function getCompetenceLevel(percentage) {
+            if (percentage >= 90) return '🏆 Excelente';
+            if (percentage >= 80) return '🌟 Muy Bueno';
+            if (percentage >= 70) return '👍 Bueno';
+            if (percentage >= 60) return '⚠️ Aceptable';
+            return '❌ Insuficiente';
+        }
+
+        // Obtener nivel agrícola basado en puntos de conocimiento
+        function getAgriculturalLevel(knowledgePoints) {
+            const percentage = (knowledgePoints / 60) * 100;
+            if (percentage >= 90) return '🚜 Especialista Agrícola';
+            if (percentage >= 80) return '🌱 Avanzado en Agricultura';
+            if (percentage >= 70) return '🌾 Competente Agrícola';
+            if (percentage >= 60) return '🌿 Conocimiento Básico';
+            if (percentage >= 40) return '📚 En Desarrollo';
+            return '❌ Conocimiento Insuficiente';
+        }
+
+        // Cerrar modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const candidateModal = document.getElementById('candidateModal');
+            const psychProfileModal = document.getElementById('psychProfileModal');
+            
+            if (event.target == candidateModal) {
+                candidateModal.style.display = 'none';
+            }
+            if (event.target == psychProfileModal) {
+                psychProfileModal.style.display = 'none';
+            }
+        }
+
+        // Filtrar candidatos
+        function filterCandidates() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            filteredCandidates = allCandidates.filter(candidate => {
+                const fullName = (candidate.fullName || candidate['Nombre Completo'] || '').toLowerCase();
+                const phone = (candidate.phone || candidate['Teléfono'] || '').toLowerCase();
+                return fullName.includes(searchTerm) || phone.includes(searchTerm);
+            });
+            updateTable();
+        }
+
+        // Filtrar solo alto riesgo
+        function clearHighRisk() {
+            filteredCandidates = allCandidates.filter(candidate => {
+                const analysis = candidate.psychologicalAnalysis || 
+                               candidate.analysis || 
+                               extractPsychologicalData(candidate);
+                
+                const psychopathy = getNumericValue(analysis.psychopathy);
+                const sociopathy = getNumericValue(analysis.sociopathy);
+                const antisocial = getNumericValue(analysis.antisocial);
+                const substanceUse = getNumericValue(analysis.substanceUse);
+                
+                return psychopathy > 30 || sociopathy > 30 || antisocial > 40 || substanceUse > 40;
+            });
+            updateTable();
+        }
+
+        // Exportar datos
+        function exportData() {
+            let csvContent = "Nombre,Teléfono,Experiencia,Puntuación,Porcentaje,Psicopatía,Sociopatía,Antisocial,Sustancias,Alcoholismo,Emppatía,Integridad,Recomendación\n";
+            
+            allCandidates.forEach(candidate => {
+                const analysis = candidate.psychologicalAnalysis || {};
+                csvContent += `"${candidate.fullName}","${candidate.phone}","${candidate.experience}",${candidate.totalScore},${candidate.percentage}%,"${analysis.psychopathy}","${analysis.sociopathy}","${analysis.antisocial}","${analysis.substanceUse}","${analysis.alcoholism}","${analysis.empathy}","${analysis.integrity}","${getRecommendation(candidate, analysis)}"\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `evaluaciones_psicologicas_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        // Mostrar loading
+        function showLoading() {
+            document.getElementById('candidatesTableBody').innerHTML = `
+                <tr>
+                    <td colspan="8" class="loading">
+                        <i class="fas fa-spinner"></i>
+                        Cargando evaluaciones...
+                    </td>
+                </tr>
+            `;
+        }
+
+        // Mostrar error
+        function showError(message) {
+            document.getElementById('candidatesTableBody').innerHTML = `
+                <tr>
+                    <td colspan="8" style="text-align: center; padding: 40px; color: #dc3545;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        ${message}
+                    </td>
+                </tr>
+            `;
+        }
+    </script>
+</body>
+</html>
