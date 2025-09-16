@@ -1,7 +1,7 @@
 // Configuración para Google Sheets
 const GOOGLE_SHEETS_CONFIG = {
     // Tu URL de Google Apps Script ya configurada
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbyRiygrDFfGL-9rVFPhxaNBEUqOglEbSfK3X0lpiePIiLIbl65Pcq7FhBUwG3OOTAhkZA/exec',
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbwiU_OYVFG5cq71VesyHY1fWOAt3zPUQ6fjNGBLv7cY-KEG_Ap8q8fCPpkIwlNvdo9xYA/exec',
     sheetName: 'Evaluaciones'
 };
 
