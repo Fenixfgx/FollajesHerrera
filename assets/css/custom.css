@@ -1,0 +1,473 @@
+/*
+Custom Css
+*/
+
+/* Top nav that hides on scroll down */
+#templatemo_nav_top {
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    transition: transform 0.3s ease;
+    width: 100%;
+    margin-bottom: 0;
+    border-bottom: none;
+    min-height: 35px; /* Reduced from 40px */
+}
+
+/* Fixed navbar - positioned directly below top nav when visible */
+.navbar.navbar-expand-lg.navbar-light.shadow {
+    position: fixed;
+    top: 35px; /* Adjusted to match reduced top nav height */
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    transition: top 0.3s ease;
+    margin-top: 0;
+    border-top: none;
+    padding: 0.25rem 0; /* Reduced padding */
+    min-height: 45px; /* Reduced minimum height */
+}
+
+/* When top nav is hidden, move main navbar to top */
+.navbar-main-top {
+    top: 0 !important;
+}
+
+/* Add padding to body to account for fixed navbar */
+body {
+    padding-top: 95px; /* Adjusted for thinner navbar */
+}
+
+/* When top nav is hidden, reduce body padding */
+.body-nav-top {
+    padding-top: 50px !important; /* Adjusted for new navbar height */
+}
+
+/* Fixed navbar - positioned directly below top nav when visible */
+.navbar.navbar-expand-lg.navbar-light.shadow {
+    position: fixed;
+    top: 40px; /* Reduced from 45px */
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    transition: top 0.3s ease;
+    margin-top: 0;
+    border-top: none;
+    padding: 0.25rem 0; /* Reduced padding */
+    min-height: 45px; /* Reduced minimum height */
+}
+
+/* Mobile specific styles */
+@media (max-width: 991.98px) {
+    /* Hide top nav on mobile */
+    #templatemo_nav_top {
+        display: none;
+    }
+    
+    /* Main navbar at top on mobile */
+    .navbar.navbar-expand-lg.navbar-light.shadow {
+        top: 0;
+    }
+    
+    /* Reduce body padding on mobile */
+    body {
+        padding-top: 45px; /* Adjusted for thinner navbar */
+    }
+    
+    .body-nav-top {
+        padding-top: 45px !important;
+    }
+    
+    /* Center logo and menu on mobile */
+    .navbar-brand {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+    }
+    
+    .navbar-collapse {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .navbar-nav {
+        justify-content: center !important;
+        align-items: center;
+    }
+    
+    .nav-item {
+        text-align: center;
+        margin: 5px 0;
+    }
+    
+    /* Center the navbar content on mobile */
+    .navbar .container {
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+    
+    /* Adjust toggle button position */
+    .navbar-toggler {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+    
+    /* Make sure language toggle is visible on mobile */
+    .language-toggle {
+        order: -1;
+        margin-bottom: 10px;
+    }
+    
+    /* Center navigation icons on mobile */
+    .navbar .d-flex {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+.navbar-hide {
+    transform: translateY(-100%);
+}
+
+/* Follajes Herrera Typography */
+.footer-brand {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    font-size: 1.8rem !important;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #198754, #146c43);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none !important;
+}
+
+/* Enhanced text readability */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Better contrast for headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Improved banner text contrast */
+.carousel-item .text-align-left {
+    color: #2c3e50;
+}
+
+.carousel-item .text-align-left p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Enhanced footer text visibility */
+.footer-link-list a {
+    color: #f8f9fa !important;
+    transition: color 0.3s ease;
+}
+
+.footer-link-list a:hover {
+    color: #198754 !important;
+}
+
+/* Better button visibility */
+.btn-success {
+    background-color: #198754;
+    border-color: #198754;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-success:hover {
+    background-color: #146c43;
+    border-color: #146c43;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(25, 135, 84, 0.3);
+}
+
+/* Language toggle switch - Neumorphic luxury design */
+.toggle-container {
+    position: relative;
+    display: inline-block;
+    padding: 4px;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    display: block;
+    width: 80px;
+    height: 40px;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+        8px 8px 16px rgba(163, 177, 198, 0.6),
+        -8px -8px 16px rgba(255, 255, 255, 0.8),
+        inset 2px 2px 4px rgba(163, 177, 198, 0.2),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(145deg, #198754, #146c43);
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+        4px 4px 8px rgba(163, 177, 198, 0.4),
+        -4px -4px 8px rgba(255, 255, 255, 0.9),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-text {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 600;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.4s ease;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-text.left {
+    left: 12px;
+    opacity: 1;
+}
+
+.toggle-text.right {
+    right: 12px;
+    opacity: 0.5;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+    background: linear-gradient(145deg, #e8f5e8, #d1f2d1);
+    box-shadow: 
+        8px 8px 16px rgba(163, 177, 198, 0.4),
+        -8px -8px 16px rgba(255, 255, 255, 0.9),
+        inset 4px 4px 8px rgba(25, 135, 84, 0.1),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-slider {
+    transform: translateX(40px);
+    background: linear-gradient(145deg, #198754, #146c43);
+    box-shadow: 
+        -4px 4px 8px rgba(163, 177, 198, 0.4),
+        4px -4px 8px rgba(255, 255, 255, 0.9),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-text.left {
+    opacity: 0.5;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-text.right {
+    opacity: 1;
+}
+
+.toggle-label:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+        10px 10px 20px rgba(163, 177, 198, 0.6),
+        -10px -10px 20px rgba(255, 255, 255, 0.8),
+        inset 2px 2px 4px rgba(163, 177, 198, 0.2),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* Enhanced footer text visibility */
+.footer-logo-alt {
+    font-family: 'Montserrat', 'Roboto', sans-serif !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+    font-size: 2.8rem !important;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 10px rgba(25, 135, 84, 0.5),
+        2px 2px 4px rgba(0,0,0,0.8) !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    border-bottom: 3px solid #198754 !important;
+}
+
+/* Enhanced footer link visibility */
+.footer-link-list a {
+    color: #f8f9fa !important;
+    transition: color 0.3s ease;
+}
+
+.footer-link-list a:hover {
+    color: #198754 !important;
+}
+
+/* Better contrast for footer text */
+.footer-link-list li {
+    color: #f8f9fa !important;
+}
+
+/* Enhanced text readability */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Better contrast for headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Enhanced banner text contrast */
+.carousel-item .text-align-left {
+    color: #2c3e50;
+}
+
+.carousel-item .text-align-left p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Better button visibility */
+.btn-success {
+    background-color: #198754;
+    border-color: #198754;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-success:hover {
+    background-color: #146c43;
+    border-color: #146c43;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(25, 135, 84, 0.3);
+}
+
+/* Animación de zoom para parallax */
+@keyframes zoomIn {
+    0% {
+        background-size: 110% auto;
+    }
+    100% {
+        background-size: 120% auto;
+    }
+}
+
+/* Botón Glass de Lujo */
+.btn-glass-luxury:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Optimización móvil para sección Nuestros Productos */
+@media (max-width: 768px) {
+    /* Sección de productos en móvil */
+    section[style*="back.png"] {
+        min-height: 100vh !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100vw !important;
+        margin-left: 0 !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: scroll !important;
+        animation: none !important;
+    }
+
+    /* Container glass en móvil */
+    section[style*="back.png"] .container {
+        padding: 15px !important;
+        margin: 10px !important;
+        border-radius: 15px !important;
+        max-width: 95% !important;
+        background: rgba(34, 139, 34, 0.2) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+    }
+
+    /* Título principal en móvil */
+    section[style*="back.png"] .h1 {
+        font-size: 1.8em !important;
+        margin-bottom: 8px !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Párrafo descriptivo en móvil */
+    section[style*="back.png"] p {
+        font-size: 1em !important;
+        margin-bottom: 12px !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Imágenes de productos - cuadradas y centradas */
+    section[style*="back.png"] .product-category-img {
+        width: 120px !important;
+        height: 120px !important;
+        object-fit: cover !important;
+        border-radius: 50% !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    /* Columnas de productos en móvil */
+    section[style*="back.png"] .col-12.col-md-4 {
+        padding: 1rem 0.5rem !important;
+        text-align: center !important;
+    }
+
+    /* Títulos de productos en móvil */
+    section[style*="back.png"] .col-12.col-md-4 h5,
+    section[style*="back.png"] .col-12.col-md-4 .h5 {
+        font-size: 1.1em !important;
+        margin-top: 10px !important;
+        margin-bottom: 5px !important;
+        font-weight: 600 !important;
+    }
+
+    /* Botón principal en móvil */
+    section[style*="back.png"] .btn-glass-luxury {
+        padding: 10px 25px !important;
+        font-size: 1em !important;
+        margin-top: 10px !important;
+        width: auto !important;
+        max-width: 280px !important;
+    }
+
+    /* Ajuste de filas en móvil */
+    section[style*="back.png"] .row {
+        margin: 0 !important;
+    }
+
+    /* Ajuste del contenedor de texto */
+    section[style*="back.png"] .col-lg-8 {
+        padding: 0 10px !important;
+    }
+}
