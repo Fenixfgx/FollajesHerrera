@@ -49,6 +49,60 @@
             footer_email: 'export@follajesherrera.com',
             footer_farms: 'Nuestras Fincas e Instalaciones',
             
+            // Farms section
+            farms_title: 'Nuestras Fincas e Instalaciones',
+            farms_description: 'Conozca las instalaciones donde cultivamos nuestros follajes con tecnología avanzada y métodos sostenibles',
+            
+            farm1_title: 'Finca Principal',
+            farm1_description: 'Nuestra instalación principal cuenta con invernaderos modernos y sistemas de riego automatizados para garantizar la máxima calidad.',
+            farm1_location: 'Ubicada en el Eje Cafetero',
+            
+            farm2_title: 'Finca Tropical',
+            farm2_description: 'Especializada en follajes tropicales y plantas exóticas, con condiciones climáticas ideales para especies delicadas.',
+            farm2_location: 'Zona de clima tropical húmedo',
+            
+            farm3_title: 'Centro de Revisión y Calidad',
+            farm3_description: 'Instalación especializada en el control y aseguramiento de calidad de nuestros follajes ornamentales. Realizamos inspecciones rigurosas y verificaciones de estándares para garantizar productos de excelencia.',
+            farm3_location: 'Certificamos Calidad Superior',
+            
+            // Footer new sections
+            footer_contact: 'Contacto',
+            footer_links: 'Enlaces',
+            footer_description: 'Exportadores de follajes ornamentales de la más alta calidad',
+            footer_whatsapp: 'WhatsApp',
+            footer_home: 'Inicio',
+            footer_about: 'Sobre Nosotros',
+            footer_products_link: 'Productos',
+            footer_contact_link: 'Contacto',
+            
+            // Hero Slider 1
+            hero1_title_left: 'FOLLAJES',
+            hero1_subtitle_left: 'Especialistas en Follajes Ornamentales',
+            hero1_description_left: 'Más de dos décadas de experiencia en el cultivo sostenible de follajes tropicales. Innovamos constantemente en técnicas de producción para ofrecer variedades únicas y de excepcional calidad.',
+            
+            hero1_title_right: 'HERRERA',
+            hero1_subtitle_right: 'Cultivamos la Naturaleza con Pasión',
+            hero1_description_right: 'Distribuimos nuestros productos a nivel global con logística especializada y tiempos de entrega garantizados. Nuestro equipo de expertos asegura que cada cliente reciba asesoría personalizada para sus necesidades específicas. Transformamos espacios con la belleza natural de nuestros follajes cultivados con pasión artesanal.',
+            
+            // Hero Slider 2
+            hero2_title: 'CALIDAD',
+            hero2_subtitle: 'Excelencia en Cada Hoja',
+            hero2_description: 'Nuestros follajes representan la perfección natural, cultivados con técnicas artesanales que combinan tradición ancestral con innovación tecnológica. Cada planta es seleccionada meticulosamente para garantizar frescura, vitalidad y belleza excepcional. Certificación internacional y procesos de calidad que superan los estándares más exigentes del mercado global. Tu satisfacción es nuestra mayor recompensa.',
+            hero2_button: 'Descubre Nuestra Colección',
+            
+            // Hero Slider 3
+            hero3_title: 'Innovación Sostenible',
+            hero3_subtitle: 'Cultivo Responsable',
+            hero3_description: 'Innovamos constantemente en técnicas de cultivo sostenible que combinan tecnología avanzada con respeto por la naturaleza. Nuestro enfoque responsable garantiza la preservación del ecosistema mientras producimos follajes ornamentales de calidad excepcional para el mercado global.',
+            
+            // Products Section
+            products_title: 'Nuestros Productos',
+            products_description: 'Descubra nuestra selección premium de follajes ornamentales, cultivados con los más altos estándares de calidad para exportación',
+            product_cat1: 'Follajes Premium',
+            product_cat2: 'Plantas Exóticas',
+            product_cat3: 'Variedades Especiales',
+            products_button: 'Ver Catálogo Completo',
+            
             // Additional translations
             learn_more: 'Saber Más',
             contact_us: 'Contáctanos',
@@ -91,7 +145,7 @@
             
             // Products
             featured_title: 'Our Products',
-            featured_text: 'Our most popular and highest quality foliage, perfect for any project',
+            featured_text: 'Specialized facility in quality control and assurance of our ornamental foliage. We perform rigorous inspections and standard verifications to guarantee products of excellence.',
             
             // Footer
             footer_brand: 'Follajes Herrera',
@@ -102,6 +156,60 @@
             footer_phone: '+57 123 456 7890',
             footer_email: 'export@follajesherrera.com',
             footer_farms: 'Our Farms and Facilities',
+            
+            // Farms section
+            farms_title: 'Our Farms and Facilities',
+            farms_description: 'Discover the facilities where we grow our foliage with advanced technology and sustainable methods',
+            
+            farm1_title: 'Main Farm',
+            farm1_description: 'Our main facility features modern greenhouses and automated irrigation systems to ensure maximum quality.',
+            farm1_location: 'Located in the Coffee Region',
+            
+            farm2_title: 'Tropical Farm',
+            farm2_description: 'Specialized in tropical foliage and exotic plants, with ideal climatic conditions for delicate species.',
+            farm2_location: 'Humid tropical climate zone',
+            
+            farm3_title: 'Quality Control Center',
+            farm3_description: 'Facility specialized in quality control and assurance of our ornamental foliage. We perform rigorous inspections and standard verifications to guarantee products of excellence.',
+            farm3_location: 'We Certify Superior Quality',
+            
+            // Footer new sections
+            footer_contact: 'Contact',
+            footer_links: 'Links',
+            footer_description: 'Exporters of ornamental foliage of the highest quality',
+            footer_whatsapp: 'WhatsApp',
+            footer_home: 'Home',
+            footer_about: 'About Us',
+            footer_products_link: 'Products',
+            footer_contact_link: 'Contact',
+            
+            // Hero Slider 1
+            hero1_title_left: 'FOLIAGE',
+            hero1_subtitle_left: 'Ornamental Foliage Specialists',
+            hero1_description_left: 'Over two decades of experience in sustainable cultivation of tropical foliage. We constantly innovate in production techniques to offer unique varieties of exceptional quality.',
+            
+            hero1_title_right: 'HERRERA',
+            hero1_subtitle_right: 'Growing Nature with Passion',
+            hero1_description_right: 'We distribute our products globally with specialized logistics and guaranteed delivery times. Our team of experts ensures that each customer receives personalized advice for their specific needs. We transform spaces with the natural beauty of our foliage cultivated with artisanal passion.',
+            
+            // Hero Slider 2
+            hero2_title: 'QUALITY',
+            hero2_subtitle: 'Excellence in Every Leaf',
+            hero2_description: 'Our foliage represents natural perfection, cultivated with artisanal techniques that combine ancestral tradition with technological innovation. Each plant is meticulously selected to guarantee freshness, vitality and exceptional beauty. International certification and quality processes that exceed the most demanding standards of the global market. Your satisfaction is our greatest reward.',
+            hero2_button: 'Discover Our Collection',
+            
+            // Hero Slider 3
+            hero3_title: 'Sustainable Innovation',
+            hero3_subtitle: 'Responsible Cultivation',
+            hero3_description: 'We constantly innovate in sustainable cultivation techniques that combine advanced technology with respect for nature. Our responsible approach ensures ecosystem preservation while producing exceptional quality ornamental foliage for the global market.',
+            
+            // Products Section
+            products_title: 'Our Products',
+            products_description: 'Discover our premium selection of ornamental foliage, cultivated with the highest quality standards for export',
+            product_cat1: 'Premium Foliage',
+            product_cat2: 'Exotic Plants',
+            product_cat3: 'Special Varieties',
+            products_button: 'View Complete Catalog',
             
             // Additional translations
             learn_more: 'Learn More',
@@ -148,6 +256,9 @@
             // Update toggle state
             $('#languageToggle').prop('checked', this.currentLanguage === 'en');
             
+            // Update all elements with data-translate attribute
+            this.updateDataTranslateElements(lang);
+            
             // Update common elements
             this.updateCommonElements(lang);
             
@@ -156,6 +267,33 @@
             
             // Trigger custom event for page-specific updates
             $(document).trigger('languageChanged', [this.currentLanguage, lang]);
+        },
+        
+        updateDataTranslateElements: function(lang) {
+            // Find and update all elements with data-translate attribute
+            $('[data-translate]').each(function() {
+                var key = $(this).attr('data-translate');
+                var translation = lang[key];
+                
+                if (translation) {
+                    // Check if element is an input
+                    if ($(this).is('input') || $(this).is('textarea')) {
+                        $(this).attr('placeholder', translation);
+                    } 
+                    // Check if element has value attribute
+                    else if ($(this).is('[value]')) {
+                        $(this).attr('value', translation);
+                    }
+                    // For paragraphs that might contain HTML tags like <strong>
+                    else if ($(this).is('p') && (translation.includes('<strong>') || translation.includes('<b>'))) {
+                        $(this).html(translation);
+                    }
+                    // For all other elements, update text content
+                    else {
+                        $(this).text(translation);
+                    }
+                }
+            });
         },
         
         updateNavigation: function(lang) {
