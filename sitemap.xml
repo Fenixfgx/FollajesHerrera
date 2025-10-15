@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage - Máxima prioridad -->
+  <url>
+    <loc>https://www.follajesherrera.com/</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.follajesherrera.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.follajesherrera.com/en/"/>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/LOGO.png</image:loc>
+      <image:caption>Follajes Herrera - Exportadores de Follajes Ornamentales</image:caption>
+      <image:title>Logo Follajes Herrera</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/banner_img_01.jpg</image:loc>
+      <image:caption>Follajes ornamentales de alta calidad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/banner_img_02.jpg</image:loc>
+      <image:caption>Cultivo sostenible de follajes</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/banner_img_03.jpg</image:loc>
+      <image:caption>Exportación internacional de follajes</image:caption>
+    </image:image>
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://www.follajesherrera.com/about.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.follajesherrera.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.follajesherrera.com/en/about.html"/>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/about-hero.svg</image:loc>
+      <image:caption>Historia de Follajes Herrera</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Shop Page - Alta prioridad para productos -->
+  <url>
+    <loc>https://www.follajesherrera.com/shop.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.follajesherrera.com/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.follajesherrera.com/en/shop.html"/>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_01.jpg</image:loc>
+      <image:caption>Helecho Tropical - Follajes Ornamentales</image:caption>
+      <image:title>Helecho Tropical</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_02.jpg</image:loc>
+      <image:caption>Ruscus - Follaje Premium</image:caption>
+      <image:title>Ruscus</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_03.jpg</image:loc>
+      <image:caption>Palma Robelina</image:caption>
+      <image:title>Palma Robelina</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_04.jpg</image:loc>
+      <image:caption>Cinta Liriope</image:caption>
+      <image:title>Cinta Liriope</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_05.jpg</image:loc>
+      <image:caption>Cocculus</image:caption>
+      <image:title>Cocculus</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_06.jpg</image:loc>
+      <image:caption>Brillantina</image:caption>
+      <image:title>Brillantina</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_07.jpg</image:loc>
+      <image:caption>Helecho Leather</image:caption>
+      <image:title>Helecho</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_08.jpg</image:loc>
+      <image:caption>Alocasia</image:caption>
+      <image:title>Alocasia</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_09.jpg</image:loc>
+      <image:caption>Eucalipto Baby Blue</image:caption>
+      <image:title>Eucalipto Baby Blue</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_10.jpg</image:loc>
+      <image:caption>Eucalipto Silver Dollar</image:caption>
+      <image:title>Eucalipto Silver Dollar</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/shop_11.jpg</image:loc>
+      <image:caption>Pino</image:caption>
+      <image:title>Pino</image:title>
+    </image:image>
+  </url>
+
+  <!-- Shop Single Page -->
+  <url>
+    <loc>https://www.follajesherrera.com/shop-single.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.follajesherrera.com/shop-single.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.follajesherrera.com/en/shop-single.html"/>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://www.follajesherrera.com/contact.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.follajesherrera.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.follajesherrera.com/en/contact.html"/>
+  </url>
+
+  <!-- Featured Products from Homepage -->
+  <url>
+    <loc>https://www.follajesherrera.com/#featured-products</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/feature_prod_01.jpg</image:loc>
+      <image:caption>Follaje Premium Featured</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/feature_prod_02.jpg</image:loc>
+      <image:caption>Follaje Premium Featured</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/feature_prod_03.jpg</image:loc>
+      <image:caption>Follaje Premium Featured</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Category Pages (if you add them in the future) -->
+  <url>
+    <loc>https://www.follajesherrera.com/#categories</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/category_img_01.jpg</image:loc>
+      <image:caption>Categoría Follajes Tropicales</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/category_img_02.jpg</image:loc>
+      <image:caption>Categoría Plantas Exóticas</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.follajesherrera.com/assets/img/category_img_03.jpg</image:loc>
+      <image:caption>Categoría Variedades Especiales</image:caption>
+    </image:image>
+  </url>
+
+</urlset>

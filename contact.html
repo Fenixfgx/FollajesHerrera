@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Follajes Herrera - Contacto | Exportadores de Follajes Ornamentales</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/LOGO.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/LOGO.png"><link rel="icon" type="image/png" sizes="32x32" href="assets/img/LOGO.png"><link rel="icon" type="image/png" sizes="16x16" href="assets/img/LOGO.png">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+    <!-- Load map styles -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+<!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
+</head>
+
+<body>
+    <!-- Start Top Nav -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@follajesherrera.com">info@follajesherrera.com</a>
+                    <i class="fa fa-phone mx-2" style="transform: scaleX(-1);"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:+57 315 263 5408">+57 315 263 5408</a>
+                </div>
+                <div>
+                    <a class="text-light" href="https://www.facebook.com/p/Comercializadora-Follajes-Herrera-100088673201963/" target="_blank"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Close Top Nav -->
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand logo align-self-center" href="index.html">
+                <img src="assets/img/LOGO.png" alt="Logo" style="height: 55px; width: auto;">
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html" data-translate="nav_home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html" data-translate="nav_about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html" data-translate="nav_shop">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html" data-translate="nav_contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                    <!-- Language Toggle Switch -->
+                    <div class="language-toggle">
+                        <div class="toggle-container">
+                            <input type="checkbox" id="languageToggle" class="toggle-checkbox">
+                            <label for="languageToggle" class="toggle-label">
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-text left">ES</span>
+                                <span class="toggle-text right">EN</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+
+    <!-- Start Content Page -->
+    <div class="container-fluid bg-light py-3">
+        <div class="col-md-8 m-auto text-center">
+            <h1 class="h2 fw-bold mb-2" style="color: #1a1a1a; margin-top: 40px;" data-translate="contact_page_title">Contáctanos</h1>
+            <p class="mb-0" style="color: #4a4a4a; font-size: 0.95rem;">
+                Exportadores de follajes ornamentales de la más alta calidad. Estamos aquí para atenderte.
+            </p>
+        </div>
+    </div>
+
+    <!-- Start Main Contact Section - Two Columns -->
+    <section class="contact-main-section py-3" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="container-fluid px-3">
+            <div class="row g-3 align-items-stretch">
+                
+                <!-- Columna Izquierda - Mapa -->
+                <div class="col-lg-6">
+                    <div class="map-luxury-container h-100 position-relative" style="min-height: 500px; max-height: 500px; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.12);">
+                        <div id="mapid" style="width: 100%; height: 100%; min-height: 500px;"></div>
+                        
+                        <!-- Badge sobre el mapa -->
+                        <div class="position-absolute top-0 start-50 translate-middle-x mt-3" style="z-index: 1000;">
+                            <div class="badge-luxury px-3 py-2" style="background: rgba(255, 255, 255, 0.95); border-radius: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); backdrop-filter: blur(10px);">
+                                <i class="fas fa-map-marker-alt me-2" style="color: #28a745;"></i>
+                                <span style="color: #1a1a1a; font-weight: 600; font-size: 0.95rem;" data-translate="contact_map_badge">Nuestra Ubicación</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha - Directorio de Contacto -->
+                <div class="col-lg-6">
+                    <div class="contact-directory-luxury h-100 p-3" style="background: white; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.12); max-height: 500px; overflow-y: auto;">
+                        
+                        <!-- Header -->
+                        <div class="directory-header mb-3 text-center">
+                            <h2 class="h3 fw-bold mb-2" style="color: #1a1a1a;" data-translate="contact_directory_title">Directorio de Contacto</h2>
+                            <div class="decorative-line mx-auto mb-2" style="width: 60px; height: 3px; background: linear-gradient(90deg, #28a745, #20c997); border-radius: 2px;"></div>
+                            <p class="mb-0" style="color: #4a4a4a; font-size: 0.9rem;">Estamos disponibles para atenderte</p>
+                        </div>
+
+                        <!-- Contact Cards -->
+                        <div class="contact-cards-luxury">
+                            
+                            <!-- Teléfono -->
+                            <div class="contact-item-luxury mb-2 p-3" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 12px; border-left: 4px solid #28a745; transition: all 0.3s ease;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle me-3" style="width: 50px; height: 50px; background: linear-gradient(135deg, #28a745, #20c997); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(40, 167, 69, 0.25); flex-shrink: 0;">
+                                        <i class="fas fa-phone-alt fa-lg" style="color: white;"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1 fw-bold" style="color: #1a1a1a; font-size: 0.95rem;" data-translate="contact_phone_title">Teléfono</h6>
+                                        <p class="mb-1" style="color: #6c757d; font-size: 0.8rem;" data-translate="contact_phone_subtitle">Llámanos directamente</p>
+                                        <a href="tel:+573152635408" class="contact-link fw-semibold" style="color: #28a745; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center;">
+                                            <i class="fas fa-phone me-1" style="font-size: 0.75rem;"></i>+57 315 263 5408
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- WhatsApp -->
+                            <div class="contact-item-luxury mb-2 p-3" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 12px; border-left: 4px solid #25D366; transition: all 0.3s ease;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle me-3" style="width: 50px; height: 50px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); flex-shrink: 0;">
+                                        <i class="fab fa-whatsapp fa-lg" style="color: white;"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1 fw-bold" style="color: #1a1a1a; font-size: 0.95rem;" data-translate="contact_whatsapp_title">WhatsApp</h6>
+                                        <p class="mb-1" style="color: #6c757d; font-size: 0.8rem;" data-translate="contact_whatsapp_subtitle">Chatea con nosotros</p>
+                                        <a href="https://wa.me/573152635408" target="_blank" class="contact-link fw-semibold" style="color: #25D366; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center;">
+                                            <i class="fab fa-whatsapp me-1" style="font-size: 0.75rem;"></i><span data-translate="contact_whatsapp_button">Iniciar chat</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="contact-item-luxury mb-2 p-3" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 12px; border-left: 4px solid #0d6efd; transition: all 0.3s ease;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle me-3" style="width: 50px; height: 50px; background: linear-gradient(135deg, #0d6efd, #0a58ca); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(13, 110, 253, 0.25); flex-shrink: 0;">
+                                        <i class="fas fa-envelope fa-lg" style="color: white;"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1 fw-bold" style="color: #1a1a1a; font-size: 0.95rem;" data-translate="contact_email_title">Correo Electrónico</h6>
+                                        <p class="mb-1" style="color: #6c757d; font-size: 0.8rem;" data-translate="contact_email_subtitle">Envíanos un email</p>
+                                        <a href="mailto:info@follajesherrera.com" class="contact-link fw-semibold" style="color: #0d6efd; text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; word-break: break-all;">
+                                            <i class="fas fa-envelope me-1" style="font-size: 0.75rem;"></i>info@follajesherrera.com
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Facebook -->
+                            <div class="contact-item-luxury mb-2 p-3" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 12px; border-left: 4px solid #1877f2; transition: all 0.3s ease;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle me-3" style="width: 50px; height: 50px; background: linear-gradient(135deg, #1877f2, #0c63d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(24, 119, 242, 0.25); flex-shrink: 0;">
+                                        <i class="fab fa-facebook-f fa-lg" style="color: white;"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1 fw-bold" style="color: #1a1a1a; font-size: 0.95rem;" data-translate="contact_facebook_title">Facebook</h6>
+                                        <p class="mb-1" style="color: #6c757d; font-size: 0.8rem;" data-translate="contact_facebook_subtitle">Síguenos en redes sociales</p>
+                                        <a href="https://facebook.com/follajesherrera" target="_blank" class="contact-link fw-semibold" style="color: #1877f2; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center;">
+                                            <i class="fab fa-facebook-f me-1" style="font-size: 0.75rem;"></i><span data-translate="contact_facebook_button">Visitar perfil</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Horario -->
+                        <div class="business-hours-luxury mt-3 p-3 text-center" style="background: linear-gradient(135deg, #28a745, #20c997); border-radius: 12px; box-shadow: 0 8px 20px rgba(40, 167, 69, 0.2);">
+                            <h6 class="mb-2 fw-bold" style="color: white; font-size: 0.95rem;"><i class="fas fa-clock me-2"></i><span data-translate="contact_hours_title">Horario de Atención</span></h6>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="mb-0 fw-semibold" style="color: white; font-size: 0.85rem;">Lun - Vie</p>
+                                    <p class="mb-0" style="color: rgba(255,255,255,0.9); font-size: 0.8rem;">8:00 AM - 6:00 PM</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="mb-0 fw-semibold" style="color: white; font-size: 0.85rem;">Sábados</p>
+                                    <p class="mb-0" style="color: rgba(255,255,255,0.9); font-size: 0.8rem;">9:00 AM - 2:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script>
+        // Coordenadas exactas de Follajes Herrera en Zipacón, Cundinamarca
+        var mymap = L.map('mapid').setView([4.72318671, -74.41714556], 14);
+
+        // Usar OpenStreetMap directamente (no requiere token)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Follajes Herrera'
+        }).addTo(mymap);
+
+        // Marcador personalizado elegante con hoja
+        var greenIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background: linear-gradient(135deg, #28a745, #20c997); width: 45px; height: 45px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 0 5px 20px rgba(40, 167, 69, 0.5); border: 3px solid white; display: flex; align-items: center; justify-content: center;"><i class="fas fa-leaf" style="color: white; transform: rotate(45deg); font-size: 18px;"></i></div>',
+            iconSize: [45, 45],
+            iconAnchor: [23, 45],
+            popupAnchor: [0, -45]
+        });
+
+        // Añadir marcador con popup
+        var marker = L.marker([4.72318671, -74.41714556], {icon: greenIcon}).addTo(mymap);
+        
+        // Función para crear el contenido del popup traducible
+        function createPopupContent() {
+            var currentLang = window.LanguageManager ? window.LanguageManager.currentLanguage : 'es';
+            var translations = window.translations || {es: {}, en: {}};
+            var t = translations[currentLang];
+            
+            var locationText = t.contact_map_location || 'Zipacón, Cundinamarca - Colombia';
+            var directionsText = t.contact_map_directions || 'Cómo llegar';
+            
+            return `
+                <div style="text-align: center; padding: 12px; min-width: 220px;">
+                    <h6 style="color: #28a745; font-weight: bold; margin-bottom: 12px; font-size: 1.1rem;">
+                        <i class="fas fa-leaf me-2"></i>Follajes Herrera
+                    </h6>
+                    <div style="border-top: 2px solid #28a745; padding-top: 8px; margin-top: 8px;">
+                        <p style="margin-bottom: 8px; color: #1a1a1a; font-weight: 600; font-size: 0.9rem;">
+                            <i class="fa fa-map-marker-alt me-2" style="color: #28a745;"></i>${locationText}
+                        </p>
+                        <p style="margin-bottom: 8px; color: #1a1a1a; font-size: 0.85rem;">
+                            <i class="fa fa-phone me-2" style="color: #28a745;"></i>+57 315 263 5408
+                        </p>
+                        <a href="https://www.google.com/maps/search/Follajes%20Herrera/@4.72318671,-74.41714556,17z" 
+                           target="_blank" 
+                           style="display: inline-block; margin-top: 8px; padding: 6px 16px; background: linear-gradient(135deg, #28a745, #20c997); color: white; text-decoration: none; border-radius: 20px; font-weight: 600; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);">
+                            <i class="fas fa-directions me-1"></i>${directionsText}
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Establecer popup inicial
+        marker.bindPopup(createPopupContent()).openPopup();
+        
+        // Actualizar popup cuando cambia el idioma
+        document.addEventListener('languageChanged', function() {
+            marker.setPopupContent(createPopupContent());
+        });
+
+        // Controles de interacción del mapa
+        mymap.scrollWheelZoom.disable();
+        
+        // Habilitar zoom con scroll cuando se hace clic en el mapa
+        mymap.on('click', function() {
+            if (mymap.scrollWheelZoom.enabled()) {
+                mymap.scrollWheelZoom.disable();
+            } else {
+                mymap.scrollWheelZoom.enable();
+            }
+        });
+
+        // Ajustar el mapa cuando la ventana cambie de tamaño
+        setTimeout(function() {
+            mymap.invalidateSize();
+        }, 100);
+    </script>
+    <!-- End Main Contact Section -->
+
+
+        <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row py-5">
+
+                <!-- Informaci�n de Contacto -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light footer-logo-alt">Follajes Herrera</h2>
+                    <p class="text-light mt-3 footer-description">
+                        Exportadores de follajes ornamentales de la m�s alta calidad
+                    </p>
+                </div>
+
+                <!-- Contacto -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <h2 class="h5 text-light border-bottom pb-3 border-light" data-translate="footer_contact">Contacto</h2>
+                    <ul class="list-unstyled text-light footer-link-list mt-3">
+                        <li class="mb-2">
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none text-light" href="tel:+573152635408">+57 315 263 5408</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none text-light" href="mailto:info@follajesherrera.com">info@follajesherrera.com</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fab fa-whatsapp fa-fw"></i>
+                            <a class="text-decoration-none text-light" href="https://wa.me/573152635408" target="_blank" data-translate="footer_whatsapp">WhatsApp</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Enlaces Rápidos -->
+                <div class="col-lg-4 col-md-12">
+                    <h2 class="h5 text-light border-bottom pb-3 border-light" data-translate="footer_links">Enlaces</h2>
+                    <ul class="list-unstyled text-light footer-link-list mt-3">
+                        <li class="mb-2"><a class="text-decoration-none text-light" href="index.html" data-translate="footer_home">Inicio</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-light" href="about.html" data-translate="footer_about">Sobre Nosotros</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-light" href="shop.html" data-translate="footer_products_link">Productos</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-light" href="contact.html" data-translate="footer_contact_link">Contacto</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Redes Sociales y Copyright -->
+            <div class="row text-light py-4 border-top border-secondary">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <ul class="list-inline footer-icons mb-0">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://www.facebook.com/p/Comercializadora-Follajes-Herrera-100088673201963/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://wa.me/573152635408" target="_blank"><i class="fab fa-whatsapp fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        Copyright &copy; 2025 Follajes Herrera | Todos los derechos reservados
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End Footer -->
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/573152635408" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/global-language.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- End Script -->
+</body>
+
+</html>
+
