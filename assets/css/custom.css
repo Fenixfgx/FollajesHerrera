@@ -1270,3 +1270,1320 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+
+/* ===========================
+   Product Cards Premium Styles
+   =========================== */
+
+.product-wap {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid #e8e8e8 !important;
+    overflow: hidden;
+}
+
+.product-wap:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+    border-color: #59ab6e !important;
+}
+
+.product-wap .card-img-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-wap:hover .card-img-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.product-wap .card-body {
+    padding: 1.5rem;
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+}
+
+.product-wap .card-body a {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #2c3e50;
+    transition: color 0.3s ease;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.product-wap .card-body a:hover {
+    color: #59ab6e;
+}
+
+.product-wap img {
+    transition: transform 0.5s ease;
+}
+
+.product-wap:hover img {
+    transform: scale(1.08);
+}
+
+.product-overlay .btn {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.product-wap:hover .product-overlay .btn {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.product-overlay .btn:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.product-overlay .btn:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.product-overlay .btn-success {
+    background: linear-gradient(135deg, #59ab6e 0%, #4a9d5f 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(89, 171, 110, 0.4);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-overlay .btn-success:hover {
+    background: linear-gradient(135deg, #4a9d5f 0%, #3a8d4f 100%);
+    box-shadow: 0 6px 20px rgba(89, 171, 110, 0.6);
+    transform: scale(1.1);
+}
+
+
+/* ===========================
+   Product Details Styles
+   =========================== */
+
+.product-name {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #2c3e50 !important;
+    margin-bottom: 0.5rem !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+    display: block !important;
+}
+
+.product-scientific-name {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.product-sizes-container {
+    text-align: center;
+    padding: 0.75rem 0;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+.sizes-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.sizes-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.product-size {
+    display: inline-block;
+    background: linear-gradient(135deg, #59ab6e 0%, #4a9d5f 100%);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    min-width: 35px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(89, 171, 110, 0.3);
+    transition: all 0.3s ease;
+}
+
+.product-size:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(89, 171, 110, 0.5);
+    background: linear-gradient(135deg, #4a9d5f 0%, #3a8d4f 100%);
+}
+
+.product-wap .card-body {
+    padding: 1.5rem 1.25rem !important;
+}
+
+/* ===========================
+   Mobile Responsive Styles
+   =========================== */
+
+/* Tablets y móviles grandes */
+@media (max-width: 992px) {
+    .product-name {
+        font-size: 1.15rem !important;
+    }
+    
+    .product-scientific-name {
+        font-size: 0.9rem;
+    }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+    /* Productos en una columna en móvil para mejor visualización */
+    #products-container .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .product-wap {
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+    
+    /* Reducir altura de la imagen para que todo quepa en pantalla */
+    .product-wap .card img {
+        max-height: 200px;
+        object-fit: contain;
+        width: 100%;
+    }
+    
+    /* Agrandar títulos */
+    .product-name {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.4rem !important;
+    }
+    
+    .product-scientific-name {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    /* Ajustar badges */
+    .product-size {
+        font-size: 1rem;
+        padding: 0.4rem 0.7rem;
+        min-width: 42px;
+        font-weight: 700;
+    }
+    
+    .sizes-wrapper {
+        gap: 0.4rem;
+    }
+    
+    /* Reducir padding del card body */
+    .product-wap .card-body {
+        padding: 1rem 1rem !important;
+    }
+    
+    .product-sizes-container {
+        padding: 0.5rem 0;
+        margin-top: 0.3rem;
+    }
+    
+    /* Ajustar overlay buttons */
+    .product-overlay .btn-success {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 576px) {
+    /* Imagen aún más pequeña en pantallas muy pequeñas */
+    .product-wap .card img {
+        max-height: 410px;
+    }
+    
+    .product-name {
+        font-size: 1.4rem !important;
+    }
+    
+    .product-scientific-name {
+        font-size: 1.05rem;
+    }
+    
+    .product-size {
+        font-size: 0.95rem;
+        padding: 0.35rem 0.65rem;
+    }
+    
+    .product-wap .card-body {
+        padding: 0.9rem 0.8rem !important;
+    }
+}
+
+/* Móviles muy pequeños (iPhone SE, etc.) */
+@media (max-width: 400px) {
+    .product-wap .card img {
+        max-height: 160px;
+    }
+    
+    .product-name {
+        font-size: 1.3rem !important;
+    }
+    
+    .product-scientific-name {
+        font-size: 1rem;
+    }
+    
+    .product-size {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.6rem;
+        min-width: 38px;
+    }
+}
+
+/* ===========================
+   Navbar Mobile Adjustments
+   =========================== */
+
+/* Ocultar buscador en menú móvil */
+@media (max-width: 991px) {
+    #inputMobileSearch {
+        display: none !important;
+    }
+    
+    .d-lg-none.flex-sm-fill {
+        display: none !important;
+    }
+}
+
+
+/* ===========================
+   Shop Single - Product Detail Images
+   =========================== */
+
+/* Contenedor del carrusel y la imagen principal */
+.product-detail-carousel {
+    max-height: 70vh;
+    overflow: hidden;
+}
+
+.product-detail-carousel .carousel-inner,
+.product-detail-carousel .carousel-item {
+    height: 70vh;
+}
+
+.product-detail-carousel img {
+    width: 100%;
+    height: 65vh;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Comprimir sección de detalles */
+.product-detail-info {
+    padding: 1.25rem 1.75rem !important;
+}
+
+.product-detail-info h1 {
+    font-size: 1.85rem !important;
+    margin-bottom: 0.4rem !important;
+    font-weight: 700 !important;
+}
+
+.product-detail-info h6 {
+    font-size: 1.1rem !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 0.6rem !important;
+    font-weight: 600 !important;
+}
+
+.product-detail-info p {
+    font-size: 1.05rem !important;
+    margin-bottom: 0.6rem !important;
+    line-height: 1.6 !important;
+}
+
+.product-detail-info ul {
+    padding-bottom: 0.4rem !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.product-detail-info ul li {
+    font-size: 1rem !important;
+    padding: 0.2rem 0 !important;
+    line-height: 1.5 !important;
+}
+
+/* Botón de Cotizar */
+.btn-cotizar {
+    background: linear-gradient(135deg, #59ab6e 0%, #4a9d5f 100%);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 2.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(89, 171, 110, 0.3);
+    width: 100%;
+}
+
+.btn-cotizar:hover {
+    background: linear-gradient(135deg, #4a9d5f 0%, #3a8d4f 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(89, 171, 110, 0.4);
+    color: white;
+}
+
+/* Responsive para m�vil */
+@media (max-width: 768px) {
+    .product-detail-carousel {
+        max-height: 50vh;
+    }
+    
+    .product-detail-carousel .carousel-inner,
+    .product-detail-carousel .carousel-item {
+        height: 50vh;
+    }
+    
+    .product-detail-carousel img {
+        height: 50vh;
+    }
+    
+    .product-detail-info {
+        padding: 0.75rem 1rem !important;
+    }
+    
+    .product-detail-info h1 {
+        font-size: 1.25rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-detail-carousel {
+        max-height: 40vh;
+    }
+    
+    .product-detail-carousel .carousel-inner,
+    .product-detail-carousel .carousel-item {
+        height: 40vh;
+    }
+    
+    .product-detail-carousel img {
+        height: 40vh;
+    }
+}
+
+
+/* ===========================
+   Related Products Section (Slider)
+   =========================== */
+
+#carousel-related-product .product-wap {
+    transition: all 0.3s ease;
+    margin: 0 5px;
+}
+
+#carousel-related-product .product-wap:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+#carousel-related-product .product-name {
+    font-size: 1.1rem !important;
+    display: block;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+#carousel-related-product .product-scientific-name {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+#carousel-related-product .product-size {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+    margin: 0 0.15rem;
+}
+
+/* Estilo de los dots del slider */
+#carousel-related-product .slick-dots {
+    bottom: -45px;
+}
+
+#carousel-related-product .slick-dots li button:before {
+    font-size: 12px;
+    color: #59ab6e;
+}
+
+#carousel-related-product .slick-dots li.slick-active button:before {
+    color: #59ab6e;
+    opacity: 1;
+}
+
+
+/* ===========================
+   Shop Single - Detalles Comprimidos
+   =========================== */
+
+/* Comprimir solo el card-body de detalles del producto */
+.product-detail-info .card-body {
+    padding: 1rem 1.5rem 0.5rem 1.5rem !important;
+}
+
+.product-detail-info .list-inline {
+    margin-bottom: 0.5rem !important;
+}
+
+.product-detail-info .list-inline-item {
+    margin-bottom: 0.3rem !important;
+}
+
+.product-detail-info form .row {
+    margin-bottom: 0.5rem !important;
+}
+
+.product-detail-info h6 {
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.4rem !important;
+}
+
+.product-detail-info p {
+    margin-bottom: 0.5rem !important;
+}
+
+.product-detail-info ul.list-unstyled {
+    margin-bottom: 0.5rem !important;
+    padding-bottom: 0.3rem !important;
+}
+
+.product-detail-info ul.list-unstyled li {
+    padding: 0.1rem 0 !important;
+}
+
+/* Reducir espacio del bot\u00f3n de cotizar */
+.product-detail-info .btn-cotizar {
+    margin-top: 0.5rem !important;
+}
+
+
+/* ===========================
+   Miniaturas - Adaptaci\u00f3n a Im�genes Verticales
+   =========================== */
+
+/* Contenedor de miniaturas m�s compacto */
+.product-links-wap .row {
+    margin-left: -5px !important;
+    margin-right: -5px !important;
+    justify-content: center;
+}
+
+.product-links-wap .col-4 {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: 120px;
+}
+
+.product-links-wap .col-4 a {
+    display: block;
+    height: 100%;
+}
+
+.product-links-wap img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 120px;
+    object-fit: contain;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.product-links-wap img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: #59ab6e;
+}
+
+.product-links-wap img.active {
+    border-color: #59ab6e;
+    box-shadow: 0 4px 12px rgba(89, 171, 110, 0.4);
+}
+
+@media (max-width: 768px) {
+    .product-links-wap .col-4 {
+        max-width: 90px;
+    }
+    
+    .product-links-wap img {
+        max-height: 90px;
+    }
+}
+
+
+/* ===========================
+   About Page Styles
+   =========================== */
+
+/* Hover lift effect for cards */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* About hero section animations */
+.about-hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1440 320\"><path fill=\"%23ffffff\" fill-opacity=\"0.1\" d=\"M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z\"></path></svg>') no-repeat bottom;
+    background-size: cover;
+    opacity: 0.3;
+}
+
+/* Team cards with improved styling */
+.team-card-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #59ab6e;
+    margin-bottom: 1rem;
+}
+
+/* Values section icons */
+.values-icon {
+    font-size: 2.5rem;
+    color: #59ab6e;
+    transition: all 0.3s ease;
+}
+
+.values-icon:hover {
+    transform: scale(1.2) rotate(10deg);
+    color: #4a9d5f;
+}
+
+/* Facility cards hover effect */
+.card .fa-leaf,
+.card .fa-home,
+.card .fa-box,
+.card .fa-flask,
+.card .fa-user-tie {
+    transition: all 0.3s ease;
+}
+
+.card:hover .fa-leaf,
+.card:hover .fa-home,
+.card:hover .fa-box,
+.card:hover .fa-flask,
+.card:hover .fa-user-tie {
+    transform: scale(1.1);
+    color: #4a9d5f !important;
+}
+
+/* Smooth animations for sections */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Story section image effects */
+.story-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.story-image img {
+    transition: transform 0.5s ease;
+}
+
+.story-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Background gradient for values section */
+.values-bg {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .about-hero-section {
+        padding: 60px 0 !important;
+    }
+    
+    .display-3 {
+        font-size: 2.5rem !important;
+    }
+    
+    .display-5 {
+        font-size: 2rem !important;
+    }
+}
+
+/* Custom scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Professional shadow effects */
+.shadow-professional {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-professional:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ===========================
+   Glass Container Effect
+   =========================== */
+
+.glass-container {
+    background: rgb(255 255 255 / 58%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    transition: all 0.3s ease;
+}
+
+.glass-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px 0 rgba(31, 38, 135, 0.3);
+}
+
+.glass-container img {
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+    transition: transform 0.3s ease;
+}
+
+.glass-container:hover img {
+    transform: scale(1.05);
+}
+
+/* ===========================
+   History Slider Styles
+   =========================== */
+
+.history-slider-container {
+    position: relative;
+}
+
+.history-slider {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.history-slider .slick-slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.history-slider .slick-prev,
+.history-slider .slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    background: rgba(89, 171, 110, 0.3);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    opacity: 0.4;
+}
+
+.history-slider .slick-prev {
+    left: 20px;
+}
+
+.history-slider .slick-next {
+    right: 20px;
+}
+
+.history-slider .slick-prev:hover,
+.history-slider .slick-next:hover {
+    background: rgba(89, 171, 110, 0.7);
+    transform: translateY(-50%) scale(1.05);
+    opacity: 1;
+}
+
+.history-slider .slick-dots {
+    bottom: 20px;
+    z-index: 100;
+}
+
+.history-slider .slick-dots li button:before {
+    color: white;
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+.history-slider .slick-dots li.slick-active button:before {
+    color: #59ab6e;
+    opacity: 1;
+}
+
+/* Smooth fade transition */
+.history-slider .slick-slide {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.history-slider .slick-slide.slick-active {
+    opacity: 1;
+}
+
+/* ===========================
+   Team Member Images
+   =========================== */
+
+.team-member-img {
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.team-member-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(89, 171, 110, 0.3);
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+
+@media (max-width: 768px) {
+    .glass-container {
+        padding: 1.5rem;
+    }
+    
+    .history-slider .slick-slide img {
+        height: 300px;
+    }
+    
+    .history-slider .slick-prev,
+    .history-slider .slick-next {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .history-slider .slick-prev {
+        left: 10px;
+    }
+    
+    .history-slider .slick-next {
+        right: 10px;
+    }
+}
+
+/* ===============================================
+   FACILITIES SECTION - Instalaciones
+   =============================================== */
+
+.facility-item {
+    margin-bottom: 4rem !important;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.facility-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.facility-image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.facility-image-container img {
+    transition: transform 0.5s ease;
+}
+
+.facility-image-container:hover img {
+    transform: scale(1.05);
+}
+
+/* Overlay removido - solo queda el zoom sutil de la imagen */
+
+.facility-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.facility-badge i {
+    color: #59ab6e;
+    font-size: 1.5rem;
+}
+
+.facility-badge .badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments for facilities */
+@media (max-width: 768px) {
+    .facility-item {
+        margin-bottom: 3rem !important;
+        flex-direction: column !important;
+    }
+    
+    .facility-item .col-lg-6 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* En móvil, imagen siempre arriba, texto abajo */
+    .facility-image-col {
+        order: -1 !important;
+    }
+    
+    .facility-text-col {
+        order: 1 !important;
+    }
+    
+    .facility-image-container img {
+        height: 250px !important;
+    }
+}
+
+/* ===============================================
+   VALUES SECTION - Neumorphic Circles
+   =============================================== */
+
+.neumorphic-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow:
+        8px 8px 16px #d1d9e6,
+        -8px -8px 16px #ffffff;
+    border: 1px solid #e6e6e6;
+    transition: all 0.3s ease;
+}
+
+.neumorphic-circle:hover {
+    box-shadow:
+        12px 12px 24px #c8d0e7,
+        -12px -12px 24px #ffffff,
+        inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+        inset -2px -2px 4px rgba(193, 193, 193, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments for neumorphic circles */
+@media (max-width: 768px) {
+    .neumorphic-circle {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .neumorphic-circle i {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* ===============================================
+   GLASS CONTAINER TEXT - Historia
+   =============================================== */
+
+.glass-container-text {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    transition: all 0.3s ease;
+}
+
+.glass-container-text:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px 0 rgba(31, 38, 135, 0.3);
+}
+
+/* Responsive adjustments for glass container text */
+@media (max-width: 768px) {
+    .glass-container-text {
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
+}
+
+/* ===============================================
+   MOBILE RESPONSIVE HIDES
+   =============================================== */
+
+/* Ocultar iconos del navbar en desktop y móvil */
+.navbar-icons .nav-icon {
+    display: none !important;
+}
+
+/* Mantener solo el toggle de idioma en todas las pantallas */
+.navbar-icons .language-toggle {
+    display: block !important;
+}
+
+/* ===============================================
+   TEAM SECTION - Cards Mejoradas
+   =============================================== */
+
+.team-card {
+    border-radius: 15px !important;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(89, 171, 110, 0.2);
+}
+
+.team-image-container {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.team-member-img {
+    transition: transform 0.4s ease;
+    filter: brightness(1.05) contrast(1.05);
+}
+
+.team-card:hover .team-member-img {
+    transform: scale(1.08);
+    filter: brightness(1.1) contrast(1.1) saturate(1.1);
+}
+
+.team-card .card-body {
+    padding: 1.5rem !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.team-card .card-title {
+    color: #2c3e50;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.team-card .text-success {
+    color: #59ab6e !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.8rem;
+}
+
+.team-card .card-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments for team cards */
+@media (max-width: 768px) {
+    .team-card {
+        margin-bottom: 2rem;
+    }
+
+    .team-member-img {
+        height: 220px !important;
+    }
+
+    .team-card .card-body {
+        padding: 1.25rem !important;
+    }
+
+    .team-card .card-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .team-member-img {
+        height: 180px !important;
+    }
+}
+
+/* Ocultar badge de experiencia en móvil */
+@media (max-width: 768px) {
+    .experience-badge {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   CONTACT PAGE LUXURY STYLES
+   ======================================== */
+
+/* Hero Map Section */
+.hero-map-section {
+    margin-top: -20px;
+    overflow: hidden;
+}
+
+.map-container {
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.map-overlay {
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Contact Directory Section */
+.contact-directory-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+}
+
+.contact-directory-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #28a745, #20c997, #17a2b8);
+}
+
+/* Contact Cards */
+.contact-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(40, 167, 69, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.contact-card:hover::before {
+    left: 100%;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px) !important;
+}
+
+/* Contact Icons */
+.contact-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.contact-icon::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    transition: width 0.3s ease;
+}
+
+.contact-card:hover .contact-icon::after {
+    width: 60px;
+}
+
+/* Buttons */
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: none;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #218838, #17a2b8);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+}
+
+/* Additional Info Section */
+.additional-info {
+    border-left: 4px solid #28a745;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+/* Business Hours */
+.business-hours {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.contact-card:nth-child(1) { animation-delay: 0.1s; }
+.contact-card:nth-child(2) { animation-delay: 0.2s; }
+.contact-card:nth-child(3) { animation-delay: 0.3s; }
+.contact-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-map-section {
+        margin-top: 0;
+    }
+
+    .map-overlay {
+        top: 20px !important;
+        transform: translateX(-50%) !important;
+        width: 90%;
+    }
+
+    .contact-card {
+        margin-bottom: 20px;
+    }
+
+    .business-hours {
+        margin-top: 20px;
+    }
+}
+
+/* Luxury Typography */
+.display-4 {
+    font-weight: 300;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* Card Titles */
+.card-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+/* Gradient Backgrounds */
+.bg-light {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+}
+
+/* Shadow Effects */
+.shadow-sm {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
