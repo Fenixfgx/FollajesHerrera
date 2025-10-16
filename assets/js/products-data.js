@@ -47,7 +47,7 @@ const productsDatabase = [
             en: 'Italian Ruscus'
         },
         scientificName: 'Ruscus aculeatus',
-        sizes: [40, 50, 70],
+        sizes: [50, 55, 60],
         image: 'assets/img/productos/shop/foliage (2).jpg',
         images: [
             'assets/img/productos/shop/foliage (2).jpg',
@@ -85,7 +85,7 @@ const productsDatabase = [
             en: 'Pygmy Date Palm'
         },
         scientificName: 'Phoenix roebelenii',
-        sizes: [30, 40, 50, 70],
+        sizes: [50, 55, 60],
         image: 'assets/img/productos/shop/foliage (3).jpg',
         images: [
             'assets/img/productos/shop/foliage (3).jpg',
@@ -123,7 +123,7 @@ const productsDatabase = [
             en: 'Lilyturf'
         },
         scientificName: 'Liriope muscari',
-        sizes: [40, 50, 70],
+        sizes: [50, 55, 60],
         image: 'assets/img/productos/shop/foliage (4).jpg',
         images: [
             'assets/img/productos/shop/foliage (4).jpg',
@@ -161,7 +161,7 @@ const productsDatabase = [
             en: 'Laurel Leaf Snailseed'
         },
         scientificName: 'Cocculus laurifolius',
-        sizes: [30, 40, 50],
+        sizes: [50, 55, 60],
         image: 'assets/img/productos/shop/foliage (5).jpg',
         images: [
             'assets/img/productos/shop/foliage (5).jpg',
@@ -199,7 +199,7 @@ const productsDatabase = [
             en: 'Baby Tears'
         },
         scientificName: 'Pilea glauca',
-        sizes: [40, 50, 70],
+        sizes: [50, 60],
         image: 'assets/img/productos/shop/foliage (6).jpg',
         images: [
             'assets/img/productos/shop/foliage (6).jpg',
@@ -237,7 +237,7 @@ const productsDatabase = [
             en: 'Leather Fern'
         },
         scientificName: 'Rumohra adiantiformis',
-        sizes: [30, 40, 50],
+        sizes: [50, 55, 60],
         image: 'assets/img/productos/shop/foliage (7).jpg',
         images: [
             'assets/img/productos/shop/foliage (7).jpg',
@@ -275,7 +275,7 @@ const productsDatabase = [
             en: 'Alocasia'
         },
         scientificName: 'Alocasia amazonica',
-        sizes: [40, 50, 70],
+        sizes: [50, 55, 60],
         image: 'assets/img/productos/shop/foliage (8).jpg',
         images: [
             'assets/img/productos/shop/foliage (8).jpg',
@@ -313,7 +313,7 @@ const productsDatabase = [
             en: 'Baby Blue Eucalyptus'
         },
         scientificName: 'Eucalyptus pulverulenta',
-        sizes: [30, 40, 50, 70],
+        sizes: [50, 55, 60],
         image: 'assets/img/productos/shop/foliage (9).jpg',
         images: [
             'assets/img/productos/shop/foliage (9).jpg',
@@ -351,7 +351,7 @@ const productsDatabase = [
             en: 'Silver Dollar Eucalyptus'
         },
         scientificName: 'Eucalyptus cinerea',
-        sizes: [40, 50, 70],
+        sizes: [55, 60],
         image: 'assets/img/productos/shop/foliage (10).jpg',
         images: [
             'assets/img/productos/shop/foliage (10).jpg',
