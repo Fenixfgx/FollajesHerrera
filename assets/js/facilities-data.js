@@ -9,8 +9,8 @@ const facilitiesData = [
             en: 'Our Farms'
         },
         description: {
-            es: 'Más de 50 hectáreas dedicadas al cultivo especializado de follajes ornamentales con sistemas de riego de última generación y técnicas agrícolas sostenibles.',
-            en: 'More than 50 hectares dedicated to specialized cultivation of ornamental foliage with state-of-the-art irrigation systems and sustainable agricultural techniques.'
+            es: 'Más de 12 hectáreas dedicadas al cultivo especializado de follajes ornamentales con sistemas de riego de última generación y técnicas agrícolas sostenibles.',
+            en: 'More than 12 hectares dedicated to specialized cultivation of ornamental foliage with state-of-the-art irrigation systems and sustainable agricultural techniques.'
         },
         image: 'assets/img/fincas/f2.jpg',
         imagePosition: 'left', // left or right

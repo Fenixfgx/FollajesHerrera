@@ -5,11 +5,11 @@ const productsDatabase = [
     {
         id: 1,
         name: {
-            es: 'Helecho Tropical',
-            en: 'Tropical Fern'
+            es: 'Pittosporum',
+            en: 'Pittosporum'
         },
-        scientificName: 'Nephrolepis exaltata',
-        sizes: [30, 40, 50],
+        scientificName: 'Pittosporum Tobira Variegata',
+        sizes: [55, 60],
         image: 'assets/img/productos/shop/foliage (1).jpg',
         images: [
             'assets/img/productos/shop/foliage (1).jpg',
@@ -157,11 +157,11 @@ const productsDatabase = [
     {
         id: 5,
         name: {
-            es: 'Cocculus',
-            en: 'Laurel Leaf Snailseed'
+            es: 'Vibornium',
+            en: 'Vibornium'
         },
-        scientificName: 'Cocculus laurifolius',
-        sizes: [50, 55, 60],
+        scientificName: 'Vibornium',
+        sizes: [55, 60],
         image: 'assets/img/productos/shop/foliage (5).jpg',
         images: [
             'assets/img/productos/shop/foliage (5).jpg',
@@ -271,10 +271,10 @@ const productsDatabase = [
     {
         id: 8,
         name: {
-            es: 'Alocasia',
-            en: 'Alocasia'
+            es: 'Cocculus',
+            en: 'Cocculus'
         },
-        scientificName: 'Alocasia amazonica',
+        scientificName: 'Cocculus laurifolius',
         sizes: [50, 55, 60],
         image: 'assets/img/productos/shop/foliage (8).jpg',
         images: [

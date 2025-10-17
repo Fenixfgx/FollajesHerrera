@@ -21,8 +21,8 @@ const teamData = [
     {
         id: 2,
         name: {
-            es: 'Carlos Rodríguez',
-            en: 'Carlos Rodríguez'
+            es: 'Julián Herrera',
+            en: 'Julián Herrera'
         },
         position: {
             es: 'Director de Operaciones',
@@ -32,13 +32,13 @@ const teamData = [
             es: 'Experto en gestión agrícola sostenible y optimización de procesos productivos.',
             en: 'Expert in sustainable agricultural management and production process optimization.'
         },
-        image: 'assets/img/team/user.png'
+        image: 'assets/img/team/julian.jpg'
     },
     {
         id: 3,
         name: {
-            es: 'Ana Martínez',
-            en: 'Ana Martínez'
+            es: 'Camilo Ramírez',
+            en: 'Camilo Ramírez'
         },
         position: {
             es: 'Gerente de Calidad',
@@ -50,22 +50,6 @@ const teamData = [
         },
         image: 'assets/img/team/user.png'
     },
-    {
-        id: 4,
-        name: {
-            es: 'Jorge Silva',
-            en: 'Jorge Silva'
-        },
-        position: {
-            es: 'Director de Exportaciones',
-            en: 'Export Director'
-        },
-        bio: {
-            es: 'Responsable de nuestras relaciones comerciales internacionales y logística global.',
-            en: 'Responsible for our international business relationships and global logistics.'
-        },
-        image: 'assets/img/team/user.png'
-    }
 ];
 
 // Función para obtener todos los miembros del equipo
@@ -93,14 +77,14 @@ class TeamLoader {
 
         teamData.forEach(member => {
             const col = document.createElement('div');
-            col.className = 'col-md-6 col-lg-3';
+            col.className = 'col-md-4 col-lg-4';
             
             col.innerHTML = `
-                <div class="team-card card h-100 border-0 shadow-lg" style="transition: all 0.4s ease; overflow: hidden;">
+                <div class="team-card card h-100 border-0 shadow-lg" style="transition: all 0.4s ease; overflow: hidden; max-width: 330px; max-height: 600px; margin: auto;">
                     <div class="team-image-container">
                         <img src="${member.image}" alt="${member.name[this.currentLanguage]}"
                             class="team-member-img w-100"
-                            style="height: 280px; object-fit: cover; transition: transform 0.4s ease;">
+                            style="height: 350px; object-fit: cover; transition: transform 0.4s ease; max-height: 320px; width: 100%; border-radius: 0.375rem 0.375rem 0 0;">
                     </div>
                     <div class="card-body text-center p-4" style="background: #ffffff;">
                         <h5 class="card-title fw-bold mb-2 text-dark">${member.name[this.currentLanguage]}</h5>
@@ -130,4 +114,31 @@ document.addEventListener('DOMContentLoaded', function() {
     $(document).on('languageChanged', function(event, lang) {
         teamLoader.updateLanguage(lang);
     });
+
+    // Agregar estilos responsivos para las imágenes del equipo en móvil
+    const style = document.createElement('style');
+    style.textContent = `
+        @media (max-width: 767.98px) {
+            .team-member-img {
+                height: 280px !important;
+                max-height: 280px !important;
+                object-fit: cover !important;
+                width: 100% !important;
+            }
+            .team-card {
+                max-width: 280px !important;
+                margin: 0 auto 1rem auto !important;
+            }
+        }
+        @media (max-width: 575.98px) {
+            .team-member-img {
+                height: 240px !important;
+                max-height: 240px !important;
+            }
+            .team-card {
+                max-width: 250px !important;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 });

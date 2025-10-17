@@ -165,20 +165,20 @@
             // About page
             about_page_title: 'Sobre Nosotros',
             about_hero_title: 'Follajes Herrera',
-            about_hero_subtitle: 'Cultivando Excelencia Desde 1985',
+            about_hero_subtitle: 'Cultivando Excelencia Desde 2011',
             about_hero_text: 'Líderes en la producción y exportación de follajes ornamentales de alta calidad para mercados internacionales.',
             
             // Our Story
             our_story_title: 'Nuestra Historia',
-            our_story_subtitle: 'Más de 35 Años de Pasión y Dedicación',
-            our_story_text: 'Desde 1985, Follajes Herrera ha sido sinónimo de calidad y compromiso en la industria de follajes ornamentales. Lo que comenzó como una pequeña finca familiar se ha transformado en una empresa líder en el sector, reconocida internacionalmente por la excelencia de nuestros productos y la dedicación de nuestro equipo.',
+            our_story_subtitle: 'Más de 11 Años de Pasión y Dedicación',
+            our_story_text: 'Desde 2011, Follajes Herrera ha sido sinónimo de calidad y compromiso en la industria de follajes ornamentales. Lo que comenzó como una pequeña finca familiar se ha transformado en una empresa líder en el sector, reconocida internacionalmente por la excelencia de nuestros productos y la dedicación de nuestro equipo.',
             our_story_text2: 'A lo largo de los años, hemos perfeccionado nuestras técnicas de cultivo, incorporando innovación tecnológica sin perder la esencia artesanal que nos distingue. Cada follaje que sale de nuestras instalaciones es el resultado de años de experiencia, conocimiento y un profundo respeto por la naturaleza.',
             
             // Facilities
             facilities_title: 'Nuestras Instalaciones',
             facilities_subtitle: 'Tecnología y Naturaleza en Armonía',
             facilities_farm1_title: 'Finca Principal',
-            facilities_farm1_text: 'Más de 50 hectáreas dedicadas al cultivo especializado de follajes ornamentales con sistemas de riego de última generación.',
+            facilities_farm1_text: 'Más de 12 hectáreas dedicadas al cultivo especializado de follajes ornamentales con sistemas de riego de última generación.',
             facilities_farm2_title: 'Invernaderos de Precisión',
             facilities_farm2_text: 'Instalaciones con control climático avanzado que garantizan condiciones óptimas durante todo el año.',
             facilities_farm3_title: 'Centro de Procesamiento',
@@ -403,20 +403,20 @@
             // About page
             about_page_title: 'About Us',
             about_hero_title: 'Follajes Herrera',
-            about_hero_subtitle: 'Cultivating Excellence Since 1985',
+            about_hero_subtitle: 'Cultivating Excellence Since 2011',
             about_hero_text: 'Leaders in the production and export of high-quality ornamental foliage for international markets.',
             
             // Our Story
             our_story_title: 'Our Story',
-            our_story_subtitle: 'Over 35 Years of Passion and Dedication',
-            our_story_text: 'Since 1985, Follajes Herrera has been synonymous with quality and commitment in the ornamental foliage industry. What started as a small family farm has transformed into a leading company in the sector, internationally recognized for the excellence of our products and the dedication of our team.',
+            our_story_subtitle: 'Over 11 years of Passion and Dedication',
+            our_story_text: 'Since 2011, Follajes Herrera has been synonymous with quality and commitment in the ornamental foliage industry. What started as a small family farm has transformed into a leading company in the sector, internationally recognized for the excellence of our products and the dedication of our team.',
             our_story_text2: 'Over the years, we have perfected our cultivation techniques, incorporating technological innovation without losing the artisanal essence that distinguishes us. Each foliage that leaves our facilities is the result of years of experience, knowledge, and a deep respect for nature.',
             
             // Facilities
             facilities_title: 'Our Facilities',
             facilities_subtitle: 'Technology and Nature in Harmony',
             facilities_farm1_title: 'Main Farm',
-            facilities_farm1_text: 'More than 50 hectares dedicated to specialized cultivation of ornamental foliage with state-of-the-art irrigation systems.',
+            facilities_farm1_text: 'More than 12 hectares dedicated to specialized cultivation of ornamental foliage with state-of-the-art irrigation systems.',
             facilities_farm2_title: 'Precision Greenhouses',
             facilities_farm2_text: 'Facilities with advanced climate control that guarantee optimal conditions year-round.',
             facilities_farm3_title: 'Processing Center',
