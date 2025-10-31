@@ -17,25 +17,25 @@ const productsDatabase = [
             'assets/img/productos/shop/foliage (1).jpg'
         ],
         description: {
-            es: 'El Helecho Tropical es uno de los follajes más versátiles y populares en la industria floral. Sus frondas elegantes y exuberantes aportan textura y volumen a cualquier arreglo. Perfecto para bodas, eventos corporativos y decoración de interiores.',
-            en: 'The Tropical Fern is one of the most versatile and popular foliages in the floral industry. Its elegant and lush fronds add texture and volume to any arrangement. Perfect for weddings, corporate events and interior decoration.'
+            es: 'El Pittosporum es un follaje ornamental de alta calidad muy apreciado en arreglos florales sofisticados. Sus hojas variegadas con bordes crema y centro verde oscuro aportan contraste y elegancia a cualquier diseño. Ideal para eventos exclusivos y decoración premium.',
+            en: 'Pittosporum is a high-quality ornamental foliage highly appreciated in sophisticated floral arrangements. Its variegated leaves with cream edges and dark green center provide contrast and elegance to any design. Ideal for exclusive events and premium decoration.'
         },
         characteristics: {
             es: [
-                'Follaje de larga duración (7-14 días)',
-                'Frondas delicadas y elegantes',
-                'Ideal para arreglos florales y ramos',
-                'Resistente al transporte',
-                'Color verde intenso y brillante',
-                'Cultivado en condiciones controladas'
+                'Follaje de larga duración (10-14 días)',
+                'Hojas variegadas verde y crema',
+                'Textura brillante y atractiva',
+                'Perfecto para arreglos elegantes',
+                'Resistente y fácil de manejar',
+                'Aroma suave y agradable'
             ],
             en: [
-                'Long-lasting foliage (7-14 days)',
-                'Delicate and elegant fronds',
-                'Ideal for floral arrangements and bouquets',
-                'Transport resistant',
-                'Intense and bright green color',
-                'Grown under controlled conditions'
+                'Long-lasting foliage (10-14 days)',
+                'Variegated green and cream leaves',
+                'Glossy and attractive texture',
+                'Perfect for elegant arrangements',
+                'Resistant and easy to handle',
+                'Soft and pleasant aroma'
             ]
         },
         translateKey: 'prod1_name'
